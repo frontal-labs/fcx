@@ -1,0 +1,11 @@
+{
+  "id": "ts-example-0001",
+  "lang": "ts",
+  "recipe": "fix-diagnostic",
+  "repo": { "url": "local", "commit": "main" },
+  "setup": [],
+  "input": { "file": "src/index.ts", "line": 1 },
+  "accepted": { "patch": "evals/patches/ts-example-0001.diff" },
+  "check": { "tests": [] },
+  "relevantFiles": ["src/index.ts"]
+}
