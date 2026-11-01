@@ -15,7 +15,7 @@ Early development (M0). See PLAN.md for the full specification.
 ### Homebrew (macOS/Linux)
 
 ```bash
-brew install frontal-labs/tap/fcx
+brew install --formula ./homebrew/fcx.rb
 ```
 
 ### npm (global)

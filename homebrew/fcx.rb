@@ -2,7 +2,7 @@ class Fcx < Formula
   desc "fcx - Frontal Codex Extra Small, a local coding agent"
   homepage "https://github.com/frontal-labs/fcx"
   version "0.0.0"
-  license "MIT"
+  license "Apache-2.0"
 
   on_macos do
     if Hardware::CPU.arm?
