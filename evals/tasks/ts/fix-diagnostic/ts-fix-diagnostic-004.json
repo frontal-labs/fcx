@@ -1,0 +1,11 @@
+{
+  "id": "ts-fix-diagnostic-004",
+  "lang": "typescript",
+  "recipe": "fix-diagnostic",
+  "repo": { "url": "https://github.com/example/repo-004", "commit": "abc123def456" },
+  "setup": ["npm install"],
+  "input": { "file": "src/file004.ts", "line": 10 },
+  "accepted": { "patch": "evals/patches/ts-fix-diagnostic-004.diff" },
+  "check": { "tests": ["npx vitest run -t Test004"] },
+  "relevantFiles": ["src/file004.ts", "src/types.ts"]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "ts-add-types-001",
+  "lang": "typescript",
+  "recipe": "add-types",
+  "repo": { "url": "https://github.com/example/repo-001", "commit": "mno345pqr678" },
+  "setup": ["npm install"],
+  "input": { "file": "src/file001.ts" },
+  "accepted": { "patch": "evals/patches/ts-add-types-001.diff" },
+  "check": { "tests": ["npx tsc --noEmit"] },
+  "relevantFiles": ["src/file001.ts"]
+}

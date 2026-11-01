@@ -1,0 +1,11 @@
+{
+  "id": "ts-write-test-003",
+  "lang": "typescript",
+  "recipe": "write-test",
+  "repo": { "url": "https://github.com/example/repo-003", "commit": "ghi789jkl012" },
+  "setup": ["npm install"],
+  "input": { "file": "src/file003.ts", "symbol": "function003" },
+  "accepted": { "patch": "evals/patches/ts-write-test-003.diff" },
+  "check": { "tests": ["npx vitest run -t TestWrite003"] },
+  "relevantFiles": ["src/file003.ts"]
+}

@@ -1,0 +1,11 @@
+{
+  "benchmarks": [
+    { "name": "fcx-version", "command": "fcx --version", "budgetMs": 60 },
+    { "name": "fcx-status", "command": "fcx status", "budgetMs": 60 },
+    { "name": "socket-roundtrip", "command": "fcx status --socket", "budgetMs": 15 },
+    { "name": "retrieve-pack", "command": "fcx bench retrieve", "budgetMs": 80 },
+    { "name": "fix-diagnostic", "command": "fcx bench fix-diagnostic", "budgetMs": 4000 }
+  ],
+  "tierS": { "maxRSSMb": 1800, "indexRSSMb": 250 },
+  "tierM": { "maxRSSMb": 2500, "indexRSSMb": 400 }
+}

@@ -1,0 +1,36 @@
+{
+  "models": {
+    "qwen2.5-1.5b": {
+      "id": "qwen2.5-1.5b",
+      "ctx": 32768,
+      "kind": "generation",
+      "tier": "S",
+      "license": "Apache-2.0",
+      "quant": "Q4_K_M"
+    },
+    "qwen2.5-0.5b": {
+      "id": "qwen2.5-0.5b",
+      "ctx": 32768,
+      "kind": "generation",
+      "tier": "S",
+      "license": "Apache-2.0",
+      "quant": "Q4_K_M"
+    },
+    "smollm2-360m": {
+      "id": "smollm2-360m",
+      "ctx": 8192,
+      "kind": "generation",
+      "tier": "S",
+      "license": "Apache-2.0",
+      "quant": "Q8_0"
+    },
+    "bge-small-en-v1.5": {
+      "id": "bge-small-en-v1.5",
+      "ctx": 512,
+      "kind": "embedding",
+      "tier": "S",
+      "license": "MIT",
+      "quant": "Q8_0"
+    }
+  }
+}

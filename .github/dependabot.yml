@@ -1,0 +1,40 @@
+version: 2
+updates:
+  - package-ecosystem: "bun"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 10
+    groups:
+      dev-tools:
+        patterns:
+          - "typescript"
+          - "@biomejs/biome"
+          - "vitest"
+          - "husky"
+          - "turbo"
+      ggml:
+        patterns:
+          - "ggml-node"
+    labels:
+      - "dependencies"
+    automerge: false
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps)"
+      include: "scope"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+    automerge: false

@@ -1,0 +1,6 @@
+{
+  "paths": {
+    "cache_dir": "/tmp/fc-test/custom-cache-017",
+    "logs_dir": "/tmp/fc-test/custom-logs-017"
+  }
+}

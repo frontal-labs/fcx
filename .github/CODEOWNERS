@@ -1,0 +1,37 @@
+# CODEOWNERS
+
+# Code ownership for fcx repository
+
+# Default owners for everything
+* @frontal-labs/engineering
+
+# Package-specific ownership
+/packages/config/ @frontal-labs/config-team
+/packages/model/ @frontal-labs/model-team
+/packages/recipes/ @frontal-labs/recipes-team
+/packages/defense/ @frontal-labs/security-team
+/packages/verify/ @frontend-labs/verify-team
+/packages/apply/ @frontal-labs/apply-team
+/packages/memory/ @frontal-labs/memory-team
+/packages/escalate/ @frontal-labs/escalate-team
+/packages/acp/ @frontal-labs/acp-team
+/packages/index/ @frontal-labs/index-team
+/packages/retrieve/ @frontal-labs/retrieve-team
+/packages/lsp/ @frontal-labs/lsp-team
+
+# CLI
+/cli/ @frontal-labs/cli-team
+
+# Configuration files
+/.github/ @frontal-labs/devops-team
+/bun.lock @frontal-labs/devops-team
+/package.json @frontal-labs/core-team
+/tsconfig.json @frontal-labs/core-team
+/biome.json @frontal-labs/core-team
+
+# Documentation
+/docs/ @frontal-labs/docs-team
+/*.md @frontal-labs/docs-team
+
+# Scripts
+/scripts/ @frontal-labs/devops-team

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FCX Recipe Output",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["applied", "proposed", "abstained", "declined", "error"]
+    },
+    "recipe": { "type": "string" },
+    "edits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "file": { "type": "string" },
+          "search": { "type": "string" },
+          "replace": { "type": "string" }
+        },
+        "required": ["file", "search", "replace"]
+      }
+    },
+    "newFile": {
+      "type": "object",
+      "properties": {
+        "path": { "type": "string" },
+        "content": { "type": "string" }
+      },
+      "required": ["path", "content"]
+    },
+    "answer": { "type": "string" },
+    "checks": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "escalationOffered": { "type": "boolean" },
+    "timings": { "type": "object" }
+  },
+  "required": ["status", "recipe"]
+}

@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "skills": {
+    "ai-sdk": {
+      "source": "vercel/ai",
+      "sourceType": "github",
+      "skillPath": "skills/use-ai-sdk/SKILL.md",
+      "computedHash": "d6910e7d8bb527d2823ba58b6225b304ae649c135fc7e43ec2d2152251c218db"
+    },
+    "drizzle": {
+      "source": "lobehub/lobehub",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/drizzle/SKILL.md",
+      "computedHash": "a51a3da4e421ae171d1b3aea0953cd63241b48a5f2fff59ad7ed0f6ff6d9a459"
+    },
+    "github-actions-templates": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/cicd-automation/skills/github-actions-templates/SKILL.md",
+      "computedHash": "26d9b7d4392712d3ff500ff535c8f68c03820111e22af74fd579f58f605b2166"
+    },
+    "mcp-builder": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/mcp-builder/SKILL.md",
+      "computedHash": "826e46adf81e1372282e205c34e1a2ee876e72148007726e4a2512599d2fef7b"
+    },
+    "playwright-cli": {
+      "source": "microsoft/playwright-cli",
+      "sourceType": "github",
+      "skillPath": "skills/playwright-cli/SKILL.md",
+      "computedHash": "ffbd59a973d4e2c19c6ecc31254a14497069c362f1d1820b6a6cfbe62de34a73"
+    },
+    "posthog-instrumentation": {
+      "source": "posthog/posthog-for-claude",
+      "sourceType": "github",
+      "skillPath": "skills/posthog-instrumentation/SKILL.md",
+      "computedHash": "a9a30a63accd756ef41009f987ac75812ab1e855b30ea5d6153e0fed16ebf22d"
+    },
+    "stripe-best-practices": {
+      "source": "stripe/ai",
+      "sourceType": "github",
+      "skillPath": "skills/stripe-best-practices/SKILL.md",
+      "computedHash": "671199d8bc7445ac6eaedabac838c562042476a8b353cb970bdfc6777bafebea"
+    },
+    "turborepo": {
+      "source": "vercel/turborepo",
+      "sourceType": "github",
+      "skillPath": "skills/turborepo/SKILL.md",
+      "computedHash": "9681d8dfeb5e6cdff767f1bcaba5d7ac55732a9d6c02ee120f44229f8ec25e7e"
+    },
+    "ultracite": {
+      "source": "haydenbleasel/ultracite",
+      "sourceType": "github",
+      "skillPath": "skills/ultracite/SKILL.md",
+      "computedHash": "786edd8e07ffab37d1d27c68a1a991b0fe4d0ba911fc97d4f93d232115f0485e"
+    },
+    "vitest": {
+      "source": "antfu/skills",
+      "sourceType": "github",
+      "skillPath": "skills/vitest/SKILL.md",
+      "computedHash": "21af2b13d47d31f3094b61c0f41abc8d6a7eed0df3c9a4029ea671f6978b7209"
+    },
+    "zod": {
+      "source": "pproenca/dot-skills",
+      "sourceType": "github",
+      "skillPath": "skills/.curated/zod/SKILL.md",
+      "computedHash": "c69b5133b65643317236707f2cd3e521b4fc6e5ee5fd6c6c00cf62a37dfd0144"
+    },
+    "fcx-config": {
+      "source": "frontal-labs/fcx",
+      "sourceType": "internal",
+      "skillPath": "skills/fcx/fcx-config/SKILL.md",
+      "computedHash": ""
+    },
+    "fcx-model": {
+      "source": "frontal-labs/fcx",
+      "sourceType": "internal",
+      "skillPath": "skills/fcx/fcx-model/SKILL.md",
+      "computedHash": ""
+    },
+    "fcx-recipes": {
+      "source": "frontal-labs/fcx",
+      "sourceType": "internal",
+      "skillPath": "skills/fcx/fcx-recipes/SKILL.md",
+      "computedHash": ""
+    },
+    "fcx-defense": {
+      "source": "frontal-labs/fcx",
+      "sourceType": "internal",
+      "skillPath": "skills/fcx/fcx-defense/SKILL.md",
+      "computedHash": ""
+    },
+    "fcx-index": {
+      "source": "frontal-labs/fcx",
+      "sourceType": "internal",
+      "skillPath": "skills/fcx/fcx-index/SKILL.md",
+      "computedHash": ""
+    },
+    "fcx-retrieve": {
+      "source": "frontal-labs/fcx",
+      "sourceType": "internal",
+      "skillPath": "skills/fcx/fcx-retrieve/SKILL.md",
+      "computedHash": ""
+    },
+    "fcx-verify": {
+      "source": "frontal-labs/fcx",
+      "sourceType": "internal",
+      "skillPath": "skills/fcx/fcx-verify/SKILL.md",
+      "computedHash": ""
+    },
+    "fcx-apply": {
+      "source": "frontal-labs/fcx",
+      "sourceType": "internal",
+      "skillPath": "skills/fcx/fcx-apply/SKILL.md",
+      "computedHash": ""
+    },
+    "fcx-memory": {
+      "source": "frontal-labs/fcx",
+      "sourceType": "internal",
+      "skillPath": "skills/fcx/fcx-memory/SKILL.md",
+      "computedHash": ""
+    },
+    "fcx-escalate": {
+      "source": "frontal-labs/fcx",
+      "sourceType": "internal",
+      "skillPath": "skills/fcx/fcx-escalate/SKILL.md",
+      "computedHash": ""
+    },
+    "fcx-acp": {
+      "source": "frontal-labs/fcx",
+      "sourceType": "internal",
+      "skillPath": "skills/fcx/fcx-acp/SKILL.md",
+      "computedHash": ""
+    },
+    "fcx-cli": {
+      "source": "frontal-labs/fcx",
+      "sourceType": "internal",
+      "skillPath": "skills/fcx/fcx-cli/SKILL.md",
+      "computedHash": ""
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"],
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 10,
+  "automerge": false,
+  "automergeType": "pr",
+  "platform": "github",
+  "packageRules": [
+    {
+      "matchPackageNames": ["typescript", "@biomejs/biome", "vitest", "husky", "turbo"],
+      "groupName": "dev tools",
+      "automerge": true
+    },
+    {
+      "matchPackageNames": ["ggml-node"],
+      "groupName": "ggml-node",
+      "automerge": false
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "automerge": true
+    }
+  ],
+  "ignorePaths": ["cli/dist/**", "packages/*/dist/**", "node_modules/**"],
+  "labels": ["dependencies"],
+  "timezone": "UTC",
+  "schedule": ["before 5am on monday"],
+  "semanticCommits": "disabled",
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps"
+}

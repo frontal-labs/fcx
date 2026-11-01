@@ -1,0 +1,9 @@
+{
+  "modeRanks": {
+    "read-only": 0,
+    "workspace-write": 1,
+    "prompt": 2,
+    "danger-full-access": 3
+  },
+  "defaultPermissionMode": "prompt"
+}

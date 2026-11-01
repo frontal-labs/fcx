@@ -1,0 +1,8 @@
+{
+  "fc": {
+    "model": "ggml/qwen2.5-0.5b",
+    "maxCandidates": 6,
+    "contextBudgetTokens": 5000,
+    "escalation": { "enabled": false }
+  }
+}

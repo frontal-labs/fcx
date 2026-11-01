@@ -1,0 +1,11 @@
+{
+  "id": "ts-fix-test-003",
+  "lang": "typescript",
+  "recipe": "fix-test",
+  "repo": { "url": "https://github.com/example/repo-003", "commit": "def456ghi789" },
+  "setup": ["npm install"],
+  "input": { "file": "src/file003.ts" },
+  "accepted": { "patch": "evals/patches/ts-fix-test-003.diff" },
+  "check": { "tests": ["npx vitest run -t TestFix003"] },
+  "relevantFiles": ["src/file003.test.ts", "src/file003.ts"]
+}

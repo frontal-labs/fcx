@@ -1,0 +1,11 @@
+{
+  "id": "ts-implement-003",
+  "lang": "typescript",
+  "recipe": "implement",
+  "repo": { "url": "https://github.com/example/repo-003", "commit": "jkl012mno345" },
+  "setup": ["npm install"],
+  "input": { "file": "src/file003.ts", "symbol": "StubClass003" },
+  "accepted": { "patch": "evals/patches/ts-implement-003.diff" },
+  "check": { "tests": ["npx vitest run -t TestImplement003"] },
+  "relevantFiles": ["src/file003.ts"]
+}

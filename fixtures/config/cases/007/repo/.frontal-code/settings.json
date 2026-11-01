@@ -1,0 +1,1 @@
+{ "policy": { "allowedProviders": ["ggml", "anthropic"], "allowedModels": ["ggml/qwen2.5-1.5b"], "deny": ["WebSearch"] } }

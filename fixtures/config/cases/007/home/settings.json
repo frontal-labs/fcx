@@ -1,0 +1,7 @@
+{
+  "policy": {
+    "allowedProviders": ["ggml", "frontal"],
+    "allowedModels": ["ggml/qwen2.5-1.5b", "ggml/qwen2.5-0.5b"],
+    "deny": ["WebFetch"]
+  }
+}

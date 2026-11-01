@@ -1,0 +1,26 @@
+{
+  "configHome": "/tmp/fc-test/home-024",
+  "projectConfig": {},
+  "settings": { "policy": { "permissionCeiling": "read-only" } },
+  "trust": { "trusted": false },
+  "policy": {
+    "allowedProviders": [],
+    "allowedModels": [],
+    "authMethods": [],
+    "permissionCeiling": "read-only",
+    "deny": []
+  },
+  "permissionMode": "read-only",
+  "paths": { "cacheDir": "/tmp/fc-test/home-024/cache", "logsDir": "/tmp/fc-test/home-024/logs" },
+  "warnings": [],
+  "local": {
+    "model": "ggml/auto",
+    "embeddingModel": "ggml/bge-small-en-v1.5",
+    "maxCandidates": "auto",
+    "contextBudgetTokens": 3000,
+    "languages": ["typescript", "python", "go", "rust"],
+    "index": { "exclude": ["**/node_modules/**", "**/target/**", "**/.venv/**", "**/dist/**"] },
+    "escalation": { "enabled": true, "provider": "default" },
+    "telemetry": "inherit"
+  }
+}

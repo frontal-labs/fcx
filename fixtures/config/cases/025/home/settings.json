@@ -1,0 +1,1 @@
+{ "policy": { "deny": ["Bash", "WebFetch", "WebSearch"] } }

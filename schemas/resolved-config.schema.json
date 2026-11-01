@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FCX ResolvedConfig",
+  "type": "object",
+  "properties": {
+    "configHome": { "type": "string" },
+    "permissionMode": {
+      "type": "string",
+      "enum": ["read-only", "workspace-write", "prompt", "danger-full-access"]
+    },
+    "trust": {
+      "type": "object",
+      "properties": {
+        "trusted": { "type": "boolean" },
+        "trustedRoot": { "type": "string" }
+      },
+      "required": ["trusted"]
+    },
+    "policy": {
+      "type": "object",
+      "properties": {
+        "allowedProviders": { "type": "array", "items": { "type": "string" } },
+        "allowedModels": { "type": "array", "items": { "type": "string" } },
+        "authMethods": { "type": "array", "items": { "type": "string" } },
+        "permissionCeiling": { "type": "string" },
+        "deny": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "paths": {
+      "type": "object",
+      "properties": {
+        "cacheDir": { "type": "string" },
+        "logsDir": { "type": "string" }
+      },
+      "required": ["cacheDir", "logsDir"]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": { "type": "string" },
+          "source": { "type": "string" },
+          "reason": { "type": "string" }
+        },
+        "required": ["key", "source", "reason"]
+      }
+    },
+    "local": {
+      "type": "object",
+      "properties": {
+        "model": { "type": "string" },
+        "embeddingModel": { "type": "string" },
+        "maxCandidates": { "type": ["number", "string"] },
+        "contextBudgetTokens": { "type": "number" },
+        "languages": { "type": "array", "items": { "type": "string" } },
+        "index": {
+          "type": "object",
+          "properties": {
+            "exclude": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "escalation": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "provider": { "type": "string" }
+          }
+        },
+        "telemetry": { "type": ["string", "boolean"] }
+      }
+    }
+  },
+  "required": [
+    "configHome",
+    "permissionMode",
+    "trust",
+    "policy",
+    "permissionMode",
+    "paths",
+    "warnings",
+    "local"
+  ]
+}

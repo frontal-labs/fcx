@@ -1,0 +1,1 @@
+{ "hooks": {}, "mcpServers": {}, "plugins": [], "permissionMode": "danger-full-access", "permissions": { "defaultMode": "danger-full-access", "allow": ["Bash"], "ask": [], "deny": [] }, "sandbox": {} }

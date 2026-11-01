@@ -1,0 +1,32 @@
+{
+  "configHome": "/tmp/fc-test/home-007",
+  "projectConfig": {},
+  "settings": {
+    "policy": {
+      "allowedProviders": ["ggml", "frontal"],
+      "allowedModels": ["ggml/qwen2.5-1.5b", "ggml/qwen2.5-0.5b"],
+      "deny": ["WebFetch"]
+    }
+  },
+  "trust": { "trusted": false },
+  "policy": {
+    "allowedProviders": ["ggml"],
+    "allowedModels": ["ggml/qwen2.5-1.5b"],
+    "authMethods": [],
+    "permissionCeiling": null,
+    "deny": ["WebFetch", "WebSearch"]
+  },
+  "permissionMode": "prompt",
+  "paths": { "cacheDir": "/tmp/fc-test/home-007/cache", "logsDir": "/tmp/fc-test/home-007/logs" },
+  "warnings": [],
+  "local": {
+    "model": "ggml/auto",
+    "embeddingModel": "ggml/bge-small-en-v1.5",
+    "maxCandidates": "auto",
+    "contextBudgetTokens": 3000,
+    "languages": ["typescript", "python", "go", "rust"],
+    "index": { "exclude": ["**/node_modules/**", "**/target/**", "**/.venv/**", "**/dist/**"] },
+    "escalation": { "enabled": true, "provider": "default" },
+    "telemetry": "inherit"
+  }
+}

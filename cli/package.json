@@ -1,0 +1,37 @@
+{
+  "name": "fcx-cli",
+  "version": "0.0.0",
+  "description": "fcx CLI binary and command dispatch layer",
+  "type": "module",
+  "main": "./src/index.ts",
+  "bin": {
+    "fcx": "./bin/fcx.js"
+  },
+  "files": ["bin/", "src/"],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "lint": "biome check ."
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontal-labs/fcx.git",
+    "directory": "cli"
+  },
+  "bugs": {
+    "url": "https://github.com/frontal-labs/fcx/issues"
+  },
+  "homepage": "https://github.com/frontal-labs/fcx#readme",
+  "keywords": ["fcx", "cli", "coding-agent"],
+  "author": "Frontal Labs, Inc.",
+  "engines": {
+    "bun": ">=1.1.0",
+    "node": ">=22.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}

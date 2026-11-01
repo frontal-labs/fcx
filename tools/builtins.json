@@ -1,0 +1,29 @@
+{
+  "typescript": [
+    "Array", "Boolean", "Date", "Error", "Function", "JSON", "Map", "Math", "Number", "Object",
+    "Promise", "Proxy", "Reflect", "RegExp", "Set", "String", "Symbol", "TypeError", "WeakMap", "WeakSet",
+    "Partial", "Readonly", "Record", "Pick", "Omit", "Exclude", "Extract", "NonNullable", "Parameters", "ReturnType",
+    "ConstructorParameters", "InstanceType", "Required", "ReadonlyArray", "Nullable",
+    "console", "process", "Buffer"
+  ],
+  "javascript": [
+    "Array", "Boolean", "Date", "Error", "Function", "JSON", "Map", "Math", "Number", "Object",
+    "Promise", "Proxy", "Reflect", "RegExp", "Set", "String", "Symbol", "TypeError", "WeakMap", "WeakSet",
+    "console", "process", "Buffer"
+  ],
+  "python": [
+    "abs", "all", "any", "ascii", "bin", "bool", "breakpoint", "bytearray", "bytes", "callable",
+    "chr", "classmethod", "compile", "complex", "copyright", "credits", "delattr", "dict", "dir", "divmod",
+    "enumerate", "eval", "exec", "exit", "filter", "float", "format", "frozenset"
+  ],
+  "go": [
+    "append", "cap", "close", "complex", "copy", "delete", "imag", "len", "make", "new", "panic", "print",
+    "println", "real", "recover", "nil", "true", "false", "iota"
+  ],
+  "rust": [
+    "box_new", "drop", "panic", "assert", "assert_eq", "assert_ne", "debug_assert", "debug_assert_eq", "debug_assert_ne",
+    "unreachable", "unimplemented", "format", "print", "println", "eprint", "eprintln", "vec", "todo", "cfg",
+    "alloc", "collections", "io", "fs", "path", "env", "process", "thread", "time", "sync", "fmt", "cmp", "convert",
+    "iter", "option", "result", "prelude", "test"
+  ]
+}

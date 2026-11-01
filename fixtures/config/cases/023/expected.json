@@ -1,0 +1,28 @@
+{
+  "configHome": "/tmp/fc-test/home-023",
+  "projectConfig": { "runtime": { "permission_mode": "invalid-mode" } },
+  "settings": {},
+  "trust": { "trusted": false },
+  "policy": {
+    "allowedProviders": [],
+    "allowedModels": [],
+    "authMethods": [],
+    "permissionCeiling": null,
+    "deny": []
+  },
+  "permissionMode": "prompt",
+  "paths": { "cacheDir": "/tmp/fc-test/home-023/cache", "logsDir": "/tmp/fc-test/home-023/logs" },
+  "warnings": [
+    { "key": "permission_mode", "source": "project.json", "reason": "unrecognized value ignored" }
+  ],
+  "local": {
+    "model": "ggml/auto",
+    "embeddingModel": "ggml/bge-small-en-v1.5",
+    "maxCandidates": "auto",
+    "contextBudgetTokens": 3000,
+    "languages": ["typescript", "python", "go", "rust"],
+    "index": { "exclude": ["**/node_modules/**", "**/target/**", "**/.venv/**", "**/dist/**"] },
+    "escalation": { "enabled": true, "provider": "default" },
+    "telemetry": "inherit"
+  }
+}

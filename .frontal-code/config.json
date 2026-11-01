@@ -1,0 +1,5 @@
+{
+  "project": "hcp",
+  "type": "monorepo",
+  "framework": "typescript"
+}

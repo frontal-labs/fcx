@@ -1,0 +1,22 @@
+{
+  "names": {
+    "ReadFile": "ReadFile",
+    "GlobSearch": "GlobSearch",
+    "GrepSearch": "GrepSearch",
+    "EditFile": "EditFile",
+    "WriteFile": "WriteFile",
+    "Bash": "Bash"
+  },
+  "minMode": {
+    "ReadFile": "read-only",
+    "GlobSearch": "read-only",
+    "GrepSearch": "read-only",
+    "EditFile": "workspace-write",
+    "WriteFile": "workspace-write",
+    "Bash": "workspace-write"
+  },
+  "readOnly": ["ReadFile", "GlobSearch", "GrepSearch"],
+  "write": ["EditFile", "WriteFile"],
+  "exec": ["Bash"],
+  "denied": []
+}

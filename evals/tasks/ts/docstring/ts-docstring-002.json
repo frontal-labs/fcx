@@ -1,0 +1,11 @@
+{
+  "id": "ts-docstring-002",
+  "lang": "typescript",
+  "recipe": "docstring",
+  "repo": { "url": "https://github.com/example/repo-002", "commit": "pqr678stu901" },
+  "setup": ["npm install"],
+  "input": { "file": "src/file002.ts", "symbol": "exportedFn002" },
+  "accepted": { "patch": "evals/patches/ts-docstring-002.diff" },
+  "check": { "tests": [] },
+  "relevantFiles": ["src/file002.ts"]
+}
