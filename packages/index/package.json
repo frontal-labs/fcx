@@ -1,10 +1,32 @@
 {
-  "name": "@fc/index",
+  "name": "fcx-index",
   "version": "0.0.0",
+  "description": "fcx code graph index: tree-sitter extraction, SQLite store, embeddings, and incremental indexing",
   "type": "module",
   "main": "./src/index.ts",
   "scripts": {
     "build": "tsc",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "biome check ."
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontal-labs/fcx.git",
+    "directory": "packages/index"
+  },
+  "bugs": {
+    "url": "https://github.com/frontal-labs/fcx/issues"
+  },
+  "homepage": "https://github.com/frontal-labs/fcx#readme",
+  "keywords": ["fcx", "index", "tree-sitter", "code-graph", "sqlite"],
+  "author": "Frontal Labs, Inc.",
+  "engines": {
+    "bun": ">=1.1.0",
+    "node": ">=22.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
   }
 }

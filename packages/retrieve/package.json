@@ -1,10 +1,32 @@
 {
-  "name": "@fc/retrieve",
+  "name": "fcx-retrieve",
   "version": "0.0.0",
+  "description": "fcx hybrid retrieval: BM25, vectors, graph expansion, and context packing",
   "type": "module",
   "main": "./src/index.ts",
   "scripts": {
     "build": "tsc",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "biome check ."
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontal-labs/fcx.git",
+    "directory": "packages/retrieve"
+  },
+  "bugs": {
+    "url": "https://github.com/frontal-labs/fcx/issues"
+  },
+  "homepage": "https://github.com/frontal-labs/fcx#readme",
+  "keywords": ["fcx", "retrieve", "bm25", "vectors", "graph", "rag"],
+  "author": "Frontal Labs, Inc.",
+  "engines": {
+    "bun": ">=1.1.0",
+    "node": ">=22.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
   }
 }

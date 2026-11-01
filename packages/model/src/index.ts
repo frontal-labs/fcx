@@ -1,17 +1,23 @@
-export interface ModelHost {
-  countTokens(text: string): number;
-  shutdown(): Promise<void>;
-  generate?(prompt: string): Promise<any>;
-}
-export function createMockModelHost(): ModelHost {
-  return {
-    countTokens: (t) => Math.ceil(t.length / 3.5),
-    shutdown: async () => {},
-    generate: async () => ({})
-  };
-}
-export class ModelWorker {
-  constructor() {}
-  async start() {}
-  async shutdown() {}
-}
+export type {
+  ModelAlias,
+  ModelHost,
+  ModelHostEvent,
+  ModelErrorEvent,
+  ModelEvent,
+  ModelLoadError,
+  ModelError,
+  ModelRegistryEntry,
+  GgmlNodeModelHostOptions,
+} from "./types.js";
+
+export {
+  defaultGenerationModel,
+  defaultEmbeddingModel,
+  getModelEntry,
+  isGenerationModel,
+  isEmbeddingModel,
+  listModels,
+  resolveModelId,
+} from "./registry.js";
+export { GgmlNodeModelHost } from "./host.js";
+export { createMockModelHost } from "./mock.js";
