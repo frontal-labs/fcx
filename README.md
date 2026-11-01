@@ -10,6 +10,41 @@ Local-first coding agent CLI. Uses a ~1.5B model locally with defense-in-depth c
 
 Early development (M0). See PLAN.md for the full specification.
 
+## Installation
+
+### Homebrew (macOS/Linux)
+
+```bash
+brew install frontal-labs/tap/fcx
+```
+
+### npm (global)
+
+```bash
+npm install -g @frontal-labs/fcx
+```
+
+### Bun (global)
+
+```bash
+bun install -g @frontal-labs/fcx
+```
+
+### From source
+
+```bash
+git clone https://github.com/frontal-labs/fcx.git
+cd fcx
+bun install
+bun run build
+# run directly
+bunx tsx cli/src/index.ts --version
+```
+
+### Binary
+
+Download the latest `fcx` binary from the GitHub releases page and add it to your `PATH`.
+
 ## Quick Start
 
 ```bash
