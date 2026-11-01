@@ -1,1 +1,14 @@
-{"compilerOptions":{"target":"ES2022","module":"ESNext","moduleResolution":"Bundler","strict":true,"esModuleInterop":true,"skipLibCheck":true,"types":["node"]},"files":[]}
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "declaration": true,
+    "noEmit": true
+  },
+  "include": ["packages/**/src/**/*", "cli/**/src/**/*"]
+}

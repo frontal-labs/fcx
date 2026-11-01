@@ -1,17 +1,51 @@
 {
-  "name": "fc",
+  "name": "fcx",
+  "version": "0.0.0",
   "private": true,
+  "description": "fcx - Frontal Codex Extra Small: a local-first coding agent CLI using ~1.5B models",
   "type": "module",
-  "workspaces": ["packages/*"],
+  "workspaces": ["packages/*", "cli"],
   "scripts": {
     "build": "bun run --filter '*' build",
     "lint": "biome check .",
     "typecheck": "tsc -b",
-    "test": "vitest run"
+    "test": "vitest run",
+    "prepare": "husky",
+    "dev": "bunx tsx cli/src/index.ts",
+    "doctor": "bunx tsx cli/src/index.ts doctor",
+    "status": "bunx tsx cli/src/index.ts status",
+    "ci:version": "changeset version && bun install --no-lockfile",
+    "release:publish": "bun run --filter '*' build && changeset publish"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontal-labs/fcx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/frontal-labs/fcx/issues"
+  },
+  "homepage": "https://github.com/frontal-labs/fcx#readme",
+  "keywords": [
+    "fcx",
+    "frontal",
+    "codex",
+    "coding-agent",
+    "local-ai",
+    "ggml",
+    "cli",
+    "developer-tools"
+  ],
+  "author": "Frontal Labs, Inc.",
+  "engines": {
+    "bun": ">=1.1.0",
+    "node": ">=22.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.0",
+    "@changesets/cli": "^3.0.3",
     "@types/node": "^26.6.6",
+    "husky": "^9.1.7",
     "turbo": "^2.11.10",
     "typescript": "^5.6.0",
     "vitest": "^2.1.0"

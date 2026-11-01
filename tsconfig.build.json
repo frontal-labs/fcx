@@ -3,6 +3,6 @@
   "references": [
     { "path": "./packages/config" },
     { "path": "./packages/model" },
-    { "path": "./packages/cli" }
+    { "path": "./cli" }
   ]
 }
