@@ -9,7 +9,7 @@ fcx uses one generation model of about 1.5B parameters. No 3B or larger models.
 | qwen2.5-1.5b | ~1.12 GB | 32768 | S | Apache-2.0 | Q4_K_M |
 | qwen2.5-0.5b | ~491 MB | 32768 | S | Apache-2.0 | Q4_K_M |
 | smollm2-360m | ~386 MB | 8192 | S | Apache-2.0 | Q8_0 |
-| bge-small-en-v1.5 (embedding) | ~368 MB | 512 | S | MIT | Q8_0 |
+| bge-small-en-v1.5 (embedding) | ~368 MB | 512 | S | Apache-2.0 | Q8_0 |
 
 ## Model IDs
 

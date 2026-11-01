@@ -30,7 +30,7 @@ export const DEFAULT_MODELS: Record<string, ModelRegistryEntry> = {
     ctx: 512,
     kind: "embedding",
     tier: "S",
-    license: "MIT",
+    license: "Apache-2.0",
     quant: "Q8_0",
   },
 };

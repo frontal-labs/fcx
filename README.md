@@ -98,4 +98,4 @@ bun run test         # Run vitest tests
 
 ## License
 
-MIT
+Apache-2.0
