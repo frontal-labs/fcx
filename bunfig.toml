@@ -1,0 +1,11 @@
+[install]
+auto = "auto"
+cache = "~/.bun/install/cache"
+registry = "https://registry.npmjs.org/"
+
+[run]
+bun = true
+shell = "system"
+
+[test]
+preload = []
