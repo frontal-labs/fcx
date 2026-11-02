@@ -1,0 +1,18 @@
+{
+  "id": "commit-message-08",
+  "recipe": "commit-message",
+  "shape": "refactor-helper",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/format.ts": "export function fmt(a: string, b: string): string {\n  return `${a} - ${b}`;\n}\n"
+  },
+  "input": {},
+  "check": {
+    "rules": ["type", "header", "subject-length", "no-period", "single-line-subject"]
+  },
+  "before": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/format.ts": "export function fmt(a: string, b: string): string {\n  return a + \" - \" + b;\n}\n"
+  }
+}

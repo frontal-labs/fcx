@@ -1,0 +1,18 @@
+{
+  "id": "add-types-10",
+  "recipe": "add-types",
+  "shape": "function-template",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/add_types_10.ts": "export function makeId(prefix: string) {\n  return `${prefix}-${Math.floor(Math.random() * 1000)}`;\n}\n"
+  },
+  "input": {
+    "file": "src/add_types_10.ts",
+    "symbol": "makeId"
+  },
+  "check": {
+    "symbol": "makeId",
+    "typeCheckFile": "src/add_types_10.ts"
+  }
+}

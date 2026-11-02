@@ -1,0 +1,22 @@
+{
+  "id": "rename-extract-01",
+  "recipe": "rename-extract",
+  "shape": "function",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/rename_01.ts": "export function calcTotal(price: number, qty: number): number {\n  return price * qty;\n}\n\nexport const cartTotal = calcTotal(4, 3);\n"
+  },
+  "input": {
+    "file": "src/rename_01.ts",
+    "line": 1,
+    "column": 17,
+    "symbol": "calcTotal",
+    "newName": "computeTotal"
+  },
+  "check": {
+    "oldName": "calcTotal",
+    "newName": "computeTotal",
+    "typeCheckFile": "src/rename_01.ts"
+  }
+}

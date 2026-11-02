@@ -1,8 +1,8 @@
-# fcx-retrieve
+# @fcx/retrieve
 
 ## Description
 
-Skill for fcx hybrid retrieval: BM25, vectors, graph expansion, and context packing. Implements the `@frontal-labs/fcx-retrieve` package (now `fcx-retrieve`).
+Skill for fcx hybrid retrieval: BM25, vectors, graph expansion, and context packing. Implements the `@fcx/retrieve` package (now `fcx-retrieve`).
 
 ## Algorithm
 

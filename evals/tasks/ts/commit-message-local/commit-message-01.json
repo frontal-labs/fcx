@@ -1,0 +1,18 @@
+{
+  "id": "commit-message-01",
+  "recipe": "commit-message",
+  "shape": "add-function",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/strings.ts": "export function trim(s: string): string {\n  return s.trim();\n}\n\nexport function capitalize(s: string): string {\n  return s.charAt(0).toUpperCase() + s.slice(1);\n}\n"
+  },
+  "input": {},
+  "check": {
+    "rules": ["type", "header", "subject-length", "no-period", "single-line-subject"]
+  },
+  "before": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/strings.ts": "export function trim(s: string): string {\n  return s.trim();\n}\n"
+  }
+}

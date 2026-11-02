@@ -1,0 +1,22 @@
+{
+  "id": "rename-extract-02",
+  "recipe": "rename-extract",
+  "shape": "const-number",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/rename_02.ts": "const MAX_RETRY = 3;\n\nexport function canRetry(n: number): boolean {\n  return n < MAX_RETRY;\n}\n"
+  },
+  "input": {
+    "file": "src/rename_02.ts",
+    "line": 1,
+    "column": 7,
+    "symbol": "MAX_RETRY",
+    "newName": "maxAttempts"
+  },
+  "check": {
+    "oldName": "MAX_RETRY",
+    "newName": "maxAttempts",
+    "typeCheckFile": "src/rename_02.ts"
+  }
+}

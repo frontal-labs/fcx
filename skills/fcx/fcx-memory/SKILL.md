@@ -1,8 +1,8 @@
-# fcx-memory
+# @fcx/memory
 
 ## Description
 
-Skill for fcx local project memory: symbol memory, context snapshots, and persistent storage. Implements the `@frontal-labs/fcx-memory` package (now `fcx-memory`).
+Skill for fcx local project memory: symbol memory, context snapshots, and persistent storage. Implements the `@fcx/memory` package (now `fcx-memory`).
 
 ## Memory Store
 

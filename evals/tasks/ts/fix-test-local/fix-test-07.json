@@ -1,0 +1,20 @@
+{
+  "id": "fix-test-07",
+  "recipe": "fix-test",
+  "shape": "wrong-array-type",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/cart.ts": "export function total(prices: number[]): number {\n  return prices.reduce((sum, p) => sum + p, 0);\n}\n",
+    "tests/cart.test.ts": "import { total } from \"../src/cart\";\n\ntest(\"total of prices\", () => {\n  expect(total(\"1,2,3\")).toBe(6);\n});\n",
+    "tests/globals.d.ts": "declare function test(name: string, fn: () => void): void;\ndeclare function expect(actual: unknown): {\n  toBe(expected: unknown): void;\n  toEqual(expected: unknown): void;\n};\n"
+  },
+  "input": {
+    "testFile": "tests/cart.test.ts",
+    "testName": "total of prices"
+  },
+  "check": {
+    "typeCheckFile": "tests/cart.test.ts",
+    "symbol": "total"
+  }
+}

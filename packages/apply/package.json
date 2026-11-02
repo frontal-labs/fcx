@@ -1,5 +1,5 @@
 {
-  "name": "fcx-apply",
+  "name": "@fcx/apply",
   "version": "0.0.0",
   "description": "fcx edit application: search/replace diffs, backups, undo, and file permissions",
   "type": "module",
@@ -22,7 +22,6 @@
   "keywords": ["fcx", "apply", "diff", "edit", "backup", "undo"],
   "author": "Frontal Labs, Inc.",
   "engines": {
-    "bun": ">=1.1.0",
     "node": ">=22.0.0"
   },
   "devDependencies": {

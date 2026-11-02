@@ -1,0 +1,19 @@
+{
+  "id": "explain-06",
+  "recipe": "explain",
+  "shape": "queue-drain",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/queue.ts": "export class JobQueue {\n  private jobs: Array<() => Promise<void>> = [];\n  private running = false;\n\n  push(job: () => Promise<void>): void {\n    this.jobs.push(job);\n    void this.drain();\n  }\n\n  private async drain(): Promise<void> {\n    if (this.running) return;\n    this.running = true;\n    while (this.jobs.length > 0) {\n      const job = this.jobs.shift();\n      if (job) await job();\n    }\n    this.running = false;\n  }\n}\n"
+  },
+  "input": {
+    "file": "src/queue.ts",
+    "startLine": 10,
+    "endLine": 18,
+    "question": "Can two jobs run at the same time?"
+  },
+  "check": {
+    "criterion": "cite-layer-keeps-every-claim"
+  }
+}

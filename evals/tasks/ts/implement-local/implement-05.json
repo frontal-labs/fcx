@@ -1,0 +1,18 @@
+{
+  "id": "implement-05",
+  "recipe": "implement",
+  "shape": "count-words",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/implement_05.ts": "/** Counts whitespace-separated words. Blank text has zero words. */\nexport function countWords(text: string): number {\n  throw new Error(\"not implemented\");\n}\n"
+  },
+  "input": {
+    "file": "src/implement_05.ts",
+    "line": 2
+  },
+  "check": {
+    "stubMarker": "not implemented",
+    "typeCheckFile": "src/implement_05.ts"
+  }
+}

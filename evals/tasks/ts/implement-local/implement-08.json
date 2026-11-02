@@ -1,0 +1,18 @@
+{
+  "id": "implement-08",
+  "recipe": "implement",
+  "shape": "palindrome",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/implement_08.ts": "/** True when the text reads the same backwards. Ignores case and non-letter characters. */\nexport function isPalindrome(text: string): boolean {\n  throw new Error(\"not implemented\");\n}\n"
+  },
+  "input": {
+    "file": "src/implement_08.ts",
+    "line": 2
+  },
+  "check": {
+    "stubMarker": "not implemented",
+    "typeCheckFile": "src/implement_08.ts"
+  }
+}

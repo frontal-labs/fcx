@@ -1,0 +1,20 @@
+{
+  "id": "fix-test-06",
+  "recipe": "fix-test",
+  "shape": "misspelled-identifier",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/stats.ts": "export function median(values: number[]): number {\n  const sorted = [...values].sort((a, b) => a - b);\n  return sorted[Math.floor(sorted.length / 2)];\n}\n",
+    "tests/stats.test.ts": "import { median } from \"../src/stats\";\n\ntest(\"median of three\", () => {\n  expect(medain([1, 3, 2])).toBe(2);\n});\n",
+    "tests/globals.d.ts": "declare function test(name: string, fn: () => void): void;\ndeclare function expect(actual: unknown): {\n  toBe(expected: unknown): void;\n  toEqual(expected: unknown): void;\n};\n"
+  },
+  "input": {
+    "testFile": "tests/stats.test.ts",
+    "testName": "median of three"
+  },
+  "check": {
+    "typeCheckFile": "tests/stats.test.ts",
+    "symbol": "median"
+  }
+}

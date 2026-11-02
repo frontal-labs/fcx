@@ -1,8 +1,8 @@
-# fcx-defense
+# @fcx/defense
 
 ## Description
 
-Skill for fcx defense pipeline: six layers that constrain, ground, anchor, verify, cite, and abstain. Implements the `@frontal-labs/fcx-defense` package (now `fcx-defense`).
+Skill for fcx defense pipeline: six layers that constrain, ground, anchor, verify, cite, and abstain. Implements the `@fcx/defense` package (now `fcx-defense`).
 
 ## Defense Layers (in order)
 

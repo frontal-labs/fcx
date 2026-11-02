@@ -1,0 +1,18 @@
+{
+  "id": "docstring-04",
+  "recipe": "docstring",
+  "shape": "arrow-const",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/docstring_04.ts": "export const slugify = (text: string): string =>\n  text.trim().toLowerCase().replace(/\\s+/g, \"-\");\n"
+  },
+  "input": {
+    "file": "src/docstring_04.ts",
+    "line": 1
+  },
+  "check": {
+    "name": "slugify",
+    "typeCheckFile": "src/docstring_04.ts"
+  }
+}

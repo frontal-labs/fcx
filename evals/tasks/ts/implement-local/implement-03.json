@@ -1,0 +1,18 @@
+{
+  "id": "implement-03",
+  "recipe": "implement",
+  "shape": "unique",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/implement_03.ts": "/** Returns the values without duplicates, keeping the first occurrence of each. */\nexport function unique(values: string[]): string[] {\n  throw new Error(\"not implemented\");\n}\n"
+  },
+  "input": {
+    "file": "src/implement_03.ts",
+    "line": 2
+  },
+  "check": {
+    "stubMarker": "not implemented",
+    "typeCheckFile": "src/implement_03.ts"
+  }
+}

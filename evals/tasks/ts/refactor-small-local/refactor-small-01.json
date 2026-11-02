@@ -1,0 +1,23 @@
+{
+  "id": "refactor-small-01",
+  "recipe": "refactor-small",
+  "shape": "loop-to-reduce",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/refactor_01.ts": "export interface Item {\n  price: number;\n}\n\nexport function sumPrices(items: Item[]): number {\n  let total = 0;\n  for (const item of items) {\n    total += item.price;\n  }\n  return total;\n}\n"
+  },
+  "input": {
+    "file": "src/refactor_01.ts",
+    "startLine": 5,
+    "endLine": 11,
+    "instruction": "Replace the loop with Array.prototype.reduce."
+  },
+  "check": {
+    "typeCheckFile": "src/refactor_01.ts",
+    "effect": {
+      "absent": ["for (const"],
+      "present": [".reduce("]
+    }
+  }
+}

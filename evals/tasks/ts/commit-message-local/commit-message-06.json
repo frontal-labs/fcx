@@ -1,0 +1,19 @@
+{
+  "id": "commit-message-06",
+  "recipe": "commit-message",
+  "shape": "delete-dead-file",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/main.ts": "export const main = 2;\n"
+  },
+  "input": {},
+  "check": {
+    "rules": ["type", "header", "subject-length", "no-period", "single-line-subject"]
+  },
+  "before": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/old-helpers.ts": "export const unused = 1;\n",
+    "src/main.ts": "export const main = 2;\n"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "add-types-04",
+  "recipe": "add-types",
+  "shape": "const-object",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/add_types_04.ts": "export const defaults = { port: 8080, host: \"localhost\", secure: false };\n"
+  },
+  "input": {
+    "file": "src/add_types_04.ts",
+    "symbol": "defaults"
+  },
+  "check": {
+    "symbol": "defaults",
+    "typeCheckFile": "src/add_types_04.ts"
+  }
+}

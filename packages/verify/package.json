@@ -1,5 +1,5 @@
 {
-  "name": "fcx-verify",
+  "name": "@fcx/verify",
   "version": "0.0.0",
   "description": "fcx per-language verifiers: TypeScript, Python, Go, Rust test and type check execution",
   "type": "module",
@@ -22,11 +22,13 @@
   "keywords": ["fcx", "verify", "verifier", "tests", "typecheck"],
   "author": "Frontal Labs, Inc.",
   "engines": {
-    "bun": ">=1.1.0",
     "node": ">=22.0.0"
   },
   "devDependencies": {
     "typescript": "^5.6.0",
     "vitest": "^2.1.0"
+  },
+  "dependencies": {
+    "typescript": "^5.6.0"
   }
 }

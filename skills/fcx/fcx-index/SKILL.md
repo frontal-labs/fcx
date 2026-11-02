@@ -1,8 +1,8 @@
-# fcx-index
+# @fcx/index
 
 ## Description
 
-Skill for fcx code graph indexing: tree-sitter extraction, SQLite store, embeddings, and incremental indexing. Implements the `@frontal-labs/fcx-index` package (now `fcx-index`).
+Skill for fcx code graph indexing: tree-sitter extraction, SQLite store, embeddings, and incremental indexing. Implements the `@fcx/index` package (now `fcx-index`).
 
 ## Schema
 

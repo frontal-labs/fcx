@@ -1,0 +1,18 @@
+{
+  "id": "add-types-06",
+  "recipe": "add-types",
+  "shape": "function-reduce",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/add_types_06.ts": "export function total(values: number[]) {\n  return values.reduce((sum, v) => sum + v, 0);\n}\n"
+  },
+  "input": {
+    "file": "src/add_types_06.ts",
+    "symbol": "total"
+  },
+  "check": {
+    "symbol": "total",
+    "typeCheckFile": "src/add_types_06.ts"
+  }
+}

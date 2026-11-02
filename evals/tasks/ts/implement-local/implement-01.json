@@ -1,0 +1,18 @@
+{
+  "id": "implement-01",
+  "recipe": "implement",
+  "shape": "parse-duration",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/implement_01.ts": "/** Parses durations such as 90s, 5m or 2h into seconds. Throws on an unknown unit. */\nexport function parseDuration(text: string): number {\n  throw new Error(\"not implemented\");\n}\n"
+  },
+  "input": {
+    "file": "src/implement_01.ts",
+    "line": 2
+  },
+  "check": {
+    "stubMarker": "not implemented",
+    "typeCheckFile": "src/implement_01.ts"
+  }
+}

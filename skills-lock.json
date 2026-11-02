@@ -67,73 +67,73 @@
       "skillPath": "skills/.curated/zod/SKILL.md",
       "computedHash": "c69b5133b65643317236707f2cd3e521b4fc6e5ee5fd6c6c00cf62a37dfd0144"
     },
-    "fcx-config": {
+    "@fcx/config": {
       "source": "frontal-labs/fcx",
       "sourceType": "internal",
       "skillPath": "skills/fcx/fcx-config/SKILL.md",
       "computedHash": ""
     },
-    "fcx-model": {
+    "@fcx/model": {
       "source": "frontal-labs/fcx",
       "sourceType": "internal",
       "skillPath": "skills/fcx/fcx-model/SKILL.md",
       "computedHash": ""
     },
-    "fcx-recipes": {
+    "@fcx/recipes": {
       "source": "frontal-labs/fcx",
       "sourceType": "internal",
       "skillPath": "skills/fcx/fcx-recipes/SKILL.md",
       "computedHash": ""
     },
-    "fcx-defense": {
+    "@fcx/defense": {
       "source": "frontal-labs/fcx",
       "sourceType": "internal",
       "skillPath": "skills/fcx/fcx-defense/SKILL.md",
       "computedHash": ""
     },
-    "fcx-index": {
+    "@fcx/index": {
       "source": "frontal-labs/fcx",
       "sourceType": "internal",
       "skillPath": "skills/fcx/fcx-index/SKILL.md",
       "computedHash": ""
     },
-    "fcx-retrieve": {
+    "@fcx/retrieve": {
       "source": "frontal-labs/fcx",
       "sourceType": "internal",
       "skillPath": "skills/fcx/fcx-retrieve/SKILL.md",
       "computedHash": ""
     },
-    "fcx-verify": {
+    "@fcx/verify": {
       "source": "frontal-labs/fcx",
       "sourceType": "internal",
       "skillPath": "skills/fcx/fcx-verify/SKILL.md",
       "computedHash": ""
     },
-    "fcx-apply": {
+    "@fcx/apply": {
       "source": "frontal-labs/fcx",
       "sourceType": "internal",
       "skillPath": "skills/fcx/fcx-apply/SKILL.md",
       "computedHash": ""
     },
-    "fcx-memory": {
+    "@fcx/memory": {
       "source": "frontal-labs/fcx",
       "sourceType": "internal",
       "skillPath": "skills/fcx/fcx-memory/SKILL.md",
       "computedHash": ""
     },
-    "fcx-escalate": {
+    "@fcx/escalate": {
       "source": "frontal-labs/fcx",
       "sourceType": "internal",
       "skillPath": "skills/fcx/fcx-escalate/SKILL.md",
       "computedHash": ""
     },
-    "fcx-acp": {
+    "@fcx/acp": {
       "source": "frontal-labs/fcx",
       "sourceType": "internal",
       "skillPath": "skills/fcx/fcx-acp/SKILL.md",
       "computedHash": ""
     },
-    "fcx-cli": {
+    "@fcx/cli": {
       "source": "frontal-labs/fcx",
       "sourceType": "internal",
       "skillPath": "skills/fcx/fcx-cli/SKILL.md",

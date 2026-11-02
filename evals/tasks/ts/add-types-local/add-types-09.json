@@ -1,0 +1,18 @@
+{
+  "id": "add-types-09",
+  "recipe": "add-types",
+  "shape": "function-predicate",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/add_types_09.ts": "export function isEmpty(list: string[]) {\n  return list.length === 0;\n}\n"
+  },
+  "input": {
+    "file": "src/add_types_09.ts",
+    "symbol": "isEmpty"
+  },
+  "check": {
+    "symbol": "isEmpty",
+    "typeCheckFile": "src/add_types_09.ts"
+  }
+}

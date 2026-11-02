@@ -9,7 +9,7 @@
     "build": "bun run --filter '*' build",
     "lint": "biome check .",
     "typecheck": "tsc -b",
-    "test": "vitest run",
+    "test": "node ./node_modules/.bin/vitest run",
     "prepare": "husky",
     "dev": "bunx tsx cli/src/index.ts",
     "doctor": "bunx tsx cli/src/index.ts doctor",
@@ -38,7 +38,6 @@
   ],
   "author": "Frontal Labs, Inc.",
   "engines": {
-    "bun": ">=1.1.0",
     "node": ">=22.0.0"
   },
   "devDependencies": {
@@ -48,6 +47,10 @@
     "husky": "^9.1.7",
     "turbo": "^2.11.10",
     "typescript": "^5.6.0",
+    "typescript-language-server": "^6.0.2",
     "vitest": "^2.1.0"
+  },
+  "dependencies": {
+    "@t3-oss/env-core": "^0.13.11"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "fcx-acp",
+  "name": "@fcx/acp",
   "version": "0.0.0",
   "description": "fcx Agent Client Protocol (V10) server over stdio",
   "type": "module",
@@ -22,11 +22,13 @@
   "keywords": ["fcx", "acp", "agent-client-protocol", "stdio"],
   "author": "Frontal Labs, Inc.",
   "engines": {
-    "bun": ">=1.1.0",
     "node": ">=22.0.0"
   },
   "devDependencies": {
     "typescript": "^5.6.0",
     "vitest": "^2.1.0"
+  },
+  "dependencies": {
+    "@agentclientprotocol/sdk": "2.2.0"
   }
 }

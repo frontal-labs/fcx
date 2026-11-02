@@ -3,12 +3,12 @@
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "declaration": true,
+    "declaration": false,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "outDir": "./dist",
-    "rootDir": "./src"
+    "noEmit": true,
+    "rootDir": "./"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "tsup.config.ts", "tests/**/*"]
 }

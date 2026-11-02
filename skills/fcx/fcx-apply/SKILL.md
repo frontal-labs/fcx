@@ -1,8 +1,8 @@
-# fcx-apply
+# @fcx/apply
 
 ## Description
 
-Skill for fcx edit application: search/replace diffs, backups, undo, and file permissions. Implements the `@frontal-labs/fcx-apply` package (now `fcx-apply`).
+Skill for fcx edit application: search/replace diffs, backups, undo, and file permissions. Implements the `@fcx/apply` package (now `fcx-apply`).
 
 ## Commands
 

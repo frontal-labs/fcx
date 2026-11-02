@@ -2,7 +2,9 @@
   "configHome": "/tmp/fc-test/home-004",
   "projectConfig": {},
   "settings": {},
-  "trust": { "trusted": false },
+  "trust": {
+    "trusted": false
+  },
   "policy": {
     "allowedProviders": [],
     "allowedModels": [],
@@ -11,42 +13,45 @@
     "deny": []
   },
   "permissionMode": "prompt",
-  "paths": { "cacheDir": "/tmp/fc-test/home-004/cache", "logsDir": "/tmp/fc-test/home-004/logs" },
+  "paths": {
+    "cacheDir": "/tmp/fc-test/home-004/cache",
+    "logsDir": "/tmp/fc-test/home-004/logs"
+  },
   "warnings": [
     {
       "key": "hooks",
       "source": "/tmp/fc-test/home-004/repo/.frontal-code/settings.json",
-      "reason": "untrusted workspace"
+      "reason": "withheld until this workspace is trusted; run `frontal-code trust` to enable"
     },
     {
       "key": "mcpServers",
       "source": "/tmp/fc-test/home-004/repo/.frontal-code/settings.json",
-      "reason": "untrusted workspace"
+      "reason": "withheld until this workspace is trusted; run `frontal-code trust` to enable"
     },
     {
       "key": "plugins",
       "source": "/tmp/fc-test/home-004/repo/.frontal-code/settings.json",
-      "reason": "untrusted workspace"
+      "reason": "withheld until this workspace is trusted; run `frontal-code trust` to enable"
     },
     {
       "key": "permissionMode",
       "source": "/tmp/fc-test/home-004/repo/.frontal-code/settings.json",
-      "reason": "untrusted workspace"
-    },
-    {
-      "key": "permissions.defaultMode",
-      "source": "/tmp/fc-test/home-004/repo/.frontal-code/settings.json",
-      "reason": "untrusted workspace"
+      "reason": "withheld until this workspace is trusted; run `frontal-code trust` to enable"
     },
     {
       "key": "sandbox",
       "source": "/tmp/fc-test/home-004/repo/.frontal-code/settings.json",
-      "reason": "untrusted workspace"
+      "reason": "withheld until this workspace is trusted; run `frontal-code trust` to enable"
+    },
+    {
+      "key": "permissions.defaultMode",
+      "source": "/tmp/fc-test/home-004/repo/.frontal-code/settings.json",
+      "reason": "withheld until this workspace is trusted; run `frontal-code trust` to enable"
     },
     {
       "key": "permissions.allow",
       "source": "/tmp/fc-test/home-004/repo/.frontal-code/settings.json",
-      "reason": "ignored (project/local allow rules are always ignored)"
+      "reason": "ignored: project and local settings can only restrict access (use deny or ask)"
     }
   ],
   "local": {
@@ -55,8 +60,13 @@
     "maxCandidates": "auto",
     "contextBudgetTokens": 3000,
     "languages": ["typescript", "python", "go", "rust"],
-    "index": { "exclude": ["**/node_modules/**", "**/target/**", "**/.venv/**", "**/dist/**"] },
-    "escalation": { "enabled": true, "provider": "default" },
+    "index": {
+      "exclude": ["**/node_modules/**", "**/target/**", "**/.venv/**", "**/dist/**"]
+    },
+    "escalation": {
+      "enabled": true,
+      "provider": "default"
+    },
     "telemetry": "inherit"
   }
 }

@@ -30,5 +30,5 @@ TypeScript, Python, Go, Rust.
 
 ## Packages
 
-- `@frontal-labs/fcx-index` — index store
-- `@frontal-labs/fcx-retrieve` — hybrid retrieval
+- `@fcx/index` — index store
+- `@fcx/retrieve` — hybrid retrieval

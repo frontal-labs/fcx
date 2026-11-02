@@ -1,0 +1,20 @@
+{
+  "id": "fix-test-05",
+  "recipe": "fix-test",
+  "shape": "string-for-number",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/text.ts": "export function repeat(text: string, times: number): string {\n  return text.repeat(times);\n}\n",
+    "tests/text.test.ts": "import { repeat } from \"../src/text\";\n\ntest(\"repeat joins copies\", () => {\n  expect(repeat(\"ab\", \"3\")).toBe(\"ababab\");\n});\n",
+    "tests/globals.d.ts": "declare function test(name: string, fn: () => void): void;\ndeclare function expect(actual: unknown): {\n  toBe(expected: unknown): void;\n  toEqual(expected: unknown): void;\n};\n"
+  },
+  "input": {
+    "testFile": "tests/text.test.ts",
+    "testName": "repeat joins copies"
+  },
+  "check": {
+    "typeCheckFile": "tests/text.test.ts",
+    "symbol": "repeat"
+  }
+}

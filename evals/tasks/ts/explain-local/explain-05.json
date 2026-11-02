@@ -1,0 +1,18 @@
+{
+  "id": "explain-05",
+  "recipe": "explain",
+  "shape": "money-format",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/money.ts": "export function formatCents(cents: number, currency = \"USD\"): string {\n  const negative = cents < 0;\n  const abs = Math.abs(cents);\n  const whole = Math.floor(abs / 100);\n  const frac = String(abs % 100).padStart(2, \"0\");\n  const text = `${currency} ${whole}.${frac}`;\n  return negative ? `-${text}` : text;\n}\n"
+  },
+  "input": {
+    "file": "src/money.ts",
+    "startLine": 1,
+    "endLine": 8
+  },
+  "check": {
+    "criterion": "cite-layer-keeps-every-claim"
+  }
+}

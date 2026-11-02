@@ -1,5 +1,5 @@
 {
-  "name": "fcx-lsp",
+  "name": "@fcx/lsp",
   "version": "0.0.0",
   "description": "fcx language server pool: per-language LSP clients using vscode-jsonrpc",
   "type": "module",
@@ -22,11 +22,14 @@
   "keywords": ["fcx", "lsp", "language-server", "jsonrpc"],
   "author": "Frontal Labs, Inc.",
   "engines": {
-    "bun": ">=1.1.0",
     "node": ">=22.0.0"
   },
   "devDependencies": {
     "typescript": "^5.6.0",
     "vitest": "^2.1.0"
+  },
+  "dependencies": {
+    "vscode-jsonrpc": "^10.0.0",
+    "vscode-languageserver-protocol": "^3.18.5"
   }
 }

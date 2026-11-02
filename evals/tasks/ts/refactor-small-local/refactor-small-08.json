@@ -1,0 +1,23 @@
+{
+  "id": "refactor-small-08",
+  "recipe": "refactor-small",
+  "shape": "foreach-to-for-of",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/refactor_08.ts": "export function logAll(lines: string[]): void {\n  lines.forEach((line) => {\n    console.log(line);\n  });\n}\n"
+  },
+  "input": {
+    "file": "src/refactor_08.ts",
+    "startLine": 1,
+    "endLine": 5,
+    "instruction": "Replace forEach with a for...of loop."
+  },
+  "check": {
+    "typeCheckFile": "src/refactor_08.ts",
+    "effect": {
+      "absent": [".forEach("],
+      "present": ["for (const"]
+    }
+  }
+}

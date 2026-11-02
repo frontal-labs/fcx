@@ -1,0 +1,20 @@
+{
+  "id": "fix-test-04",
+  "recipe": "fix-test",
+  "shape": "boolean-as-string",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/parity.ts": "export function isEven(n: number): boolean {\n  return n % 2 === 0;\n}\n",
+    "tests/parity.test.ts": "import { isEven } from \"../src/parity\";\n\ntest(\"isEven detects even numbers\", () => {\n  const result: string = isEven(2);\n  expect(result).toBe(true);\n});\n",
+    "tests/globals.d.ts": "declare function test(name: string, fn: () => void): void;\ndeclare function expect(actual: unknown): {\n  toBe(expected: unknown): void;\n  toEqual(expected: unknown): void;\n};\n"
+  },
+  "input": {
+    "testFile": "tests/parity.test.ts",
+    "testName": "isEven detects even numbers"
+  },
+  "check": {
+    "typeCheckFile": "tests/parity.test.ts",
+    "symbol": "isEven"
+  }
+}

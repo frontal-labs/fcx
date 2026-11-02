@@ -1,0 +1,19 @@
+{
+  "id": "write-test-01",
+  "recipe": "write-test",
+  "shape": "add",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/write_test_01.ts": "export function add(a: number, b: number): number {\n  return a + b;\n}\n",
+    "tests/globals.d.ts": "declare function test(name: string, fn: () => void): void;\ndeclare function expect(actual: unknown): {\n  toBe(expected: unknown): void;\n  toEqual(expected: unknown): void;\n};\n"
+  },
+  "input": {
+    "file": "src/write_test_01.ts",
+    "symbol": "add"
+  },
+  "check": {
+    "symbol": "add",
+    "newTestUnder": ["tests/", "__tests__/"]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "refactor-small-02",
+  "recipe": "refactor-small",
+  "shape": "let-to-const",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/refactor_02.ts": "export function badge(name: string): string {\n  let tag = \"user\";\n  return `[${tag}] ${name}`;\n}\n"
+  },
+  "input": {
+    "file": "src/refactor_02.ts",
+    "startLine": 1,
+    "endLine": 4,
+    "instruction": "Use const instead of let, because tag is never reassigned."
+  },
+  "check": {
+    "typeCheckFile": "src/refactor_02.ts",
+    "effect": {
+      "absent": ["let tag"],
+      "present": ["const tag"]
+    }
+  }
+}

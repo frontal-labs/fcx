@@ -1,8 +1,8 @@
-# fcx-acp
+# @fcx/acp
 
 ## Description
 
-Skill for fcx Agent Client Protocol (V10) server over stdio. Implements the `@frontal-labs/fcx-acp` package (now `fcx-acp`).
+Skill for fcx Agent Client Protocol (V10) server over stdio. Implements the `@fcx/acp` package (now `fcx-acp`).
 
 ## Commands
 

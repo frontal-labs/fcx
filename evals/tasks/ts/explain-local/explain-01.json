@@ -1,0 +1,18 @@
+{
+  "id": "explain-01",
+  "recipe": "explain",
+  "shape": "retry-loop",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/retry.ts": "export async function withRetry<T>(fn: () => Promise<T>, attempts: number): Promise<T> {\n  let lastError: unknown;\n  for (let i = 0; i < attempts; i++) {\n    try {\n      return await fn();\n    } catch (error) {\n      lastError = error;\n    }\n  }\n  throw lastError;\n}\n"
+  },
+  "input": {
+    "file": "src/retry.ts",
+    "startLine": 1,
+    "endLine": 11
+  },
+  "check": {
+    "criterion": "cite-layer-keeps-every-claim"
+  }
+}

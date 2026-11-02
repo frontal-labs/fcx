@@ -1,0 +1,18 @@
+{
+  "id": "explain-07",
+  "recipe": "explain",
+  "shape": "header-parse",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/headers.ts": "export function parseContentType(value: string): { type: string; charset?: string } {\n  const [type, ...params] = value.split(\";\").map((part) => part.trim());\n  const charset = params\n    .map((param) => param.split(\"=\"))\n    .find(([name]) => name?.toLowerCase() === \"charset\")?.[1];\n  return charset ? { type, charset } : { type };\n}\n"
+  },
+  "input": {
+    "file": "src/headers.ts",
+    "startLine": 1,
+    "endLine": 7
+  },
+  "check": {
+    "criterion": "cite-layer-keeps-every-claim"
+  }
+}

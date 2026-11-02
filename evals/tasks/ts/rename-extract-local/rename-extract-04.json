@@ -1,0 +1,22 @@
+{
+  "id": "rename-extract-04",
+  "recipe": "rename-extract",
+  "shape": "parameter",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/rename_04.ts": "export function scale(factor: number, value: number): number {\n  return factor * value;\n}\n"
+  },
+  "input": {
+    "file": "src/rename_04.ts",
+    "line": 1,
+    "column": 23,
+    "symbol": "factor",
+    "newName": "multiplier"
+  },
+  "check": {
+    "oldName": "factor",
+    "newName": "multiplier",
+    "typeCheckFile": "src/rename_04.ts"
+  }
+}

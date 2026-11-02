@@ -45,4 +45,4 @@ Stored in `settings.json` under the `"fc"` key:
 
 ## Packages
 
-- `@frontal-labs/fcx-config` — `resolveConfig(cwd)` returns `ResolvedConfig`
+- `@fcx/config` — `resolveConfig(cwd)` returns `ResolvedConfig`

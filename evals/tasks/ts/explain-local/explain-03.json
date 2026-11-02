@@ -1,0 +1,18 @@
+{
+  "id": "explain-03",
+  "recipe": "explain",
+  "shape": "parse-pairs",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/pairs.ts": "export function parsePairs(text: string): Map<string, string> {\n  const result = new Map<string, string>();\n  for (const line of text.split(\"\\n\")) {\n    const [key, ...rest] = line.split(\"=\");\n    if (!key || rest.length === 0) continue;\n    result.set(key.trim(), rest.join(\"=\").trim());\n  }\n  return result;\n}\n"
+  },
+  "input": {
+    "file": "src/pairs.ts",
+    "startLine": 1,
+    "endLine": 9
+  },
+  "check": {
+    "criterion": "cite-layer-keeps-every-claim"
+  }
+}

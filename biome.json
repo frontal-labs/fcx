@@ -27,6 +27,16 @@
     }
   },
   "files": {
-    "ignore": ["node_modules", "dist", "evals/reports", ".frontal-code", ".zed", ".vscode"]
+    "ignore": [
+      ".frontal-code",
+      ".vscode",
+      ".zed",
+      "dist",
+      "evals/reports",
+      "node_modules",
+      "training/.venv",
+      "training/data",
+      "training/reports"
+    ]
   }
 }

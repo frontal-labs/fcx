@@ -1,0 +1,23 @@
+{
+  "id": "refactor-small-05",
+  "recipe": "refactor-small",
+  "shape": "template-literal",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/refactor_05.ts": "export function greet(first: string, last: string): string {\n  return \"Hello, \" + first + \" \" + last;\n}\n"
+  },
+  "input": {
+    "file": "src/refactor_05.ts",
+    "startLine": 1,
+    "endLine": 3,
+    "instruction": "Use a template literal instead of string concatenation."
+  },
+  "check": {
+    "typeCheckFile": "src/refactor_05.ts",
+    "effect": {
+      "absent": ["\"Hello, \" + first"],
+      "present": ["`Hello, "]
+    }
+  }
+}

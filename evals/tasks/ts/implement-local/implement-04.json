@@ -1,0 +1,18 @@
+{
+  "id": "implement-04",
+  "recipe": "implement",
+  "shape": "clamp-percent",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/implement_04.ts": "/** Limits a value to the range 0 to 100. */\nexport function clampPercent(value: number): number {\n  throw new Error(\"not implemented\");\n}\n"
+  },
+  "input": {
+    "file": "src/implement_04.ts",
+    "line": 2
+  },
+  "check": {
+    "stubMarker": "not implemented",
+    "typeCheckFile": "src/implement_04.ts"
+  }
+}

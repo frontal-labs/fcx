@@ -1,0 +1,18 @@
+{
+  "id": "add-types-02",
+  "recipe": "add-types",
+  "shape": "const-number",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/add_types_02.ts": "export const retries = 3;\n"
+  },
+  "input": {
+    "file": "src/add_types_02.ts",
+    "symbol": "retries"
+  },
+  "check": {
+    "symbol": "retries",
+    "typeCheckFile": "src/add_types_02.ts"
+  }
+}

@@ -21,13 +21,13 @@ brew install --formula ./homebrew/fcx.rb
 ### npm (global)
 
 ```bash
-npm install -g @frontal-labs/fcx
+npm install -g @fcx/fcx
 ```
 
 ### Bun (global)
 
 ```bash
-bun install -g @frontal-labs/fcx
+bun install -g @fcx/fcx
 ```
 
 ### From source

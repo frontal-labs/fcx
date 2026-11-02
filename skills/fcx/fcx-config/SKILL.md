@@ -1,8 +1,8 @@
-# fcx-config
+# @fcx/config
 
 ## Description
 
-Skill for fcx configuration resolution, trust checking, policy intersection, and permission mode resolution. Implements the `@frontal-labs/fcx-config` package (now `fcx-config`).
+Skill for fcx configuration resolution, trust checking, policy intersection, and permission mode resolution. Implements the `@fcx/config` package (now `fcx-config`).
 
 ## Commands
 

@@ -1,0 +1,18 @@
+{
+  "id": "add-types-07",
+  "recipe": "add-types",
+  "shape": "const-array",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/add_types_07.ts": "export const TAGS = [\"alpha\", \"beta\"];\n"
+  },
+  "input": {
+    "file": "src/add_types_07.ts",
+    "symbol": "TAGS"
+  },
+  "check": {
+    "symbol": "TAGS",
+    "typeCheckFile": "src/add_types_07.ts"
+  }
+}

@@ -1,4 +1,4 @@
-# fcx-cli
+# @fcx/cli
 
 ## Description
 

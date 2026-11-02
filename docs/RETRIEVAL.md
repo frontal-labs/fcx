@@ -19,4 +19,4 @@ Configurable via `fc.embeddingModel`. Default: `ggml/bge-small-en-v1.5`. M1 comp
 
 ## Packages
 
-- `@frontal-labs/fcx-retrieve` — `retrieve(task): ContextBundle`
+- `@fcx/retrieve` — `retrieve(task): ContextBundle`

@@ -1,8 +1,14 @@
 {
   "configHome": "/tmp/fc-test/home-026",
   "projectConfig": {},
-  "settings": { "permissionMode": "danger-full-access", "hooks": {} },
-  "trust": { "trusted": true, "trustedRoot": "/tmp/fc-test/home-026" },
+  "settings": {
+    "permissionMode": "danger-full-access",
+    "hooks": {}
+  },
+  "trust": {
+    "trusted": true,
+    "trustedRoot": "/tmp/fc-test/home-026"
+  },
   "policy": {
     "allowedProviders": [],
     "allowedModels": [],
@@ -10,17 +16,31 @@
     "permissionCeiling": null,
     "deny": []
   },
-  "permissionMode": "danger-full-access",
-  "paths": { "cacheDir": "/tmp/fc-test/home-026/cache", "logsDir": "/tmp/fc-test/home-026/logs" },
-  "warnings": [],
+  "permissionMode": "prompt",
+  "paths": {
+    "cacheDir": "/tmp/fc-test/home-026/cache",
+    "logsDir": "/tmp/fc-test/home-026/logs"
+  },
+  "warnings": [
+    {
+      "key": "permissionMode",
+      "source": "/tmp/fc-test/home-026/repo/.frontal-code/settings.json",
+      "reason": "capped at prompt; project and local settings cannot raise the mode above the user's"
+    }
+  ],
   "local": {
     "model": "ggml/auto",
     "embeddingModel": "ggml/bge-small-en-v1.5",
     "maxCandidates": "auto",
     "contextBudgetTokens": 3000,
     "languages": ["typescript", "python", "go", "rust"],
-    "index": { "exclude": ["**/node_modules/**", "**/target/**", "**/.venv/**", "**/dist/**"] },
-    "escalation": { "enabled": true, "provider": "default" },
+    "index": {
+      "exclude": ["**/node_modules/**", "**/target/**", "**/.venv/**", "**/dist/**"]
+    },
+    "escalation": {
+      "enabled": true,
+      "provider": "default"
+    },
     "telemetry": "inherit"
   }
 }

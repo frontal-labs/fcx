@@ -1,0 +1,19 @@
+{
+  "id": "explain-04",
+  "recipe": "explain",
+  "shape": "debounce",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/debounce.ts": "export function debounce<A extends unknown[]>(fn: (...args: A) => void, waitMs: number) {\n  let timer: ReturnType<typeof setTimeout> | undefined;\n  return (...args: A): void => {\n    if (timer !== undefined) clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), waitMs);\n  };\n}\n"
+  },
+  "input": {
+    "file": "src/debounce.ts",
+    "startLine": 1,
+    "endLine": 7,
+    "question": "Why is the function returned instead of called?"
+  },
+  "check": {
+    "criterion": "cite-layer-keeps-every-claim"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "implement-06",
+  "recipe": "implement",
+  "shape": "invert-map",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/implement_06.ts": "/** Swaps keys and values. When two keys share a value, the later key wins. */\nexport function invertMap(input: Record<string, string>): Record<string, string> {\n  throw new Error(\"not implemented\");\n}\n"
+  },
+  "input": {
+    "file": "src/implement_06.ts",
+    "line": 2
+  },
+  "check": {
+    "stubMarker": "not implemented",
+    "typeCheckFile": "src/implement_06.ts"
+  }
+}

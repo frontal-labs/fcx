@@ -1,0 +1,19 @@
+{
+  "id": "write-test-04",
+  "recipe": "write-test",
+  "shape": "clamp",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/write_test_04.ts": "export function clampIndex(index: number, length: number): number {\n  return Math.max(0, Math.min(index, length - 1));\n}\n",
+    "tests/globals.d.ts": "declare function test(name: string, fn: () => void): void;\ndeclare function expect(actual: unknown): {\n  toBe(expected: unknown): void;\n  toEqual(expected: unknown): void;\n};\n"
+  },
+  "input": {
+    "file": "src/write_test_04.ts",
+    "symbol": "clampIndex"
+  },
+  "check": {
+    "symbol": "clampIndex",
+    "newTestUnder": ["tests/", "__tests__/"]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "docstring-05",
+  "recipe": "docstring",
+  "shape": "function-date",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/docstring_05.ts": "export function parseIsoDate(input: string): Date | undefined {\n  const date = new Date(input);\n  return Number.isNaN(date.getTime()) ? undefined : date;\n}\n"
+  },
+  "input": {
+    "file": "src/docstring_05.ts",
+    "line": 1
+  },
+  "check": {
+    "name": "parseIsoDate",
+    "typeCheckFile": "src/docstring_05.ts"
+  }
+}

@@ -1,0 +1,85 @@
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { type LayerEvent, RecipeInputError, runWriteTest } from "../src/index.js";
+import { makeWorkspace, queueModel } from "./support.js";
+
+const MATH = "export function add(a: number, b: number): number {\n  return a + b;\n}\n";
+
+const GOOD = {
+  file: "tests/add.test.ts",
+  imports: ["../src/math.js"],
+  testCode: 'import { add } from "../src/math.js";\n\nexport const sum: number = add(1, 2);\n',
+};
+
+describe("write-test", () => {
+  let fixture: ReturnType<typeof makeWorkspace>;
+
+  beforeEach(() => {
+    fixture = makeWorkspace({ "src/math.ts": MATH });
+  });
+
+  afterEach(() => {
+    fixture.cleanup();
+  });
+
+  const base = (model: ReturnType<typeof queueModel>, maxCandidates = 2) => ({
+    model,
+    workspace: fixture.ws,
+    file: "src/math.ts",
+    symbol: "add",
+    indexPath: fixture.indexPath,
+    maxCandidates,
+  });
+
+  it("verifies a new test file under tests/ whose imports resolve and that type-checks", async () => {
+    const result = await runWriteTest(base(queueModel([GOOD]), 1));
+    expect(result.status).toBe("verified");
+    if (result.status === "verified") {
+      expect(result.file).toBe("tests/add.test.ts");
+      expect(result.testCode).toBe(GOOD.testCode);
+      expect(result.verification.notRun.join(" ")).toMatch(/test-run/);
+    }
+  });
+
+  it("abstains when every candidate puts the test outside tests/ or __tests__/", async () => {
+    const outside = { ...GOOD, file: "src/add.test.ts" };
+    const events: LayerEvent[] = [];
+    const result = await runWriteTest({
+      ...base(queueModel([outside, outside])),
+      onLayer: (e) => events.push(e),
+    });
+    expect(result.status).toBe("abstained");
+    expect(events.filter((e) => e.layer === "constrain").map((e) => e.reasonCode)).toEqual([
+      "TEST_PATH_OUTSIDE_TESTS",
+      "TEST_PATH_OUTSIDE_TESTS",
+    ]);
+  });
+
+  it("records a schema-invalid output as a failed candidate and then verifies the next one", async () => {
+    const model = queueModel([{ file: "tests/add.test.ts" }, GOOD]);
+    const result = await runWriteTest(base(model));
+    expect(result.status).toBe("verified");
+    if (result.status === "verified") expect(result.candidates[0]).toMatchObject({ pass: false });
+    expect(model.prompts[1]).toContain("did not match the required JSON schema");
+  });
+
+  it("rejects an existing file name and an import that does not resolve", async () => {
+    const events: LayerEvent[] = [];
+    const existing = { ...GOOD, file: "src/math.ts" };
+    const unresolved = { ...GOOD, imports: ["./nowhere.js"] };
+    const result = await runWriteTest({
+      ...base(queueModel([existing, unresolved])),
+      onLayer: (e) => events.push(e),
+    });
+    expect(result.status).toBe("abstained");
+    expect(events.filter((e) => e.layer === "constrain").map((e) => e.reasonCode)).toEqual([
+      "TEST_PATH_OUTSIDE_TESTS",
+      "IMPORT_NOT_RESOLVED",
+    ]);
+  });
+
+  it("rejects an unknown symbol", async () => {
+    await expect(
+      runWriteTest({ ...base(queueModel([]), 1), symbol: "missing" }),
+    ).rejects.toBeInstanceOf(RecipeInputError);
+  });
+});

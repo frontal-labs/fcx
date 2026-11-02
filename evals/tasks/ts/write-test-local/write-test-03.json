@@ -1,0 +1,19 @@
+{
+  "id": "write-test-03",
+  "recipe": "write-test",
+  "shape": "csv-line",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/write_test_03.ts": "export function parseCsvLine(line: string): string[] {\n  return line.split(\",\").map((part) => part.trim());\n}\n",
+    "tests/globals.d.ts": "declare function test(name: string, fn: () => void): void;\ndeclare function expect(actual: unknown): {\n  toBe(expected: unknown): void;\n  toEqual(expected: unknown): void;\n};\n"
+  },
+  "input": {
+    "file": "src/write_test_03.ts",
+    "symbol": "parseCsvLine"
+  },
+  "check": {
+    "symbol": "parseCsvLine",
+    "newTestUnder": ["tests/", "__tests__/"]
+  }
+}

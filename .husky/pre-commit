@@ -1,1 +1,1 @@
-bun run lint && bun run typecheck && bun run test
+bun run lint && bun run typecheck && node ./node_modules/.bin/vitest run

@@ -1,6 +1,6 @@
 {
   "configHome": "/tmp/fc-test/home-006",
-  "projectConfig": { "runtime": { "permission_mode": "danger-full-access" } },
+  "projectConfig": {},
   "settings": {},
   "trust": { "trusted": false },
   "policy": {
@@ -10,7 +10,7 @@
     "permissionCeiling": null,
     "deny": []
   },
-  "permissionMode": "danger-full-access",
+  "permissionMode": "prompt",
   "paths": { "cacheDir": "/tmp/fc-test/home-006/cache", "logsDir": "/tmp/fc-test/home-006/logs" },
   "warnings": [],
   "local": {

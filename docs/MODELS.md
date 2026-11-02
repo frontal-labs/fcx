@@ -2,7 +2,7 @@
 
 fcx uses one generation model of about 1.5B parameters. No 3B or larger models.
 
-## Registry (`@frontal-labs/fcx-model`)
+## Registry (`@fcx/model`)
 
 | Model | Size | Context | Tier | License | Quant |
 |-------|------|---------|------|---------|-------|

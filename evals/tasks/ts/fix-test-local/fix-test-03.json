@@ -1,0 +1,20 @@
+{
+  "id": "fix-test-03",
+  "recipe": "fix-test",
+  "shape": "wrong-property-name",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/users.ts": "export function formatUser(user: { name: string; age: number }): string {\n  return `${user.name} (${user.age})`;\n}\n",
+    "tests/users.test.ts": "import { formatUser } from \"../src/users\";\n\ntest(\"formats the user name\", () => {\n  expect(formatUser({ name: \"Ada\", age: 36 }).length).toBe(7);\n  const label: string = formatUser({ nmae: \"Ada\", age: 36 });\n  expect(label).toBe(\"Ada (36)\");\n});\n",
+    "tests/globals.d.ts": "declare function test(name: string, fn: () => void): void;\ndeclare function expect(actual: unknown): {\n  toBe(expected: unknown): void;\n  toEqual(expected: unknown): void;\n};\n"
+  },
+  "input": {
+    "testFile": "tests/users.test.ts",
+    "testName": "formats the user name"
+  },
+  "check": {
+    "typeCheckFile": "tests/users.test.ts",
+    "symbol": "formatUser"
+  }
+}

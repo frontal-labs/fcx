@@ -1,0 +1,18 @@
+{
+  "id": "add-types-08",
+  "recipe": "add-types",
+  "shape": "function-object",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/add_types_08.ts": "export function pair(a: string, b: number) {\n  return { first: a, second: b };\n}\n"
+  },
+  "input": {
+    "file": "src/add_types_08.ts",
+    "symbol": "pair"
+  },
+  "check": {
+    "symbol": "pair",
+    "typeCheckFile": "src/add_types_08.ts"
+  }
+}

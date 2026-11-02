@@ -1,5 +1,5 @@
 {
-  "name": "fcx-escalate",
+  "name": "@fcx/escalate",
   "version": "0.0.0",
   "description": "fcx hosted model escalation: approval-gated fallback to hosted models",
   "type": "module",
@@ -22,7 +22,6 @@
   "keywords": ["fcx", "escalate", "hosted", "approval", "fallback"],
   "author": "Frontal Labs, Inc.",
   "engines": {
-    "bun": ">=1.1.0",
     "node": ">=22.0.0"
   },
   "devDependencies": {

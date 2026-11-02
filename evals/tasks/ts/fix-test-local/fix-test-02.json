@@ -1,0 +1,20 @@
+{
+  "id": "fix-test-02",
+  "recipe": "fix-test",
+  "shape": "missing-argument",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/math.ts": "export function add(a: number, b: number): number {\n  return a + b;\n}\n",
+    "tests/math.test.ts": "import { add } from \"../src/math\";\n\ntest(\"add sums two numbers\", () => {\n  expect(add(1)).toBe(1);\n});\n",
+    "tests/globals.d.ts": "declare function test(name: string, fn: () => void): void;\ndeclare function expect(actual: unknown): {\n  toBe(expected: unknown): void;\n  toEqual(expected: unknown): void;\n};\n"
+  },
+  "input": {
+    "testFile": "tests/math.test.ts",
+    "testName": "add sums two numbers"
+  },
+  "check": {
+    "typeCheckFile": "tests/math.test.ts",
+    "symbol": "add"
+  }
+}

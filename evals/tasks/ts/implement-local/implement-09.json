@@ -1,0 +1,18 @@
+{
+  "id": "implement-09",
+  "recipe": "implement",
+  "shape": "method",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/implement_09.ts": "export class Cache {\n  private items = new Map<string, string>();\n\n  /** Returns the value stored under key, or undefined when there is none. */\n  get(key: string): string | undefined {\n    throw new Error(\"not implemented\");\n  }\n\n  set(key: string, value: string): void {\n    this.items.set(key, value);\n  }\n}\n"
+  },
+  "input": {
+    "file": "src/implement_09.ts",
+    "line": 5
+  },
+  "check": {
+    "stubMarker": "not implemented",
+    "typeCheckFile": "src/implement_09.ts"
+  }
+}

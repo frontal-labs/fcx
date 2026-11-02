@@ -1,0 +1,23 @@
+{
+  "id": "refactor-small-06",
+  "recipe": "refactor-small",
+  "shape": "remove-unused",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/refactor_06.ts": "export function area(width: number, height: number): number {\n  const unused = 2;\n  return width * height;\n}\n"
+  },
+  "input": {
+    "file": "src/refactor_06.ts",
+    "startLine": 1,
+    "endLine": 4,
+    "instruction": "Remove the unused variable."
+  },
+  "check": {
+    "typeCheckFile": "src/refactor_06.ts",
+    "effect": {
+      "absent": ["unused"],
+      "present": ["width * height"]
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "write-test-06",
+  "recipe": "write-test",
+  "shape": "initials",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/write_test_06.ts": "export function initials(fullName: string): string {\n  return fullName\n    .split(\" \")\n    .filter((part) => part.length > 0)\n    .map((part) => part[0].toUpperCase())\n    .join(\"\");\n}\n",
+    "tests/globals.d.ts": "declare function test(name: string, fn: () => void): void;\ndeclare function expect(actual: unknown): {\n  toBe(expected: unknown): void;\n  toEqual(expected: unknown): void;\n};\n"
+  },
+  "input": {
+    "file": "src/write_test_06.ts",
+    "symbol": "initials"
+  },
+  "check": {
+    "symbol": "initials",
+    "newTestUnder": ["tests/", "__tests__/"]
+  }
+}

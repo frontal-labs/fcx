@@ -1,0 +1,19 @@
+{
+  "id": "explain-02",
+  "recipe": "explain",
+  "shape": "cache-get",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/cache.ts": "export class TtlCache<V> {\n  private entries = new Map<string, { value: V; expires: number }>();\n\n  constructor(private readonly ttlMs: number, private readonly now: () => number = Date.now) {}\n\n  get(key: string): V | undefined {\n    const entry = this.entries.get(key);\n    if (!entry) return undefined;\n    if (entry.expires <= this.now()) {\n      this.entries.delete(key);\n      return undefined;\n    }\n    return entry.value;\n  }\n\n  set(key: string, value: V): void {\n    this.entries.set(key, { value, expires: this.now() + this.ttlMs });\n  }\n}\n"
+  },
+  "input": {
+    "file": "src/cache.ts",
+    "startLine": 6,
+    "endLine": 14,
+    "question": "When does get return undefined?"
+  },
+  "check": {
+    "criterion": "cite-layer-keeps-every-claim"
+  }
+}

@@ -1,8 +1,8 @@
-# fcx-verify
+# @fcx/verify
 
 ## Description
 
-Skill for fcx per-language verifiers: TypeScript, Python, Go, Rust test and type check execution. Implements the `@frontal-labs/fcx-verify` package (now `fcx-verify`).
+Skill for fcx per-language verifiers: TypeScript, Python, Go, Rust test and type check execution. Implements the `@fcx/verify` package (now `fcx-verify`).
 
 ## Verifiers
 

@@ -1,0 +1,22 @@
+{
+  "id": "rename-extract-06",
+  "recipe": "rename-extract",
+  "shape": "function-call",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/rename_06.ts": "export function fetchUser(id: string) {\n  return { id };\n}\n\nexport const u = fetchUser(\"a\");\n"
+  },
+  "input": {
+    "file": "src/rename_06.ts",
+    "line": 1,
+    "column": 17,
+    "symbol": "fetchUser",
+    "newName": "loadUser"
+  },
+  "check": {
+    "oldName": "fetchUser",
+    "newName": "loadUser",
+    "typeCheckFile": "src/rename_06.ts"
+  }
+}

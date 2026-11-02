@@ -1,0 +1,22 @@
+{
+  "id": "rename-extract-08",
+  "recipe": "rename-extract",
+  "shape": "let-counter",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/rename_08.ts": "let counter = 0;\n\nexport function bump(): number {\n  counter += 1;\n  return counter;\n}\n"
+  },
+  "input": {
+    "file": "src/rename_08.ts",
+    "line": 1,
+    "column": 5,
+    "symbol": "counter",
+    "newName": "requestCount"
+  },
+  "check": {
+    "oldName": "counter",
+    "newName": "requestCount",
+    "typeCheckFile": "src/rename_08.ts"
+  }
+}

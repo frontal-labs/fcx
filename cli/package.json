@@ -1,5 +1,5 @@
 {
-  "name": "fcx-cli",
+  "name": "@fcx/cli",
   "version": "0.0.0",
   "description": "fcx CLI binary and command dispatch layer",
   "type": "module",
@@ -7,9 +7,9 @@
   "bin": {
     "fcx": "./bin/fcx.js"
   },
-  "files": ["bin/", "src/"],
+  "files": ["bin/", "dist/"],
   "scripts": {
-    "build": "tsc",
+    "build": "tsup",
     "test": "vitest run",
     "lint": "biome check ."
   },
@@ -26,12 +26,29 @@
   "keywords": ["fcx", "cli", "coding-agent"],
   "author": "Frontal Labs, Inc.",
   "engines": {
-    "bun": ">=1.1.0",
     "node": ">=22.0.0"
   },
   "devDependencies": {
+    "@agentclientprotocol/sdk": "2.2.0",
     "@biomejs/biome": "^1.9.0",
+    "tsup": "^8.5.1",
     "typescript": "^5.6.0",
     "vitest": "^2.1.0"
+  },
+  "dependencies": {
+    "@fcx/acp": "workspace:*",
+    "@fcx/apply": "workspace:*",
+    "@fcx/config": "workspace:*",
+    "@fcx/defense": "workspace:*",
+    "@fcx/escalate": "workspace:*",
+    "@fcx/index": "workspace:*",
+    "@fcx/lsp": "workspace:*",
+    "@fcx/memory": "workspace:*",
+    "@fcx/model": "workspace:*",
+    "@fcx/recipes": "workspace:*",
+    "@fcx/retrieve": "workspace:*",
+    "@fcx/verify": "workspace:*",
+    "typescript": "^5.6.0",
+    "zod": "^4.1.5"
   }
 }

@@ -1,0 +1,18 @@
+{
+  "id": "commit-message-02",
+  "recipe": "commit-message",
+  "shape": "fix-boundary",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/pages.ts": "export function pageCount(total: number, size: number): number {\n  return Math.ceil(total / size);\n}\n"
+  },
+  "input": {},
+  "check": {
+    "rules": ["type", "header", "subject-length", "no-period", "single-line-subject"]
+  },
+  "before": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/pages.ts": "export function pageCount(total: number, size: number): number {\n  return Math.floor(total / size);\n}\n"
+  }
+}

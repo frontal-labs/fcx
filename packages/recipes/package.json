@@ -1,5 +1,5 @@
 {
-  "name": "fcx-recipes",
+  "name": "@fcx/recipes",
   "version": "0.0.0",
   "description": "fcx recipes: router and 10 coding recipes (fix-diagnostic, fix-test, write-test, implement, add-types, docstring, refactor-small, rename-extract, explain, commit-message)",
   "type": "module",
@@ -22,11 +22,18 @@
   "keywords": ["fcx", "recipes", "router", "coding-agent"],
   "author": "Frontal Labs, Inc.",
   "engines": {
-    "bun": ">=1.1.0",
     "node": ">=22.0.0"
   },
   "devDependencies": {
     "typescript": "^5.6.0",
     "vitest": "^2.1.0"
+  },
+  "dependencies": {
+    "@fcx/apply": "workspace:*",
+    "@fcx/defense": "workspace:*",
+    "@fcx/verify": "workspace:*",
+    "@fcx/retrieve": "workspace:*",
+    "@fcx/model": "workspace:*",
+    "zod": "^4.1.5"
   }
 }

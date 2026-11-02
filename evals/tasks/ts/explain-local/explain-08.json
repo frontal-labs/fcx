@@ -1,0 +1,19 @@
+{
+  "id": "explain-08",
+  "recipe": "explain",
+  "shape": "range-sum",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/ranges.ts": "export function sumRanges(ranges: Array<[number, number]>): number {\n  let total = 0;\n  for (const [start, end] of ranges) {\n    if (end < start) continue;\n    total += end - start + 1;\n  }\n  return total;\n}\n"
+  },
+  "input": {
+    "file": "src/ranges.ts",
+    "startLine": 1,
+    "endLine": 8,
+    "question": "What happens to a range whose end is before its start?"
+  },
+  "check": {
+    "criterion": "cite-layer-keeps-every-claim"
+  }
+}

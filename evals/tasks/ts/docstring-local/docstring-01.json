@@ -1,0 +1,18 @@
+{
+  "id": "docstring-01",
+  "recipe": "docstring",
+  "shape": "function-clamp",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/docstring_01.ts": "export function clamp(value: number, min: number, max: number): number {\n  return Math.min(Math.max(value, min), max);\n}\n"
+  },
+  "input": {
+    "file": "src/docstring_01.ts",
+    "line": 1
+  },
+  "check": {
+    "name": "clamp",
+    "typeCheckFile": "src/docstring_01.ts"
+  }
+}

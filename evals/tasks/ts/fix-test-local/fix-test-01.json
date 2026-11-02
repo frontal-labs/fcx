@@ -1,0 +1,20 @@
+{
+  "id": "fix-test-01",
+  "recipe": "fix-test",
+  "shape": "wrong-argument-type",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/slug.ts": "export function slugify(title: string): string {\n  return title.trim().toLowerCase().replace(/ /g, \"-\");\n}\n",
+    "tests/slug.test.ts": "import { slugify } from \"../src/slug\";\n\ntest(\"slugify lowercases\", () => {\n  expect(slugify(42)).toBe(\"42\");\n});\n",
+    "tests/globals.d.ts": "declare function test(name: string, fn: () => void): void;\ndeclare function expect(actual: unknown): {\n  toBe(expected: unknown): void;\n  toEqual(expected: unknown): void;\n};\n"
+  },
+  "input": {
+    "testFile": "tests/slug.test.ts",
+    "testName": "slugify lowercases"
+  },
+  "check": {
+    "typeCheckFile": "tests/slug.test.ts",
+    "symbol": "slugify"
+  }
+}

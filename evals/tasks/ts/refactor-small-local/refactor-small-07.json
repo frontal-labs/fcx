@@ -1,0 +1,23 @@
+{
+  "id": "refactor-small-07",
+  "recipe": "refactor-small",
+  "shape": "ternary-to-if",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/refactor_07.ts": "export function sign(n: number): string {\n  return n < 0 ? \"negative\" : \"non-negative\";\n}\n"
+  },
+  "input": {
+    "file": "src/refactor_07.ts",
+    "startLine": 1,
+    "endLine": 3,
+    "instruction": "Rewrite the ternary as an if statement."
+  },
+  "check": {
+    "typeCheckFile": "src/refactor_07.ts",
+    "effect": {
+      "absent": [" ? "],
+      "present": ["if ("]
+    }
+  }
+}

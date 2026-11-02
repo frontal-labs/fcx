@@ -1,0 +1,22 @@
+{
+  "id": "rename-extract-09",
+  "recipe": "rename-extract",
+  "shape": "parameter-in-template",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/rename_09.ts": "export function greetAll(names: string[]): string[] {\n  return names.map((name) => `hi ${name}`);\n}\n"
+  },
+  "input": {
+    "file": "src/rename_09.ts",
+    "line": 2,
+    "column": 21,
+    "symbol": "name",
+    "newName": "person"
+  },
+  "check": {
+    "oldName": "name",
+    "newName": "person",
+    "typeCheckFile": "src/rename_09.ts"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "docstring-08",
+  "recipe": "docstring",
+  "shape": "function-median",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/docstring_08.ts": "export function median(values: number[]): number {\n  const sorted = [...values].sort((a, b) => a - b);\n  const mid = Math.floor(sorted.length / 2);\n  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;\n}\n"
+  },
+  "input": {
+    "file": "src/docstring_08.ts",
+    "line": 1
+  },
+  "check": {
+    "name": "median",
+    "typeCheckFile": "src/docstring_08.ts"
+  }
+}

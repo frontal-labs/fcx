@@ -1,8 +1,8 @@
-# fcx-model
+# @fcx/model
 
 ## Description
 
-Skill for fcx model hosting: ggml-node wrapper, model registry, mock host, and `ModelHost` interface. Implements the `@frontal-labs/fcx-model` package (now `fcx-model`).
+Skill for fcx model hosting: ggml-node wrapper, model registry, mock host, and `ModelHost` interface. Implements the `@fcx/model` package (now `fcx-model`).
 
 ## Commands
 

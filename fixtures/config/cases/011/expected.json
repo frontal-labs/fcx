@@ -2,7 +2,9 @@
   "configHome": "/tmp/fc-test/home-011",
   "projectConfig": {},
   "settings": {},
-  "trust": { "trusted": false },
+  "trust": {
+    "trusted": false
+  },
   "policy": {
     "allowedProviders": [],
     "allowedModels": [],
@@ -11,12 +13,15 @@
     "deny": []
   },
   "permissionMode": "prompt",
-  "paths": { "cacheDir": "/tmp/fc-test/home-011/cache", "logsDir": "/tmp/fc-test/home-011/logs" },
+  "paths": {
+    "cacheDir": "/tmp/fc-test/home-011/cache",
+    "logsDir": "/tmp/fc-test/home-011/logs"
+  },
   "warnings": [
     {
       "key": "permissions.allow",
       "source": "/tmp/fc-test/home-011/repo/.frontal-code/settings.json",
-      "reason": "ignored (project/local allow rules are always ignored)"
+      "reason": "ignored: project and local settings can only restrict access (use deny or ask)"
     }
   ],
   "local": {
@@ -25,8 +30,13 @@
     "maxCandidates": "auto",
     "contextBudgetTokens": 3000,
     "languages": ["typescript", "python", "go", "rust"],
-    "index": { "exclude": ["**/node_modules/**", "**/target/**", "**/.venv/**", "**/dist/**"] },
-    "escalation": { "enabled": true, "provider": "default" },
+    "index": {
+      "exclude": ["**/node_modules/**", "**/target/**", "**/.venv/**", "**/dist/**"]
+    },
+    "escalation": {
+      "enabled": true,
+      "provider": "default"
+    },
     "telemetry": "inherit"
   }
 }

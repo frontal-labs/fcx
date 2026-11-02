@@ -1,5 +1,5 @@
 {
-  "name": "fcx-memory",
+  "name": "@fcx/memory",
   "version": "0.0.0",
   "description": "fcx local project memory: symbol memory, context snapshots, and persistent storage",
   "type": "module",
@@ -22,7 +22,6 @@
   "keywords": ["fcx", "memory", "context", "symbols", "snapshots"],
   "author": "Frontal Labs, Inc.",
   "engines": {
-    "bun": ">=1.1.0",
     "node": ">=22.0.0"
   },
   "devDependencies": {

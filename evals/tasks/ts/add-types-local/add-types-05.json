@@ -1,0 +1,18 @@
+{
+  "id": "add-types-05",
+  "recipe": "add-types",
+  "shape": "class-property",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/add_types_05.ts": "export class Counter {\n  count = 0;\n\n  increment(by: number) {\n    this.count += by;\n    return this.count;\n  }\n}\n"
+  },
+  "input": {
+    "file": "src/add_types_05.ts",
+    "symbol": "count"
+  },
+  "check": {
+    "symbol": "count",
+    "typeCheckFile": "src/add_types_05.ts"
+  }
+}

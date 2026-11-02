@@ -1,0 +1,18 @@
+{
+  "id": "add-types-01",
+  "recipe": "add-types",
+  "shape": "function-return",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/add_types_01.ts": "export function greet(name: string) {\n  return `hello ${name}`;\n}\n"
+  },
+  "input": {
+    "file": "src/add_types_01.ts",
+    "symbol": "greet"
+  },
+  "check": {
+    "symbol": "greet",
+    "typeCheckFile": "src/add_types_01.ts"
+  }
+}

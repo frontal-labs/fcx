@@ -2,7 +2,9 @@
   "configHome": "/tmp/fc-test/home-009",
   "projectConfig": {},
   "settings": {},
-  "trust": { "trusted": false },
+  "trust": {
+    "trusted": false
+  },
   "policy": {
     "allowedProviders": [],
     "allowedModels": [],
@@ -11,22 +13,24 @@
     "deny": []
   },
   "permissionMode": "prompt",
-  "paths": { "cacheDir": "/tmp/fc-test/home-009/cache", "logsDir": "/tmp/fc-test/home-009/logs" },
-  "warnings": [
-    {
-      "key": "RUSTY_CLAUDE_PERMISSION_MODE",
-      "source": "env",
-      "reason": "unrecognized value ignored"
-    }
-  ],
+  "paths": {
+    "cacheDir": "/tmp/fc-test/home-009/cache",
+    "logsDir": "/tmp/fc-test/home-009/logs"
+  },
+  "warnings": [],
   "local": {
     "model": "ggml/auto",
     "embeddingModel": "ggml/bge-small-en-v1.5",
     "maxCandidates": "auto",
     "contextBudgetTokens": 3000,
     "languages": ["typescript", "python", "go", "rust"],
-    "index": { "exclude": ["**/node_modules/**", "**/target/**", "**/.venv/**", "**/dist/**"] },
-    "escalation": { "enabled": true, "provider": "default" },
+    "index": {
+      "exclude": ["**/node_modules/**", "**/target/**", "**/.venv/**", "**/dist/**"]
+    },
+    "escalation": {
+      "enabled": true,
+      "provider": "default"
+    },
     "telemetry": "inherit"
   }
 }

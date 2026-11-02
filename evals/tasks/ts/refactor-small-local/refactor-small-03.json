@@ -1,0 +1,23 @@
+{
+  "id": "refactor-small-03",
+  "recipe": "refactor-small",
+  "shape": "optional-chaining",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/refactor_03.ts": "export function cityOf(user: { address?: { city: string } }): string | undefined {\n  return user.address && user.address.city;\n}\n"
+  },
+  "input": {
+    "file": "src/refactor_03.ts",
+    "startLine": 1,
+    "endLine": 3,
+    "instruction": "Use optional chaining instead of the && checks."
+  },
+  "check": {
+    "typeCheckFile": "src/refactor_03.ts",
+    "effect": {
+      "absent": ["user.address && "],
+      "present": ["?."]
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { resolveConfig } from "./index";
+import { resolveConfig } from "../src/index";
+
 describe("config", () => {
   it("resolves config", () => {
     const cfg = resolveConfig(process.cwd());

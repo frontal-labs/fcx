@@ -1,0 +1,22 @@
+{
+  "id": "rename-extract-03",
+  "recipe": "rename-extract",
+  "shape": "class",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/rename_03.ts": "export class UserStore {\n  private users: string[] = [];\n\n  add(name: string): void {\n    this.users.push(name);\n  }\n}\n\nexport const store = new UserStore();\n"
+  },
+  "input": {
+    "file": "src/rename_03.ts",
+    "line": 1,
+    "column": 14,
+    "symbol": "UserStore",
+    "newName": "AccountStore"
+  },
+  "check": {
+    "oldName": "UserStore",
+    "newName": "AccountStore",
+    "typeCheckFile": "src/rename_03.ts"
+  }
+}

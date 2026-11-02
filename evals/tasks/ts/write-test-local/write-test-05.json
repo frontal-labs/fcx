@@ -1,0 +1,19 @@
+{
+  "id": "write-test-05",
+  "recipe": "write-test",
+  "shape": "is-leap",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/write_test_05.ts": "export function isLeapYear(year: number): boolean {\n  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;\n}\n",
+    "tests/globals.d.ts": "declare function test(name: string, fn: () => void): void;\ndeclare function expect(actual: unknown): {\n  toBe(expected: unknown): void;\n  toEqual(expected: unknown): void;\n};\n"
+  },
+  "input": {
+    "file": "src/write_test_05.ts",
+    "symbol": "isLeapYear"
+  },
+  "check": {
+    "symbol": "isLeapYear",
+    "newTestUnder": ["tests/", "__tests__/"]
+  }
+}

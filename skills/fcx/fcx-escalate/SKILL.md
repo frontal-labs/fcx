@@ -1,8 +1,8 @@
-# fcx-escalate
+# @fcx/escalate
 
 ## Description
 
-Skill for fcx hosted model escalation: approval-gated fallback to hosted models. Implements the `@frontal-labs/fcx-escalate` package (now `fcx-escalate`).
+Skill for fcx hosted model escalation: approval-gated fallback to hosted models. Implements the `@fcx/escalate` package (now `fcx-escalate`).
 
 ## Escalation
 

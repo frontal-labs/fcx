@@ -1,0 +1,22 @@
+{
+  "id": "rename-extract-05",
+  "recipe": "rename-extract",
+  "shape": "const-array",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/rename_05.ts": "export const tmp = [1, 2, 3].map((n) => n * 2);\n"
+  },
+  "input": {
+    "file": "src/rename_05.ts",
+    "line": 1,
+    "column": 14,
+    "symbol": "tmp",
+    "newName": "doubled"
+  },
+  "check": {
+    "oldName": "tmp",
+    "newName": "doubled",
+    "typeCheckFile": "src/rename_05.ts"
+  }
+}

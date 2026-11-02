@@ -1,0 +1,18 @@
+{
+  "id": "docstring-07",
+  "recipe": "docstring",
+  "shape": "generic-chunk",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/docstring_07.ts": "export function chunk<T>(items: T[], size: number): T[][] {\n  const out: T[][] = [];\n  for (let i = 0; i < items.length; i += size) {\n    out.push(items.slice(i, i + size));\n  }\n  return out;\n}\n"
+  },
+  "input": {
+    "file": "src/docstring_07.ts",
+    "line": 1
+  },
+  "check": {
+    "name": "chunk",
+    "typeCheckFile": "src/docstring_07.ts"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "rename-extract-07",
+  "recipe": "rename-extract",
+  "shape": "interface",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/rename_07.ts": "export interface PaymentInfo {\n  card: string;\n}\n\nexport function charge(p: PaymentInfo): string {\n  return p.card;\n}\n"
+  },
+  "input": {
+    "file": "src/rename_07.ts",
+    "line": 1,
+    "column": 18,
+    "symbol": "PaymentInfo",
+    "newName": "PaymentDetails"
+  },
+  "check": {
+    "oldName": "PaymentInfo",
+    "newName": "PaymentDetails",
+    "typeCheckFile": "src/rename_07.ts"
+  }
+}

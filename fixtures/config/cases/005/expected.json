@@ -1,8 +1,14 @@
 {
   "configHome": "/tmp/fc-test/home-005",
-  "projectConfig": {},
+  "projectConfig": {
+    "runtime": {
+      "permission_mode": "danger-full-access"
+    }
+  },
   "settings": {},
-  "trust": { "trusted": false },
+  "trust": {
+    "trusted": false
+  },
   "policy": {
     "allowedProviders": [],
     "allowedModels": [],
@@ -10,17 +16,31 @@
     "permissionCeiling": null,
     "deny": []
   },
-  "permissionMode": "workspace-write",
-  "paths": { "cacheDir": "/tmp/fc-test/home-005/cache", "logsDir": "/tmp/fc-test/home-005/logs" },
-  "warnings": [],
+  "permissionMode": "prompt",
+  "paths": {
+    "cacheDir": "/tmp/fc-test/home-005/cache",
+    "logsDir": "/tmp/fc-test/home-005/logs"
+  },
+  "warnings": [
+    {
+      "key": "runtime.permission_mode",
+      "source": "project.json",
+      "reason": "ignored: Frontal Code does not apply the project.json permission mode"
+    }
+  ],
   "local": {
     "model": "ggml/auto",
     "embeddingModel": "ggml/bge-small-en-v1.5",
     "maxCandidates": "auto",
     "contextBudgetTokens": 3000,
     "languages": ["typescript", "python", "go", "rust"],
-    "index": { "exclude": ["**/node_modules/**", "**/target/**", "**/.venv/**", "**/dist/**"] },
-    "escalation": { "enabled": true, "provider": "default" },
+    "index": {
+      "exclude": ["**/node_modules/**", "**/target/**", "**/.venv/**", "**/dist/**"]
+    },
+    "escalation": {
+      "enabled": true,
+      "provider": "default"
+    },
     "telemetry": "inherit"
   }
 }

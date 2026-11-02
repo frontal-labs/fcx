@@ -1,0 +1,18 @@
+{
+  "id": "docstring-06",
+  "recipe": "docstring",
+  "shape": "type-alias",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/docstring_06.ts": "export type Result<T> = { ok: true; value: T } | { ok: false; error: string };\n"
+  },
+  "input": {
+    "file": "src/docstring_06.ts",
+    "line": 1
+  },
+  "check": {
+    "name": "Result",
+    "typeCheckFile": "src/docstring_06.ts"
+  }
+}

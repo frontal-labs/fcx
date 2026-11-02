@@ -1,5 +1,5 @@
 {
-  "name": "fcx-defense",
+  "name": "@fcx/defense",
   "version": "0.0.0",
   "description": "fcx six-layer defense pipeline: constrain, ground, anchor, verify, cite, abstain",
   "type": "module",
@@ -22,11 +22,14 @@
   "keywords": ["fcx", "defense", "hallucination", "safety", "verification"],
   "author": "Frontal Labs, Inc.",
   "engines": {
-    "bun": ">=1.1.0",
     "node": ">=22.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.6.0",
     "vitest": "^2.1.0"
+  },
+  "dependencies": {
+    "@fcx/apply": "workspace:*",
+    "@fcx/verify": "workspace:*",
+    "typescript": "^5.6.0"
   }
 }

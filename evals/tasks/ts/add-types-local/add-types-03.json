@@ -1,0 +1,18 @@
+{
+  "id": "add-types-03",
+  "recipe": "add-types",
+  "shape": "function-boolean",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/add_types_03.ts": "export function parseFlag(raw: string) {\n  return raw === \"1\" || raw === \"true\";\n}\n"
+  },
+  "input": {
+    "file": "src/add_types_03.ts",
+    "symbol": "parseFlag"
+  },
+  "check": {
+    "symbol": "parseFlag",
+    "typeCheckFile": "src/add_types_03.ts"
+  }
+}

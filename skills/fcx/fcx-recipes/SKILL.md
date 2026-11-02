@@ -1,8 +1,8 @@
-# fcx-recipes
+# @fcx/recipes
 
 ## Description
 
-Skill for fcx recipes: router and 10 coding recipes. Implements the `@frontal-labs/fcx-recipes` package (now `fcx-recipes`).
+Skill for fcx recipes: router and 10 coding recipes. Implements the `@fcx/recipes` package (now `fcx-recipes`).
 
 ## Commands
 

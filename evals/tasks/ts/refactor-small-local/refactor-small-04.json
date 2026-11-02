@@ -1,0 +1,23 @@
+{
+  "id": "refactor-small-04",
+  "recipe": "refactor-small",
+  "shape": "includes",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/refactor_04.ts": "export function hasAdmin(roles: string[]): boolean {\n  return roles.indexOf(\"admin\") !== -1;\n}\n"
+  },
+  "input": {
+    "file": "src/refactor_04.ts",
+    "startLine": 1,
+    "endLine": 3,
+    "instruction": "Use Array.prototype.includes instead of indexOf."
+  },
+  "check": {
+    "typeCheckFile": "src/refactor_04.ts",
+    "effect": {
+      "absent": ["indexOf"],
+      "present": [".includes("]
+    }
+  }
+}

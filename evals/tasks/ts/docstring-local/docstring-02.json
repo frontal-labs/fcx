@@ -1,0 +1,18 @@
+{
+  "id": "docstring-02",
+  "recipe": "docstring",
+  "shape": "interface",
+  "synthetic": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\",\n    \"tests\"\n  ]\n}\n",
+    "src/docstring_02.ts": "export interface Address {\n  street: string;\n  city: string;\n}\n"
+  },
+  "input": {
+    "file": "src/docstring_02.ts",
+    "line": 1
+  },
+  "check": {
+    "name": "Address",
+    "typeCheckFile": "src/docstring_02.ts"
+  }
+}
