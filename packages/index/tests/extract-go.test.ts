@@ -76,7 +76,8 @@ async function indexed(files: Record<string, string>): Promise<IndexStore> {
     goCacheDir: join(ws.root, "..", "go-cache"),
   });
   store = openIndex(ws.dbPath);
-  expect(summary.warnings).toEqual([]);
+  // The message carries the warning text, so a failure shows why the file was skipped.
+  expect(summary.warnings, summary.warnings.join("; ")).toEqual([]);
   return store;
 }
 
