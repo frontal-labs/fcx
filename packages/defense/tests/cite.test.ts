@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { containsWord } from "../src/cite.js";
+import { containsWord, unshownNames } from "../src/cite.js";
 import { type Claim, cite } from "../src/index.js";
 
 const WORKSPACE = "/repo";
@@ -180,6 +180,18 @@ describe("cite layer", () => {
     it("does not ask to regenerate for an empty claim list", () => {
       expect(cite([], options)).toEqual({ kept: [], dropped: [], regenerate: false });
     });
+  });
+});
+
+describe("unshownNames", () => {
+  it("lists code names in the text that the shown text does not contain", () => {
+    expect(unshownNames("`parse` calls `verify()` and 'ggml/auto'", "function parse() {}")).toEqual(
+      ["ggml/auto", "verify"],
+    );
+  });
+
+  it("returns nothing when every code name was shown, and ignores prose", () => {
+    expect(unshownNames("The `parse` function is simple.", "parse(input)")).toEqual([]);
   });
 });
 

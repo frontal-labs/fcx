@@ -85,6 +85,21 @@ export function quotedLiterals(text: string): Set<string> {
   return found;
 }
 
+/**
+ * Code names in `text` (identifiers and quoted literals, as the cite layer finds them) that `shown` does not
+ * contain. Prose is not checked. An empty list means every code name in `text` was shown.
+ */
+export function unshownNames(text: string, shown: string): string[] {
+  const missing: string[] = [];
+  for (const identifier of codeIdentifiers(text)) {
+    if (!containsWord(shown, identifier)) missing.push(identifier);
+  }
+  for (const literal of quotedLiterals(text)) {
+    if (!shown.includes(literal)) missing.push(literal);
+  }
+  return missing.sort();
+}
+
 export function cite(claims: readonly Claim[], options: CiteOptions): CiteResult {
   const read = options.readFile ?? ((path: string) => readFileSync(path, "utf-8"));
   const files = new Map<string, string | null>();
