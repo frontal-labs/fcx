@@ -1,5 +1,6 @@
 import type { GlobalArgs } from "../args.js";
 import { setProtocolMode } from "../lib/approval.js";
+import { resolveFcxConfig } from "../lib/config.js";
 
 /**
  * Sends console output to stderr. The protocol owns stdout, so any stray log line must never reach it.
@@ -34,7 +35,7 @@ export async function runAcpCli(args: GlobalArgs): Promise<number> {
   setProtocolMode(true);
   routeConsoleToStderr();
 
-  const resolved = resolveConfig(args.cwd, { permissionMode: args.permissionMode });
+  const resolved = resolveFcxConfig(args.cwd, { permissionMode: args.permissionMode });
   const models = new ModelHostCache({
     create: createFreshModelHost,
     idleUnloadMs: idleUnloadMsFrom(resolved.settings.fc),

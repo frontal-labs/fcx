@@ -1,4 +1,5 @@
-import { type ConfigWarning, type PermissionMode, resolveConfig } from "@fcx/config";
+import type { ConfigWarning, PermissionMode } from "@fcx/config";
+import { resolveFcxConfig } from "../lib/config.js";
 import { meta } from "../meta.js";
 
 export interface StatusReport {
@@ -9,14 +10,14 @@ export interface StatusReport {
   configHome: string;
   trust: { trusted: boolean; trustedRoot?: string };
   permissionMode: PermissionMode;
-  policy: ReturnType<typeof resolveConfig>["policy"];
+  policy: ReturnType<typeof resolveFcxConfig>["policy"];
   paths: { cacheDir: string; logsDir: string };
-  local: ReturnType<typeof resolveConfig>["local"];
+  local: ReturnType<typeof resolveFcxConfig>["local"];
   warnings: ConfigWarning[];
 }
 
 export function status(cwd: string, permissionMode?: PermissionMode): StatusReport {
-  const resolved = resolveConfig(cwd, { permissionMode });
+  const resolved = resolveFcxConfig(cwd, { permissionMode });
   return {
     status: "ok",
     binary: meta.binary,

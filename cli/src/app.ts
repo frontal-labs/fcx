@@ -1,7 +1,8 @@
 import { relative, sep } from "node:path";
-import { readEnv, resolveConfig } from "@fcx/config";
+import { readEnv } from "@fcx/config";
 import type { GlobalArgs } from "./args.js";
 import type { IndexReport } from "./commands/index.js";
+import { resolveFcxConfig } from "./lib/config.js";
 import { meta } from "./meta.js";
 import { emit } from "./output.js";
 
@@ -181,7 +182,7 @@ export async function runFix(args: GlobalArgs, cwd: string): Promise<number> {
   const { undoRootFor, memoryPathFor } = await import("./lib/repo.js");
   const { formatFix } = await import("./lib/format.js");
 
-  const resolved = resolveConfig(cwd, { permissionMode: args.permissionMode });
+  const resolved = resolveFcxConfig(cwd, { permissionMode: args.permissionMode });
   // Escalation needs a person at the terminal to say yes. Without one it is never offered.
   const { escalationOptionFor } = await import("./lib/escalation.js");
   const escalation = escalationOptionFor({
@@ -216,7 +217,7 @@ export async function runUndo(args: GlobalArgs, cwd: string): Promise<number> {
   const { applyUndo } = await import("./lib/undo.js");
   const { rememberSafely } = await import("./lib/memory.js");
   const { memoryPathFor } = await import("./lib/repo.js");
-  const resolved = resolveConfig(cwd, { permissionMode: args.permissionMode });
+  const resolved = resolveFcxConfig(cwd, { permissionMode: args.permissionMode });
   const result = applyUndo(resolved.paths.cacheDir, cwd);
   if (result.status !== "ok") {
     emit(args.outputFormat, result, () => `undo failed: ${result.message}`);
@@ -247,7 +248,7 @@ export async function runUndo(args: GlobalArgs, cwd: string): Promise<number> {
 async function runMemoryCommand(args: GlobalArgs, cwd: string): Promise<number> {
   const { runMemory, formatMemory, memoryExitCode } = await import("./commands/memory.js");
   const { memoryPathFor } = await import("./lib/repo.js");
-  const resolved = resolveConfig(cwd, { permissionMode: args.permissionMode });
+  const resolved = resolveFcxConfig(cwd, { permissionMode: args.permissionMode });
   const report = runMemory(args.rest, memoryPathFor(resolved.paths.cacheDir, cwd));
   emit(args.outputFormat, report, () => formatMemory(report));
   return memoryExitCode(report);
@@ -262,7 +263,7 @@ async function runIndexCommand(args: GlobalArgs, cwd: string): Promise<number> {
     emit(args.outputFormat, report, () => formatIndex(report));
     return 1;
   }
-  const resolved = resolveConfig(cwd, { permissionMode: args.permissionMode });
+  const resolved = resolveFcxConfig(cwd, { permissionMode: args.permissionMode });
   const report = await runIndex(
     parsed,
     cwd,

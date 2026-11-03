@@ -1,7 +1,8 @@
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { type PermissionMode, resolveConfig } from "@fcx/config";
+import type { PermissionMode } from "@fcx/config";
 import { type DetectedServer, detectServers } from "@fcx/lsp";
+import { resolveFcxConfig } from "../lib/config.js";
 
 export type CheckStatus = "ok" | "warn" | "fail";
 
@@ -19,7 +20,7 @@ export interface DoctorReport {
 const MIN_NODE_MAJOR = 22;
 
 export async function doctor(cwd: string, permissionMode?: PermissionMode): Promise<DoctorReport> {
-  const resolved = resolveConfig(cwd, { permissionMode });
+  const resolved = resolveFcxConfig(cwd, { permissionMode });
   const checks: Check[] = [];
 
   const nodeMajor = Number(process.versions.node.split(".")[0]);

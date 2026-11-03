@@ -9,12 +9,13 @@ import {
   resolveInWorkspace,
 } from "@fcx/apply";
 import type { PermissionMode } from "@fcx/config";
-import { resolveConfig } from "@fcx/config";
+
 import type { ModelHost } from "@fcx/model";
 import { type LayerEvent, RecipeInputError, type VerificationScope } from "@fcx/recipes";
 import type { GlobalArgs, OutputFormat } from "../args.js";
 import { emit } from "../output.js";
 import { askToApply, writesPermitted } from "./approval.js";
+import { resolveFcxConfig } from "./config.js";
 import { instructionsFor } from "./instructions.js";
 import { indexPathFor, undoRootFor } from "./repo.js";
 import { candidateBudget, createModelHost } from "./runtime.js";
@@ -353,7 +354,7 @@ export function formatBase(
 
 /** Builds the environment from the resolved config, the same way `fix` does. */
 export async function recipeEnvFor(args: GlobalArgs, cwd: string): Promise<RecipeEnv> {
-  const resolved = resolveConfig(cwd, { permissionMode: args.permissionMode });
+  const resolved = resolveFcxConfig(cwd, { permissionMode: args.permissionMode });
   return {
     workspace: cwd,
     model: await createModelHost(resolved.local),

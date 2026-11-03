@@ -1,8 +1,9 @@
 import { randomUUID } from "node:crypto";
 import { connect } from "node:net";
 import { isAbsolute, join } from "node:path";
-import { type MergedSettings, resolveConfig } from "@fcx/config";
+import type { MergedSettings } from "@fcx/config";
 import type { GlobalArgs } from "../args.js";
+import { resolveFcxConfig } from "./config.js";
 
 /** Env switch that turns the warm server on for one run (plan §15.2 item 3). */
 export const WARM_ENV = "FCX_WARM";
@@ -171,7 +172,7 @@ export async function routeToWarmServer(args: GlobalArgs): Promise<number | unde
   try {
     const cwd = args.cwd ?? process.cwd();
     const envOn = process.env[WARM_ENV] === "1";
-    const resolved = resolveConfig(cwd, { permissionMode: args.permissionMode });
+    const resolved = resolveFcxConfig(cwd, { permissionMode: args.permissionMode });
     if (!envOn && !readWarmSettings(resolved.settings).enabled) return undefined;
 
     const outcome = await sendWarmRequest(socketPathFor(resolved.paths.cacheDir), {

@@ -4,7 +4,7 @@ import { chmod, lstat, mkdir, unlink } from "node:fs/promises";
 import { type Server, type Socket, connect, createServer } from "node:net";
 import { dirname, isAbsolute } from "node:path";
 import { format } from "node:util";
-import { FcError, resolveConfig } from "@fcx/config";
+import { FcError } from "@fcx/config";
 import { type GlobalArgs, parseGlobalArgs } from "../args.js";
 import {
   STOP_ARG,
@@ -16,6 +16,7 @@ import {
   sendWarmRequest,
   socketPathFor,
 } from "./client.js";
+import { resolveFcxConfig } from "./config.js";
 
 /** A request line larger than this is dropped, so a client cannot exhaust server memory. */
 const MAX_REQUEST_BYTES = 1024 * 1024;
@@ -351,7 +352,7 @@ function message(error: unknown): string {
 
 /** `fcx serve`: runs the warm server in the foreground, or stops one with `--stop`. */
 export async function runServe(args: GlobalArgs, cwd: string): Promise<number> {
-  const resolved = resolveConfig(cwd, { permissionMode: args.permissionMode });
+  const resolved = resolveFcxConfig(cwd, { permissionMode: args.permissionMode });
   const socketPath = socketPathFor(resolved.paths.cacheDir);
 
   if (args.rest.length === 1 && args.rest[0] === "--stop") {

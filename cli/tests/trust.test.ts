@@ -5,6 +5,7 @@ import { resolveConfig } from "@fcx/config";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { GlobalArgs } from "../src/args.js";
 import { runTrustCommand } from "../src/commands/trust.js";
+import { resolveFcxConfig } from "../src/lib/config.js";
 
 const args = (rest: string[] = [], outputFormat: "text" | "json" = "json"): GlobalArgs => ({
   command: "trust",
@@ -54,6 +55,14 @@ describe("fcx trust", () => {
     const list = JSON.parse(readFileSync(join(configHome, "trusted-workspaces.json"), "utf-8"));
     expect(list.trustedWorkspaces).toHaveLength(1);
     expect(resolveConfig(workspace).trust.trusted).toBe(true);
+  });
+
+  it("names fcx trust in the warnings fcx prints, and Frontal Code's command stays in the shared config", () => {
+    const fcx = resolveFcxConfig(workspace).warnings.map((w) => w.reason);
+    expect(fcx.length).toBeGreaterThan(0);
+    for (const reason of fcx) expect(reason).toContain("run `fcx trust`");
+    const shared = resolveConfig(workspace).warnings.map((w) => w.reason);
+    for (const reason of shared) expect(reason).toContain("run `frontal-code trust`");
   });
 
   it("defaults to the current directory when no path is given", () => {
