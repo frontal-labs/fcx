@@ -1,6 +1,6 @@
 {
   "name": "@fcx/model",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "fcx model host: ggml-node wrapper, model registry, mock host, and ModelHost interface",
   "type": "module",
   "main": "./src/index.ts",

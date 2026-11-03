@@ -1,6 +1,6 @@
 {
   "name": "@fcx/lsp",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "fcx language server pool: per-language LSP clients using vscode-jsonrpc",
   "type": "module",
   "main": "./src/index.ts",

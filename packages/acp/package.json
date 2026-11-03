@@ -1,6 +1,6 @@
 {
   "name": "@fcx/acp",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "fcx Agent Client Protocol (V10) server over stdio",
   "type": "module",
   "main": "./src/index.ts",

@@ -1,6 +1,6 @@
 {
   "name": "@fcx/index",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "fcx code graph index: TypeScript compiler API extraction, SQLite (node:sqlite) store with FTS5, and incremental indexing",
   "type": "module",
   "main": "./src/index.ts",

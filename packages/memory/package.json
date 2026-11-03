@@ -1,6 +1,6 @@
 {
   "name": "@fcx/memory",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "fcx local project memory: symbol memory, context snapshots, and persistent storage",
   "type": "module",
   "main": "./src/index.ts",

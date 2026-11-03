@@ -1,6 +1,6 @@
 {
   "name": "@fcx/verify",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "fcx per-language verifiers: TypeScript, Python, Go, Rust test and type check execution",
   "type": "module",
   "main": "./src/index.ts",

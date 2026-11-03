@@ -1,6 +1,6 @@
 {
   "name": "@fcx/defense",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "fcx six-layer defense pipeline: constrain, ground, anchor, verify, cite, abstain",
   "type": "module",
   "main": "./src/index.ts",

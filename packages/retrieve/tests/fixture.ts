@@ -6,7 +6,7 @@ import { join } from "node:path";
 export const FIXTURE_FILES: Readonly<Record<string, string>> = {
   "package.json": JSON.stringify({
     name: "fixture-app",
-    version: "0.0.0",
+    version: "0.1.0",
     dependencies: { zod: "^3.0.0" },
     devDependencies: { vitest: "^2.0.0" },
   }),

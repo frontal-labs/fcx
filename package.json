@@ -1,6 +1,6 @@
 {
   "name": "@fcx/root",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "Frontal Codex Extra Small: a local-first coding agent CLI using ~1.5B models",
   "type": "module",
@@ -16,6 +16,9 @@
     "status": "bunx tsx cli/src/index.ts status",
     "ci:version": "changeset version && bun install --no-lockfile",
     "release:publish": "bun run --filter '*' build && changeset publish"
+  },
+  "bin": {
+    "fcx": "./bin/index.js"
   },
   "license": "Apache-2.0",
   "repository": {

@@ -1,6 +1,6 @@
 {
   "name": "@fcx/recipes",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "fcx recipes: router and 10 coding recipes (fix-diagnostic, fix-test, write-test, implement, add-types, docstring, refactor-small, rename-extract, explain, commit-message)",
   "type": "module",
   "main": "./src/index.ts",
