@@ -2,7 +2,7 @@
   "name": "@fcx/root",
   "version": "0.0.0",
   "private": true,
-  "description": "fcx - Frontal Codex Extra Small: a local-first coding agent CLI using ~1.5B models",
+  "description": "Frontal Codex Extra Small: a local-first coding agent CLI using ~1.5B models",
   "type": "module",
   "workspaces": ["packages/*", "cli"],
   "scripts": {
@@ -49,8 +49,5 @@
     "typescript": "^5.6.0",
     "typescript-language-server": "^6.0.2",
     "vitest": "^2.1.0"
-  },
-  "dependencies": {
-    "@t3-oss/env-core": "^0.13.11"
   }
 }
