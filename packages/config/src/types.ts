@@ -71,6 +71,11 @@ export interface ResolvedConfig {
 export interface ResolveOptions {
   /** Value of `--permission-mode`. Highest precedence (plan §5.2); still capped by policy. */
   permissionMode?: PermissionMode;
+  /**
+   * The command named in warnings that tell a person how to trust a workspace. Defaults to Frontal Code's
+   * `frontal-code trust`, which the parity fixtures expect. fcx passes `fcx trust`.
+   */
+  trustCommand?: string;
 }
 
 export interface ModeEntry {

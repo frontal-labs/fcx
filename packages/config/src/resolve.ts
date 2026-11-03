@@ -36,7 +36,13 @@ export function resolveConfig(
 
   const trust = checkTrust(configHome, canonicalPath(workspace));
   const projectConfig = findProjectConfig(workspace, env, warnings, trust.trusted);
-  const loaded = loadSettings(configHome, workspace, trust.trusted, warnings);
+  const loaded = loadSettings(
+    configHome,
+    workspace,
+    trust.trusted,
+    warnings,
+    options.trustCommand ?? "frontal-code trust",
+  );
   const policy = intersectPolicy(loaded.policies, warnings);
   const permissionMode = resolvePermissionMode(
     loaded.modes,

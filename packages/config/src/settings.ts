@@ -31,6 +31,7 @@ export function loadSettings(
   workspace: string,
   trusted: boolean,
   warnings: ConfigWarning[],
+  trustCommand = "frontal-code trust",
 ): LoadedSettings {
   const merged: Record<string, unknown> = {};
   const policies: Array<Record<string, unknown>> = [];
@@ -48,7 +49,7 @@ export function loadSettings(
         warnings.push({
           key,
           source: file.path,
-          reason: "withheld until this workspace is trusted; run `frontal-code trust` to enable",
+          reason: `withheld until this workspace is trusted; run \`${trustCommand}\` to enable`,
         });
       }
     }
