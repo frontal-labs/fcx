@@ -7,13 +7,19 @@
 //   FAKE_LSP_SILENT=1  never publish diagnostics (used for timeout tests)
 //   FAKE_LSP_CRASH=once    exit on the first didOpen, only while FAKE_LSP_MARKER is absent
 //   FAKE_LSP_CRASH=always  exit on every didOpen
+//   FAKE_LSP_SPLIT=1   publish an empty set first (the syntax pass), then the errors after
+//                      FAKE_LSP_SPLIT_DELAY_MS (default 300), as typescript-language-server can
+//   FAKE_LSP_SILENT_AFTER_FIRST=1  publish for the first document only, then stay silent
 import { existsSync, writeFileSync } from "node:fs";
 
 if (process.env.FAKE_LSP_PID_FILE) {
   writeFileSync(process.env.FAKE_LSP_PID_FILE, String(process.pid));
 }
 
-const silent = process.env.FAKE_LSP_SILENT === "1";
+let silent = process.env.FAKE_LSP_SILENT === "1";
+const split = process.env.FAKE_LSP_SPLIT === "1";
+const splitDelayMs = Number(process.env.FAKE_LSP_SPLIT_DELAY_MS ?? 300);
+const silentAfterFirst = process.env.FAKE_LSP_SILENT_AFTER_FIRST === "1";
 const crashMode = process.env.FAKE_LSP_CRASH ?? "";
 const marker = process.env.FAKE_LSP_MARKER ?? "";
 
@@ -61,7 +67,16 @@ function handleNotification(method, params) {
       method === "textDocument/didOpen"
         ? doc.text
         : params.contentChanges[params.contentChanges.length - 1].text;
+    if (split && text.includes("ERROR")) {
+      send({
+        method: "textDocument/publishDiagnostics",
+        params: { uri: doc.uri, version: doc.version, diagnostics: [] },
+      });
+      setTimeout(() => publish(doc.uri, doc.version, text), splitDelayMs);
+      return;
+    }
     publish(doc.uri, doc.version, text);
+    if (silentAfterFirst) silent = true;
   }
 }
 

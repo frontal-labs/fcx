@@ -148,16 +148,21 @@ export interface LanguageServerPoolOptions {
   /** Timeout for the initialize handshake. Default 60000. */
   readonly initializeTimeoutMs?: number;
   /**
-   * Quiet period after the first publish for a file. Servers may send one
-   * publish per diagnostic kind, so the pool waits this long for more before
-   * answering. Default 150.
+   * Quiet period after a publish that has diagnostics. Servers may send one publish per diagnostic
+   * kind, so the pool waits this long for more before answering. Default 150.
    */
   readonly settleMs?: number;
   /**
-   * After a publish that was empty, a check whose result is also empty may produce no publish at
-   * all (typescript-language-server does this). The pool then waits this long and reports the
-   * previous empty state. Default 500.
+   * Quiet period after a publish with no diagnostics. Servers that check syntax first publish an
+   * empty set before the type errors arrive, so an empty publish waits this long for the rest.
+   * Default 500.
    */
+  readonly emptySettleMs?: number;
+  /**
+   * After the previous state was empty, a check may produce no publish at all when the new text is
+   * also clean (some servers do this). The pool reports the empty state after this long. Default 500.
+   */
+  readonly silentCleanMs?: number;
   /** Unexpected exits allowed before the pool stops restarting a server. Default 1. */
   readonly maxRestarts?: number;
   /** Replaces detection for a language. Used by tests and by custom servers. */

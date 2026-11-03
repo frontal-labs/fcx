@@ -20,6 +20,8 @@ const DEFAULTS = {
   requestTimeoutMs: 15_000,
   initializeTimeoutMs: 60_000,
   settleMs: 150,
+  emptySettleMs: 500,
+  silentCleanMs: 500,
   maxRestarts: 1,
 } as const;
 
@@ -120,6 +122,8 @@ export class LanguageServerPool {
     const timing = {
       timeoutMs: this.options.diagnosticsTimeoutMs ?? DEFAULTS.diagnosticsTimeoutMs,
       settleMs: this.options.settleMs ?? DEFAULTS.settleMs,
+      emptySettleMs: this.options.emptySettleMs ?? DEFAULTS.emptySettleMs,
+      silentCleanMs: this.options.silentCleanMs ?? DEFAULTS.silentCleanMs,
     };
     const diagnostics = await outcome.exclusive(() =>
       runOverlayCheck(outcome, file, overlays, timing),

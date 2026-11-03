@@ -83,6 +83,30 @@ describe("timeouts", () => {
 });
 
 describe("shutdown", () => {
+  it("waits for the type errors that follow an empty syntax pass", async () => {
+    // The fake publishes an empty set first and the error 300 ms later. The pool's empty-publish
+    // window (500 ms by default) is longer than that gap, so the error is seen.
+    makePool({ FAKE_LSP_SPLIT: "1" });
+    await writeFile(file, "export const a = 1;\n");
+    const result = await pool?.diagnostics(file, new Map([[file, "const x = ERROR;\n"]]));
+    expect(result).toMatchObject({ source: "language-server" });
+    if (result?.source !== "language-server") return;
+    expect(result.diagnostics.map((d) => d.message)).toEqual(["fake error"]);
+  });
+
+  it("reports an empty result when the server stays silent after an empty state", async () => {
+    // First check: the server publishes an empty set for the clean text. Second check: the same text
+    // again, and the server publishes nothing. The pool reports the empty state after silentCleanMs.
+    makePool(
+      { FAKE_LSP_SILENT_AFTER_FIRST: "1" },
+      { diagnosticsTimeoutMs: 3000, emptySettleMs: 20, silentCleanMs: 50 },
+    );
+    const clean = "export const a = 1;\n";
+    await pool?.diagnostics(file, new Map([[file, clean]]));
+    const second = await pool?.diagnostics(file, new Map([[file, clean]]));
+    expect(second).toEqual({ source: "language-server", language: "typescript", diagnostics: [] });
+  });
+
   it("terminates the server process", async () => {
     const pidFile = join(root, "pid.txt");
     const p = makePool({ FAKE_LSP_PID_FILE: pidFile });

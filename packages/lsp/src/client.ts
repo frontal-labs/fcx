@@ -39,6 +39,8 @@ export interface ClientStartOptions {
 export interface CheckTiming {
   readonly timeoutMs: number;
   readonly settleMs: number;
+  readonly emptySettleMs: number;
+  readonly silentCleanMs: number;
 }
 
 interface DocumentState {
@@ -55,6 +57,7 @@ interface PublishWaiter {
   readonly uri: string;
   readonly minVersion: number;
   readonly settleMs: number;
+  readonly emptySettleMs: number;
   readonly resolve: (diagnostics: lsp.Diagnostic[]) => void;
   readonly reject: (error: LspError) => void;
   deadline: NodeJS.Timeout | undefined;
@@ -415,26 +418,37 @@ export class LspClient {
         reject(this.crashError());
         return;
       }
+      // The state before this check. If it was empty, a server may stay silent when the new text is clean too.
+      const previous = this.documents.get(uri)?.lastPublished;
+      const silentlyClean = previous !== undefined && previous.length === 0;
       const waiter: PublishWaiter = {
         uri,
         minVersion,
         settleMs: timing.settleMs,
+        emptySettleMs: timing.emptySettleMs,
         resolve,
         reject,
         deadline: undefined,
         settleTimer: undefined,
         latest: undefined,
       };
-      waiter.deadline = setTimeout(() => {
-        this.removeWaiter(waiter);
-        reject(
-          new LspError(
-            "TIMEOUT",
-            `${this.language} language server sent no diagnostics for ${uri} within ${timing.timeoutMs} ms`,
-            { language: this.language },
-          ),
-        );
-      }, timing.timeoutMs);
+      waiter.deadline = setTimeout(
+        () => {
+          this.removeWaiter(waiter);
+          if (silentlyClean) {
+            resolve([]);
+            return;
+          }
+          reject(
+            new LspError(
+              "TIMEOUT",
+              `${this.language} language server sent no diagnostics for ${uri} within ${timing.timeoutMs} ms`,
+              { language: this.language },
+            ),
+          );
+        },
+        silentlyClean ? timing.silentCleanMs : timing.timeoutMs,
+      );
       this.waiters.add(waiter);
     });
   }
@@ -459,10 +473,12 @@ export class LspClient {
         waiter.deadline = undefined;
       }
       if (waiter.settleTimer !== undefined) clearTimeout(waiter.settleTimer);
+      // An empty publish may be the syntax pass; the type errors can follow it, so it waits longer.
+      const quiet = params.diagnostics.length === 0 ? waiter.emptySettleMs : waiter.settleMs;
       waiter.settleTimer = setTimeout(() => {
         this.removeWaiter(waiter);
         waiter.resolve(waiter.latest ?? []);
-      }, waiter.settleMs);
+      }, quiet);
     }
   }
 
