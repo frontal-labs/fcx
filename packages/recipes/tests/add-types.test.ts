@@ -156,7 +156,9 @@ describe("runAddTypes", () => {
     if (result.status === "abstained") expect(result.lastError).toMatch(/new error/);
   });
 
-  it("rejects an edit to a file other than the one named", async () => {
+  it("rejects an edit to a real file other than the one named", async () => {
+    fixture.cleanup();
+    fixture = makeWorkspace({ [FILE]: SOURCE, "src/other.ts": "export const x = 1;\n" });
     const elsewhere = {
       edits: [{ file: "src/other.ts", search: "x", replace: "y" }],
     };
@@ -168,6 +170,15 @@ describe("runAddTypes", () => {
         reasonCode: "PATH_NOT_ALLOWED",
       });
     }
+  });
+
+  it("points an edit that names an invented path at the file being annotated", async () => {
+    // The model invents "/path/to/..." for the file. The only allowed file is the one named, so the edit is
+    // pointed at it and the annotation is applied.
+    const [edit] = ANNOTATE_ADD.edits;
+    const invented = { edits: [{ ...edit, file: "/path/to/src/math.ts" }] };
+    const result = await runAddTypes(base(queueModel([invented])));
+    expect(result.status).toBe("verified");
   });
 
   it("records a schema-invalid output as a failed candidate and then verifies the next one", async () => {

@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from "node:fs";
+import { relative, sep } from "node:path";
 import { type Edit, resolveInWorkspace } from "@fcx/apply";
 import { type Bundle, type LayerOutcome, anchor, constrain, verify } from "@fcx/defense";
 import type { ModelHost } from "@fcx/model";
@@ -13,6 +14,32 @@ import { prepareInstructions, withInstructions } from "./instructions.js";
  */
 
 /** Temperatures for successive candidates (plan §10). Candidates run one at a time. */
+/**
+ * A recipe that edits one file has one allowed path. A model sometimes names that file by a path it made up
+ * ("/src/a.ts", "/path/to/a.ts"), and constrain then rejects a correct edit. With exactly one allowed file, an edit
+ * whose path is outside the workspace or does not exist is pointed at it. A real file the recipe may not touch is
+ * left alone, so constrain still rejects it. Constrain and every later layer still run on the result.
+ */
+export function pinEditsToTarget(
+  edits: readonly Edit[],
+  workspace: string,
+  allowedFiles: readonly string[],
+): Edit[] {
+  const [target, ...rest] = allowedFiles;
+  if (target === undefined || rest.length > 0) return [...edits];
+  const pinned = relative(workspace, target).split(sep).join("/");
+  return edits.map((edit) => {
+    let resolved: string;
+    try {
+      resolved = resolveInWorkspace(workspace, edit.file);
+    } catch {
+      return { ...edit, file: pinned };
+    }
+    if (resolved === target || existsSync(resolved)) return edit;
+    return { ...edit, file: pinned };
+  });
+}
+
 export const CANDIDATE_TEMPERATURES = [0.2, 0.5, 0.7, 0.9, 1.0, 1.0] as const;
 
 /** An `edits` output with between one and `max` search/replace blocks. */
@@ -136,6 +163,11 @@ export interface RecipeDefinition<O> {
   readonly maxTokens?: number;
   /** Builds the prompt. `feedback` is the previous candidate's failure, when there is one. */
   prompt(feedback: string | undefined): RecipePrompt;
+  /**
+   * Tidies a parsed output before any check sees it. Schemas cannot hold transforms, because the model is
+   * constrained by the schema converted to JSON Schema, so this is where a recipe normalizes its output.
+   */
+  normalize?(output: O): O;
   /** Turns a parsed output into search/replace edits. */
   toEdits(output: O): Edit[];
   /** Optional deterministic first candidate, tried before any model candidate. */
@@ -297,7 +329,8 @@ export async function runRecipeEngine<O>(options: RecipeRunOptions<O>): Promise<
         maxTokens: recipe.maxTokens ?? 768,
       });
       output = recipe.schema.parse(result.object);
-      edits = recipe.toEdits(output);
+      if (recipe.normalize) output = recipe.normalize(output);
+      edits = pinEditsToTarget(recipe.toEdits(output), options.workspace, options.allowedFiles);
     } catch (error) {
       // A model that cannot load is an environment problem, not a bad candidate. Let it reach the caller.
       if (isModelLoadFailure(error)) throw error;
