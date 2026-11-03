@@ -68,7 +68,7 @@ bunx tsx cli/src/index.ts doctor
 
 The binary is `fcx` (avoiding the `fc` shell built-in clash). It is exposed via:
 - `cli/bin/fcx.js` (bun entry)
-- `bin/fcx.js` (node entry)
+- `bin/index.js` (node entry)
 - `homebrew/fcx.rb` (Homebrew formula)
 
 ## Commands

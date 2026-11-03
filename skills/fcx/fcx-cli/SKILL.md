@@ -41,7 +41,7 @@ Commands:
 ## Entry Points
 
 - `cli/bin/fcx.js` — Bun entry (primary)
-- `bin/fcx.js` — Node entry (fallback)
+- `bin/index.js` — Node entry (fallback)
 - `homebrew/fcx.rb` — Homebrew formula
 
 ## Binary

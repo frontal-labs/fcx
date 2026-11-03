@@ -57,7 +57,7 @@ See root README for full command list. Key commands:
 
 Entry points:
 - `cli/bin/fcx.js` (bun)
-- `bin/fcx.js` (node)
+- `bin/index.js` (node)
 - `homebrew/fcx.rb` (Homebrew formula)
 
 ## License
