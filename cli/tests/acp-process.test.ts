@@ -2,25 +2,33 @@
  * Conformance test with a real process. It spawns the built CLI (`node cli/dist/main.js acp`) and drives it over
  * stdio with the official ACP client from @agentclientprotocol/sdk.
  *
- * Requires a fresh build: run `bun run build` in cli/ first. The test reads cli/dist/main.js and does not build.
+ * The suite builds cli/dist itself before it runs, so it never spawns a missing or stale bundle.
  *
  * The model is scripted. The child gets NODE_ENV=test and FCX_TEST_SCRIPTED_MODEL=<script file>, which the
  * factory in src/lib/runtime.ts honours only under NODE_ENV=test (see src/lib/scripted-model.ts).
  *
  * The client is imported from the package install under packages/acp, because cli/ does not declare the SDK.
  */
-import { type ChildProcess, spawn } from "node:child_process";
+import { type ChildProcess, spawn, spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { PassThrough, Readable, Writable } from "node:stream";
 import { fileURLToPath } from "node:url";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 
 // The client SDK is installed for packages/acp only. Import it by path, not by bare specifier.
 import * as sdk from "@agentclientprotocol/sdk";
 
+const CLI_DIR = fileURLToPath(new URL("..", import.meta.url));
 const CLI_ENTRY = fileURLToPath(new URL("../dist/main.js", import.meta.url));
+
+beforeAll(() => {
+  const built = spawnSync("bun", ["run", "build"], { cwd: CLI_DIR, encoding: "utf8" });
+  if (built.status !== 0) {
+    throw new Error(`cli build failed:\n${built.stdout}\n${built.stderr}`);
+  }
+}, 120_000);
 
 const SOURCE = [
   "export function total(values: number[]): number {",
