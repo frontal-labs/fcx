@@ -53,7 +53,12 @@ describe("fix-test command", () => {
 
   beforeEach(() => {
     sb = makeSandbox("fcx-fixtest-");
-    writeProject(sb.workspace, { "src/math.ts": MATH, "tests/math.test.ts": TEST });
+    writeProject(sb.workspace, {
+      "src/math.ts": MATH,
+      "tests/math.test.ts": TEST,
+      // The test runner's globals, so the test file type-checks apart from the bug the recipe fixes.
+      "tests/globals.d.ts": "declare function it(name: string, fn: () => void): void;\n",
+    });
   });
   afterEach(() => sb.cleanup());
 

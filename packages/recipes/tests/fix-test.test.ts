@@ -22,6 +22,8 @@ describe("fix-test", () => {
       "src/math.ts": MATH,
       "src/other.ts": OTHER,
       "tests/math.test.ts": TEST,
+      // The test runner's globals, so the test file type-checks apart from the bug the recipe fixes.
+      "tests/globals.d.ts": "declare function it(name: string, fn: () => void): void;\n",
     });
   });
 
@@ -74,6 +76,25 @@ describe("fix-test", () => {
     if (result.status === "verified")
       expect(result.candidates[0]).toMatchObject({ source: "model", pass: false });
     expect(model.prompts[1]).toContain("did not match the required JSON schema");
+  });
+
+  it("rejects an edit that leaves the test file with the type error it was asked to fix", async () => {
+    fixture.cleanup();
+    fixture = makeWorkspace({
+      "src/math.ts": MATH,
+      "tests/math.test.ts": TEST.replace("add(1, 2)", "add(1)"),
+      "tests/globals.d.ts": "declare function it(name: string, fn: () => void): void;\n",
+    });
+    const unrelated = {
+      edits: [
+        { file: "tests/math.test.ts", search: "adds two numbers", replace: "adds two numbers." },
+      ],
+    };
+    const result = await runFixTest(base(queueModel([unrelated, unrelated])));
+    expect(result.status).toBe("abstained");
+    if (result.status === "abstained") {
+      expect(result.candidates[0]?.layers.at(-1)).toMatchObject({ reasonCode: "TARGET_NOT_FIXED" });
+    }
   });
 
   it("rejects an edit to a file outside the allowed set", async () => {

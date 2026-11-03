@@ -55,6 +55,20 @@ Constraints:
 
 export const DocstringSchema = z.object({ doc: z.string().min(1) });
 
+const CODE_START =
+  /^(const|let|var|return|function|import|export|if|for|while|class|type|interface)\b/;
+
+/** True when every non-blank line reads as words, not code: no code punctuation and no code keyword at its start. */
+export function isProse(text: string): boolean {
+  const lines = text
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line !== "");
+  return (
+    lines.length > 0 && lines.every((line) => !/[;{}()=]/.test(line) && !CODE_START.test(line))
+  );
+}
+
 /**
  * Tidies a model's doc text when it is one JSDoc block wrapped in code fences, or written on one line. The fence
  * lines are dropped and each inner line is indented to sit under the opening delimiter. A line without a leading
@@ -66,6 +80,12 @@ export function extractDocBlock(raw: string): string {
     .replace(/^\s*(```|~~~)[^\n]*\n?/gm, "")
     .replace(/\n?\s*(```|~~~)\s*$/gm, "")
     .trim();
+  if (!text.includes("/**") && !text.includes("*/") && isProse(text)) {
+    // The model wrote the comment text without its delimiters. Each line becomes a line of the block.
+    const lines = text.split("\n").map((line) => line.trim().replace(/^\*\s?/, ""));
+    const body = lines.map((line) => (line === "" ? " *" : ` * ${line}`));
+    return ["/**", ...body, " */"].join("\n");
+  }
   if (!text.startsWith("/**") || !text.endsWith("*/") || text.indexOf("*/") !== text.length - 2) {
     return text;
   }

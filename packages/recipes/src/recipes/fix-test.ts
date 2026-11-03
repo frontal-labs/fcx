@@ -15,9 +15,10 @@
  * must supply that text, or the prompt says it is missing.
  */
 import type { Edit } from "@fcx/apply";
+import type { LayerOutcome } from "@fcx/defense";
 import type { ModelHost } from "@fcx/model";
 import { retrieve } from "@fcx/retrieve";
-import { createTsChecker } from "@fcx/verify";
+import { type Checker, createTsChecker, errorsOnly } from "@fcx/verify";
 import { groundLayer, typeCheckLayer } from "../checks.js";
 import {
   RecipeInputError,
@@ -163,7 +164,8 @@ export async function runFixTest(options: FixTestOptions): Promise<FixTestResult
         { name: "ground", check: ({ texts, original }) => groundLayer(checker, texts, original) },
         {
           name: "verify",
-          check: ({ texts, original }) => typeCheckLayer({ checker, workspace, texts, original }),
+          check: ({ texts, original }) =>
+            fixTestVerify({ checker, workspace, texts, original, testPath }),
         },
       ],
     };
@@ -203,4 +205,32 @@ export async function runFixTest(options: FixTestOptions): Promise<FixTestResult
   } finally {
     checker.dispose();
   }
+}
+
+/**
+ * The verify layer for fix-test. The shared type-check layer only refuses new errors. A fix-test edit has to leave the
+ * test file with no type errors at all, because that is what the fix is for, so an edit that leaves the reported
+ * error in place is rejected here.
+ */
+export function fixTestVerify(options: {
+  checker: Checker;
+  workspace: string;
+  texts: ReadonlyMap<string, string>;
+  original: (path: string) => string | undefined;
+  testPath: string;
+}): LayerOutcome {
+  const t0 = performance.now();
+  const base = typeCheckLayer(options);
+  if (!base.pass) return base;
+  const left = errorsOnly(options.checker.diagnostics(options.testPath, new Map(options.texts)));
+  if (left.length === 0) return base;
+  const first = left[0];
+  if (first === undefined) return base;
+  return {
+    layer: "verify",
+    pass: false,
+    ms: Math.round(performance.now() - t0),
+    reasonCode: "TARGET_NOT_FIXED",
+    feedback: `The test file still has a type error at line ${first.line}: TS${first.code} ${first.message}. Fix every error in the file.`,
+  };
 }
