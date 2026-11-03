@@ -10,5 +10,20 @@
     "declaration": true,
     "noEmit": true
   },
-  "include": ["packages/**/src/**/*", "cli/**/src/**/*"]
+  "files": [],
+  "references": [
+    { "path": "./packages/acp" },
+    { "path": "./packages/apply" },
+    { "path": "./packages/config" },
+    { "path": "./packages/defense" },
+    { "path": "./packages/escalate" },
+    { "path": "./packages/index" },
+    { "path": "./packages/lsp" },
+    { "path": "./packages/memory" },
+    { "path": "./packages/model" },
+    { "path": "./packages/recipes" },
+    { "path": "./packages/retrieve" },
+    { "path": "./packages/verify" },
+    { "path": "./cli" }
+  ]
 }

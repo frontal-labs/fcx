@@ -1,5 +1,5 @@
 {
-  "name": "fcx",
+  "name": "@fcx/root",
   "version": "0.0.0",
   "private": true,
   "description": "fcx - Frontal Codex Extra Small: a local-first coding agent CLI using ~1.5B models",
