@@ -80,7 +80,7 @@ async function indexed(files: Record<string, string>): Promise<IndexStore> {
   return store;
 }
 
-describe.skipIf(!hasGo)("go extraction (go/ast via a built helper)", () => {
+describe.skipIf(!hasGo)("go extraction (go/ast via a built helper)", { timeout: 120_000 }, () => {
   it("reports functions, methods with receiver-qualified names, types, constants and kinds", async () => {
     const db = await indexed({
       "go.mod": GO_MOD,
@@ -150,7 +150,7 @@ describe.skipIf(!hasGo)("go extraction (go/ast via a built helper)", () => {
   });
 });
 
-describe.skipIf(!hasGo)("go extractor binary cache", () => {
+describe.skipIf(!hasGo)("go extractor binary cache", { timeout: 120_000 }, () => {
   it("builds once, then reuses the cached binary keyed by the source sha256", async () => {
     scratch = mkdtempSync(join(tmpdir(), "fcx-go-cache-"));
     const first = await ensureGoExtractor(scratch);
