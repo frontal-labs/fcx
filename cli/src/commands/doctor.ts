@@ -42,7 +42,7 @@ export async function doctor(cwd: string, permissionMode?: PermissionMode): Prom
     status: resolved.trust.trusted ? "ok" : "warn",
     detail: resolved.trust.trusted
       ? `trusted (${resolved.trust.trustedRoot})`
-      : "untrusted: project and local settings are restricted; run `frontal-code trust`",
+      : "untrusted: project and local settings are restricted; run `fcx trust`",
   });
 
   const allowed = resolved.policy.allowedProviders;
@@ -104,7 +104,7 @@ export async function checkLanguageServers(workspace: string, trusted: boolean):
       return {
         name: "language-servers",
         status: "warn",
-        detail: `workspace language server found for ${blocked.join(", ")}, but the workspace is untrusted, so it is ignored; run \`frontal-code trust\``,
+        detail: `workspace language server found for ${blocked.join(", ")}, but the workspace is untrusted, so it is ignored; run \`fcx trust\``,
       };
     }
     if (available.length === 0) {

@@ -11,6 +11,11 @@ import { checkTrust } from "./trust.js";
 import type { ConfigWarning, ResolveOptions, ResolvedConfig } from "./types.js";
 import { canonicalPath } from "./util.js";
 
+/** The shared config home: `FRONTAL_CODE_CONFIG_HOME`, else `~/.frontal-code`. Frontal Code reads the same directory. */
+export function configHomeFor(env: Env): string {
+  return env.FRONTAL_CODE_CONFIG_HOME ?? join(env.HOME, ".frontal-code");
+}
+
 /**
  * Resolves the effective configuration the way the Frontal Code runtime does
  * (`crates/code-core/src/config.rs`, `crates/code-runtime/src/config.rs`):
@@ -25,7 +30,7 @@ export function resolveConfig(
   env: Env = readEnv(),
 ): ResolvedConfig {
   const warnings: ConfigWarning[] = [];
-  const configHome = env.FRONTAL_CODE_CONFIG_HOME ?? join(env.HOME, ".frontal-code");
+  const configHome = configHomeFor(env);
   // Paths are reported as given (like Frontal Code); only trust matching canonicalizes.
   const workspace = resolve(cwd);
 

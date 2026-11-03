@@ -39,7 +39,7 @@ describe("doctor language-server trust line", () => {
     const check = await lspCheck();
     expect(check.status).toBe("warn");
     expect(check.detail).toMatch(/typescript.*untrusted|untrusted.*typescript/);
-    expect(check.detail).toContain("frontal-code trust");
+    expect(check.detail).toContain("fcx trust");
   });
 
   it("uses the workspace server once the workspace is trusted", async () => {

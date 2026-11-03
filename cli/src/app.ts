@@ -35,6 +35,8 @@ Commands:
   commit [--apply]          Write a commit message for staged changes. --apply runs git commit after a yes
   ask "<text>"              Route a task to a recipe. Commit messages run; other recipes print their command
   undo                      Undo the last applied change
+  tui                       Open the interactive terminal UI (also: bare fcx in a terminal)
+  trust [path]              Trust a workspace (default: current directory) so its project settings and language servers apply
   memory list|forget|clear  Show, delete or clear local memory   [--kind K] [<id>]
   index [--rebuild|--status] Build, rebuild or show the code index
   init                      Initialize fcx in a project            (not implemented yet)
@@ -85,11 +87,21 @@ const RECIPE_COMMANDS: ReadonlyMap<string, CommandHandler> = new Map<string, Com
   ["acp", async (args) => (await import("./commands/acp.js")).runAcpCli(args)],
 ]);
 
+/** True when both stdin and stdout are terminals, so an interactive UI can read keys and draw. */
+function isTerminal(): boolean {
+  return process.stdin.isTTY === true && process.stdout.isTTY === true;
+}
+
 export async function run(args: GlobalArgs): Promise<number> {
   if (args.version) {
     console.log(meta.version);
     return 0;
   }
+  if (args.command === "tui" || (args.command === undefined && !args.help && isTerminal())) {
+    const { runTui } = await import("./lib/tui.js");
+    return runTui((next) => run(next), args.cwd ?? process.cwd());
+  }
+
   if (args.help || args.command === undefined) {
     console.log(HELP);
     return 0;
@@ -126,6 +138,11 @@ export async function run(args: GlobalArgs): Promise<number> {
 
   if (args.command === "undo") {
     return runUndo(args, cwd);
+  }
+
+  if (args.command === "trust") {
+    const { runTrustCommand } = await import("./commands/trust.js");
+    return runTrustCommand(args, cwd);
   }
 
   if (args.command === "serve") {

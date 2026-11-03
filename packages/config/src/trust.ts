@@ -1,3 +1,4 @@
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join, resolve, sep } from "node:path";
 import { ConfigError } from "./errors.js";
 import { readJsonObject } from "./json.js";
@@ -17,6 +18,20 @@ export function checkTrust(
     }
   }
   return { trusted: false };
+}
+
+/**
+ * Adds a workspace to `trusted-workspaces.json` in the config home and returns the canonical path stored.
+ * Trusting a workspace lets its project settings apply and lets a language server run from its node_modules.
+ */
+export function trustWorkspace(configHome: string, workspace: string): string {
+  const path = join(configHome, "trusted-workspaces.json");
+  const root = canonicalPath(workspace);
+  const roots = readTrustedWorkspaces(path);
+  if (!roots.some((existing) => canonicalPath(existing) === root)) roots.push(root);
+  mkdirSync(configHome, { recursive: true });
+  writeFileSync(path, `${JSON.stringify({ trustedWorkspaces: roots }, null, 2)}\n`);
+  return root;
 }
 
 export function readTrustedWorkspaces(path: string): string[] {

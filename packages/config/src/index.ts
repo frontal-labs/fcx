@@ -10,5 +10,6 @@ export type {
 } from "./types.js";
 export { ConfigError, FcError } from "./errors.js";
 export { normalizePermissionMode } from "./permissions.js";
-export { resolveConfig } from "./resolve.js";
+export { configHomeFor, resolveConfig } from "./resolve.js";
+export { trustWorkspace } from "./trust.js";
 export { readEnv, type Env } from "./keys.js";

@@ -14,7 +14,7 @@ fcx never weakens Frontal Code's security model.
 
 ## Trust
 
-- Workspace trust: project/local settings untrusted until `frontal-code trust` is run.
+- Workspace trust: project/local settings untrusted until `fcx trust` is run.
 - Trust is read-only; fcx never writes `trusted-workspaces.json`.
 - In untrusted workspaces, `hooks`, `mcpServers`, `plugins`, `enabledPlugins`, `sandbox`, `permissionMode`, `permissions.defaultMode` are withheld.
 
