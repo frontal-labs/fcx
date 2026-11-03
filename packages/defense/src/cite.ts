@@ -32,6 +32,7 @@ export type CiteReasonCode =
   | "FILE_NOT_FOUND"
   | "RANGE_INVALID"
   | "RANGE_OUT_OF_BOUNDS"
+  | "NO_IDENTIFIER"
   | "IDENTIFIER_NOT_IN_CITATION";
 
 export interface CiteResult {
@@ -67,6 +68,19 @@ export function codeIdentifiers(text: string): Set<string> {
   for (const match of text.matchAll(/[A-Za-z_$][A-Za-z0-9_$]*/g)) {
     const word = match[0];
     if (/[_$]/.test(word) || /[a-z][A-Z]/.test(word)) found.add(word);
+  }
+  return found;
+}
+
+/**
+ * Quoted literals a claim asserts, when they look like code: a path, package or id with a separator
+ * ('ggml/auto', "max-tokens", 'v1.5'). Prose in quotes is not checked. A literal must appear verbatim in the cited text.
+ */
+export function quotedLiterals(text: string): Set<string> {
+  const found = new Set<string>();
+  // Opening and closing quotes must not touch a letter or digit, so contractions like don't/won't are prose.
+  for (const match of text.matchAll(/(?<![A-Za-z0-9])(["'])([^"'\s]+)\1(?![A-Za-z0-9])/g)) {
+    if (/[/._-]/.test(match[2])) found.add(match[2]);
   }
   return found;
 }
@@ -126,8 +140,17 @@ function judge(
 
   const span = surviving.join("\n");
   const identifiers = codeIdentifiers(claim.text);
+  // A claim with nothing to check ("The registry holds some data") would pass every other test. It must name code.
+  if (identifiers.size === 0 && quotedLiterals(claim.text).size === 0) {
+    return { ok: false, reasonCode: "NO_IDENTIFIER" };
+  }
   for (const identifier of identifiers) {
     if (!containsWord(span, identifier)) {
+      return { ok: false, reasonCode: "IDENTIFIER_NOT_IN_CITATION" };
+    }
+  }
+  for (const literal of quotedLiterals(claim.text)) {
+    if (!span.includes(literal)) {
       return { ok: false, reasonCode: "IDENTIFIER_NOT_IN_CITATION" };
     }
   }

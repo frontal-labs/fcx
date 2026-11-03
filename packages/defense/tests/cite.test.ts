@@ -26,7 +26,7 @@ const options = { workspace: WORKSPACE, readFile };
 describe("cite layer", () => {
   it("keeps a claim whose identifiers all appear in the cited span", () => {
     const claim: Claim = {
-      text: "parse tokenize build",
+      text: "`parse` `tokenize` `build`",
       cites: [{ file: "src/a.ts", start: 1, end: 3 }],
     };
     const result = cite([claim], options);
@@ -41,16 +41,19 @@ describe("cite layer", () => {
   });
 
   it("drops a claim whose citation range is past the end of the file", () => {
-    const claim: Claim = { text: "parse", cites: [{ file: "src/a.ts", start: 1, end: 40 }] };
+    const claim: Claim = { text: "`parse`", cites: [{ file: "src/a.ts", start: 1, end: 40 }] };
     const result = cite([claim], options);
     expect(result.kept).toEqual([]);
     expect(result.dropped).toEqual([{ claim, reasonCode: "RANGE_OUT_OF_BOUNDS" }]);
   });
 
   it("drops a claim whose citation range is malformed", () => {
-    const zero: Claim = { text: "parse", cites: [{ file: "src/a.ts", start: 0, end: 1 }] };
-    const reversed: Claim = { text: "parse", cites: [{ file: "src/a.ts", start: 3, end: 1 }] };
-    const fractional: Claim = { text: "parse", cites: [{ file: "src/a.ts", start: 1.5, end: 2 }] };
+    const zero: Claim = { text: "`parse`", cites: [{ file: "src/a.ts", start: 0, end: 1 }] };
+    const reversed: Claim = { text: "`parse`", cites: [{ file: "src/a.ts", start: 3, end: 1 }] };
+    const fractional: Claim = {
+      text: "`parse`",
+      cites: [{ file: "src/a.ts", start: 1.5, end: 2 }],
+    };
     const result = cite([zero, reversed, fractional], options);
     expect(result.dropped.map((d) => d.reasonCode)).toEqual([
       "RANGE_INVALID",
@@ -60,19 +63,19 @@ describe("cite layer", () => {
   });
 
   it("drops a claim whose cited file does not exist", () => {
-    const claim: Claim = { text: "parse", cites: [{ file: "src/missing.ts", start: 1, end: 1 }] };
+    const claim: Claim = { text: "`parse`", cites: [{ file: "src/missing.ts", start: 1, end: 1 }] };
     expect(cite([claim], options).dropped).toEqual([{ claim, reasonCode: "FILE_NOT_FOUND" }]);
   });
 
   it("drops a claim whose cited file is outside the workspace", () => {
-    const claim: Claim = { text: "parse", cites: [{ file: "../etc/passwd", start: 1, end: 1 }] };
+    const claim: Claim = { text: "`parse`", cites: [{ file: "../etc/passwd", start: 1, end: 1 }] };
     expect(cite([claim], options).dropped).toEqual([
       { claim, reasonCode: "FILE_OUTSIDE_WORKSPACE" },
     ]);
   });
 
   it("drops a claim with no citation at all", () => {
-    const claim: Claim = { text: "parse", cites: [] };
+    const claim: Claim = { text: "`parse`", cites: [] };
     expect(cite([claim], options).dropped).toEqual([{ claim, reasonCode: "NO_CITATION" }]);
   });
 
@@ -83,6 +86,32 @@ describe("cite layer", () => {
     };
     const result = cite([claim], options);
     expect(result.dropped).toEqual([{ claim, reasonCode: "IDENTIFIER_NOT_IN_CITATION" }]);
+  });
+
+  it("drops a claim whose quoted code literal is not in the cited span", () => {
+    const claim: Claim = {
+      text: "The alias 'ggml/auto' maps to the default model",
+      cites: [{ file: "src/b.ts", start: 1, end: 1 }],
+    };
+    const result = cite([claim], options);
+    expect(result.dropped).toEqual([{ claim, reasonCode: "IDENTIFIER_NOT_IN_CITATION" }]);
+  });
+
+  it("keeps a claim whose quoted code literal appears in the cited span", () => {
+    FILES["/repo/src/c.ts"] = `export const alias = "ggml/auto";`;
+    const claim: Claim = {
+      text: "The alias 'ggml/auto' is defined here",
+      cites: [{ file: "src/c.ts", start: 1, end: 1 }],
+    };
+    expect(cite([claim], options).kept).toEqual([claim]);
+  });
+
+  it("drops a claim that names no code, because nothing in it can be checked", () => {
+    const claim: Claim = {
+      text: "The file holds some values and helpers.",
+      cites: [{ file: "src/a.ts", start: 1, end: 3 }],
+    };
+    expect(cite([claim], options).dropped).toEqual([{ claim, reasonCode: "NO_IDENTIFIER" }]);
   });
 
   it("matches identifiers case-sensitively", () => {
@@ -102,7 +131,7 @@ describe("cite layer", () => {
 
   it("discards an invalid citation but keeps the claim on a valid one", () => {
     const claim: Claim = {
-      text: "parse tokenize",
+      text: "`parse` `tokenize`",
       cites: [
         { file: "src/missing.ts", start: 1, end: 1 },
         { file: "src/a.ts", start: 1, end: 2 },
@@ -112,7 +141,7 @@ describe("cite layer", () => {
   });
 
   it("drops a claim when every citation is invalid, and says why", () => {
-    const claim: Claim = { text: "parse", cites: [{ file: "src/a.ts", start: 90, end: 99 }] };
+    const claim: Claim = { text: "`parse`", cites: [{ file: "src/a.ts", start: 90, end: 99 }] };
     expect(cite([claim], options).dropped).toEqual([{ claim, reasonCode: "RANGE_OUT_OF_BOUNDS" }]);
   });
 
@@ -125,8 +154,8 @@ describe("cite layer", () => {
   });
 
   describe("regenerate threshold", () => {
-    const keep: Claim = { text: "parse", cites: [{ file: "src/a.ts", start: 1, end: 3 }] };
-    const drop: Claim = { text: "parse", cites: [] };
+    const keep: Claim = { text: "`parse`", cites: [{ file: "src/a.ts", start: 1, end: 3 }] };
+    const drop: Claim = { text: "`parse`", cites: [] };
     const run = (kept: number, dropped: number) =>
       cite([...Array(kept).fill(keep), ...Array(dropped).fill(drop)], options);
 
