@@ -54,6 +54,31 @@ Constraints:
 - Output must be valid JSON matching the schema: { "doc": "..." }.`;
 
 export const DocstringSchema = z.object({ doc: z.string().min(1) });
+
+/**
+ * Tidies a model's doc text when it is one JSDoc block wrapped in code fences, or written on one line. The fence
+ * lines are dropped and each inner line is indented to sit under the opening delimiter. A line without a leading
+ * asterisk is left as written, so the constrain check still sees it. A one-line block is returned as written. Anything else is returned trimmed and unchanged,
+ * so the constrain check rejects it with its own reason (text around the block, code, a second block).
+ */
+export function extractDocBlock(raw: string): string {
+  const text = raw
+    .replace(/^\s*(```|~~~)[^\n]*\n?/gm, "")
+    .replace(/\n?\s*(```|~~~)\s*$/gm, "")
+    .trim();
+  if (!text.startsWith("/**") || !text.endsWith("*/") || text.indexOf("*/") !== text.length - 2) {
+    return text;
+  }
+  // A one-line block is already valid as written.
+  if (!text.includes("\n")) return text;
+  const body = text
+    .slice(3, -2)
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line, i, all) => !(line === "" && (i === 0 || i === all.length - 1)))
+    .map((line) => (line === "" ? " *" : line.startsWith("*") ? ` ${line}` : line));
+  return ["/**", ...(body.length === 0 ? [" *"] : body), " */"].join("\n");
+}
 export type DocstringOutput = z.infer<typeof DocstringSchema>;
 
 export const DOCSTRING_SCOPE: VerificationScope = {
@@ -168,6 +193,7 @@ export async function runDocstring(options: DocstringOptions): Promise<Docstring
 
   const recipe: RecipeDefinition<DocstringOutput> = {
     schema: DocstringSchema,
+    normalize: (output) => ({ doc: extractDocBlock(output.doc) }),
     temperatures: CANDIDATE_TEMPERATURES,
     prompt: (feedback) => ({
       system: DOCSTRING_SYSTEM,
