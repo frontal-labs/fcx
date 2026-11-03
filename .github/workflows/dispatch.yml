@@ -4,6 +4,9 @@ on:
   repository_dispatch:
     types: [fcx-trigger]
 
+permissions:
+  contents: read
+
 jobs:
   dispatch:
     name: Dispatch

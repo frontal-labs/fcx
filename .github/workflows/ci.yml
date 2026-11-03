@@ -13,6 +13,9 @@ concurrency:
 env:
   BUN_VERSION: latest
 
+permissions:
+  contents: read
+
 jobs:
   lint:
     name: Lint
