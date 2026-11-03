@@ -22,6 +22,8 @@ export interface ExplainReport extends RecipeReportBase {
   answer?: ExplainAnswer;
   /** Claims the defense layer removed because their citations did not support them. */
   dropped?: number;
+  /** Code names the summary used that the model was not shown. When any, the summary is withheld. */
+  summaryOmitted?: string[];
   question?: string;
 }
 
@@ -55,6 +57,7 @@ export async function runExplainCommand(
         ...extra,
         answer: result.answer,
         dropped: result.dropped.length,
+        summaryOmitted: result.summaryOmitted,
       };
     }
     return {
@@ -68,6 +71,7 @@ export async function runExplainCommand(
       ...extra,
       answer: result.answer,
       dropped: result.dropped.length,
+      summaryOmitted: result.summaryOmitted,
     };
   } catch (error) {
     return { ...failedRun(state, error), ...extra };
@@ -76,8 +80,13 @@ export async function runExplainCommand(
 
 export function formatExplain(report: ExplainReport): string {
   const extra: string[] = [];
+  if (report.summaryOmitted && report.summaryOmitted.length > 0) {
+    extra.push(
+      `  summary withheld: it names code the model was not shown (${report.summaryOmitted.join(", ")})`,
+    );
+  }
   if (report.answer) {
-    extra.push(`  ${report.answer.summary}`);
+    if (report.answer.summary !== "") extra.push(`  ${report.answer.summary}`);
     for (const claim of report.answer.claims) {
       const cite = claim.cites[0];
       const where = cite ? ` (${cite.file}:${cite.start}-${cite.end})` : "";
