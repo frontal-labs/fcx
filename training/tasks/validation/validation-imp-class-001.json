@@ -1,0 +1,14 @@
+{
+  "id": "validation-imp-class-001",
+  "split": "validation",
+  "family": "imp-class",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/cache.ts": "export class Basket61 {\n  size = 260;\n}\n",
+    "src/a.ts": "export const spindle18 = new Basket61().size;\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

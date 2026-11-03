@@ -414,3 +414,29 @@ synthetic, so the pass rates say little about real code.
   anchor mismatches. A next attempt would need more and more varied data, early stopping on validation, and evaluation
   under the product grammar.
 - **Report:** `training/reports/mlx-test-2026-11-02.json`. Prompts and completions are in `training/eval-mlx/`.
+
+## 2026-11-02 — Repository repair after the disk-full period
+
+- **Cause, as observed:** source imports across packages had been rewritten from relative paths to an `@/` alias
+  (which maps to each package's `src/` root). Several rewritten paths were wrong, and vitest and typecheck failed. I
+  did not make this rewrite. Some files also reverted my first repair.
+- **Repair:** every source import is relative again. Unresolved imports were fixed by matching the unique module file
+  in the same package. `escalate` now declares `zod`, and `cli` declares `ggml-node`, which the bundle leaves external.
+- **Stray directory:** a literal `./~` holding Bun's package cache appears after `bun install` in this environment. It
+  is untracked and must be deleted, not committed.
+- **Verified after the repair:** typecheck 0 errors; lint clean; 82 test files and 728 tests passing; the built
+  `fcx acp` answers `initialize` over stdio.
+- **Still open:** the second fine-tuning attempt (resumed from data collection), the real-editor test, and committing.
+
+## 2026-11-03 — Attempt 2 fine-tuning result: NOT shipped
+
+- **Data:** 1,078 training examples from 1,620 tasks; 62 validation from 96 (family-disjoint from train and test).
+- **Selection:** checkpoint 100 had the lowest validation loss (0.192; later checkpoints 0.215 to 0.223). Chosen by
+  validation loss only, as the protocol requires.
+- **Test split (90 model-resolved tasks, fence-stripped, MLX inference):** base 34/90 (28.5% to 48.1%); fine-tuned 33/90
+  (27.4% to 47.0%). Discordant pairs: 8 base-only, 7 fine-tuned-only. Exact sign test p = 1.0.
+- **Verdict:** not shipped. The pre-registered rule needs a higher pass rate and p < 0.05. Neither holds, so there is
+  no GGUF and no llama.cpp decision to make for this model.
+- **Caveats:** MLX inference, not the product runtime. The test split was already used by attempt 1, so this is a
+  re-measurement. The v2 data is still self-distilled from the same 1.5B model.
+- **Report:** `training/reports/attempt2-2026-11-03.json`.

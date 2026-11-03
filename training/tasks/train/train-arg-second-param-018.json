@@ -1,0 +1,13 @@
+{
+  "id": "train-arg-second-param-018",
+  "split": "train",
+  "family": "arg-second-param",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "function invoice97(s: string, width: number): string {\n  return s.padStart(width);\n}\nexport const sprocket10 = invoice97(\"widget20\", \"386\");\n"
+  },
+  "target": "src/a.ts:4",
+  "check": "no-type-errors-in-target-file"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "validation-arg-object-second-field-008",
+  "split": "validation",
+  "family": "arg-object-second-field",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Basket74 { id: number; name: string; }\nfunction orbit91(u: Basket74): string {\n  return u.name;\n}\nexport const hinge74 = orbit91({ id: 184, name: 184 });\n"
+  },
+  "target": "src/a.ts:5",
+  "check": "no-type-errors-in-target-file"
+}

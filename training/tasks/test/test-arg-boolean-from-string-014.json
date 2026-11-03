@@ -1,0 +1,13 @@
+{
+  "id": "test-arg-boolean-from-string-014",
+  "split": "test",
+  "family": "arg-boolean-from-string",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "function yarrow31(on: boolean): string {\n  return on ? \"y\" : \"n\";\n}\nexport const zephyr74 = yarrow31(\"marble17\");\n"
+  },
+  "target": "src/a.ts:4",
+  "check": "no-type-errors-in-target-file"
+}

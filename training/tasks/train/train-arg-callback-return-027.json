@@ -1,0 +1,13 @@
+{
+  "id": "train-arg-callback-return-027",
+  "split": "train",
+  "family": "arg-callback-return",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "function ledger88(cb: (x: number) => number): number {\n  return cb(340);\n}\nexport const tally29 = ledger88((x: number) => \"meadow77\");\n"
+  },
+  "target": "src/a.ts:4",
+  "check": "no-type-errors-in-target-file"
+}

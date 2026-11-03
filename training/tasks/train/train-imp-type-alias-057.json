@@ -1,0 +1,14 @@
+{
+  "id": "train-imp-type-alias-057",
+  "split": "train",
+  "family": "imp-type-alias",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/types.ts": "export type Tally20 = { cobalt: number };\n",
+    "src/a.ts": "export function widget65(p: Tally20): number {\n  return p.cobalt;\n}\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

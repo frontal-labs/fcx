@@ -1,0 +1,13 @@
+{
+  "id": "validation-typo-parameter-012",
+  "split": "validation",
+  "family": "typo-parameter",
+  "category": "misspelled-name",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "export function pillar49(saddle: number, parcel: number): number {\n  return sadlde + parcel;\n}\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}

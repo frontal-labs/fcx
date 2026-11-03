@@ -1,0 +1,14 @@
+{
+  "id": "train-imp-enum-member-037",
+  "split": "train",
+  "family": "imp-enum-member",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/codes.ts": "export enum Widget1 { Thimble = 3 }\n",
+    "src/a.ts": "export const gadget45 = Widget1.Thimble;\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

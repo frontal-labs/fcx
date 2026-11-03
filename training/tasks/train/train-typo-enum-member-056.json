@@ -1,0 +1,13 @@
+{
+  "id": "train-typo-enum-member-056",
+  "split": "train",
+  "family": "typo-enum-member",
+  "category": "misspelled-name",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "export enum Harbor86 { Pulley = 1, Invoice = 2 }\nexport const gadget22 = Harbor86.Pluley;\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}

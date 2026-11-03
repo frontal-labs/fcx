@@ -1,0 +1,13 @@
+{
+  "id": "validation-arg-object-field-011",
+  "split": "validation",
+  "family": "arg-object-field",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Mosaic12 { id: number; }\nfunction mosaic6(u: Mosaic12): number {\n  return u.id;\n}\nexport const hinge55 = mosaic6({ id: \"lantern39\" });\n"
+  },
+  "target": "src/a.ts:5",
+  "check": "no-type-errors-in-target-file"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "train-typo-enum-member-052",
+  "split": "train",
+  "family": "typo-enum-member",
+  "category": "misspelled-name",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "export enum Meadow99 { Gadget = 1, Pulley = 2 }\nexport const widget70 = Meadow99.Gagdet;\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "train-ann-tuple-length-007",
+  "split": "train",
+  "family": "ann-tuple-length",
+  "category": "annotation-mismatch",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "export const ember91: [number, number] = [783, 234, 425];\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

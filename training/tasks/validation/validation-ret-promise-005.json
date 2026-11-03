@@ -1,0 +1,13 @@
+{
+  "id": "validation-ret-promise-005",
+  "split": "validation",
+  "family": "ret-promise",
+  "category": "return-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "export async function mosaic63(): Promise<number> {\n  return \"quartz81\";\n}\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}

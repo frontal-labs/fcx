@@ -1,0 +1,13 @@
+{
+  "id": "train-arg-second-param-028",
+  "split": "train",
+  "family": "arg-second-param",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "function pulley88(s: string, width: number): string {\n  return s.padStart(width);\n}\nexport const widget74 = pulley88(\"ledger62\", \"982\");\n"
+  },
+  "target": "src/a.ts:4",
+  "check": "no-type-errors-in-target-file"
+}

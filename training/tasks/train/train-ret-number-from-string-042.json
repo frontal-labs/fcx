@@ -1,0 +1,13 @@
+{
+  "id": "train-ret-number-from-string-042",
+  "split": "train",
+  "family": "ret-number-from-string",
+  "category": "return-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "export function fennel35(s: string): number {\n  return s;\n}\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "train-imp-const-config-021",
+  "split": "train",
+  "family": "imp-const-config",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/config.ts": "export const CISTERN58 = 4;\n",
+    "src/a.ts": "export const ember61 = CISTERN58 + 1;\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

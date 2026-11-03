@@ -1,0 +1,13 @@
+{
+  "id": "train-typo-function-call-038",
+  "split": "train",
+  "family": "typo-function-call",
+  "category": "misspelled-name",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "export function invoice1(x: number): number {\n  return x * 2;\n}\nexport const widget5 = invioce1(557);\n"
+  },
+  "target": "src/a.ts:4",
+  "check": "no-type-errors-in-target-file"
+}

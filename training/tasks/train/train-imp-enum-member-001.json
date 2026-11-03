@@ -1,0 +1,14 @@
+{
+  "id": "train-imp-enum-member-001",
+  "split": "train",
+  "family": "imp-enum-member",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/codes.ts": "export enum Invoice17 { Invoice = 3 }\n",
+    "src/a.ts": "export const sprocket13 = Invoice17.Invoice;\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

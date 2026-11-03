@@ -1,0 +1,14 @@
+{
+  "id": "train-imp-type-interface-021",
+  "split": "train",
+  "family": "imp-type-interface",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/types.ts": "export interface Invoice16 { cobalt: number; }\n",
+    "src/a.ts": "export function gadget38(p: Invoice16): number {\n  return p.cobalt;\n}\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

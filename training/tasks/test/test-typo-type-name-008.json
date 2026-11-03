@@ -1,0 +1,13 @@
+{
+  "id": "test-typo-type-name-008",
+  "split": "test",
+  "family": "typo-type-name",
+  "category": "misspelled-name",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Quiver23 { kettle: number; }\nconst zephyr77: Quive2r3 = { kettle: 150 };\nexport const out = zephyr77;\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}

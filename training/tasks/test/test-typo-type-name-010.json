@@ -1,0 +1,13 @@
+{
+  "id": "test-typo-type-name-010",
+  "split": "test",
+  "family": "typo-type-name",
+  "category": "misspelled-name",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Hammock93 { hammock: number; }\nconst lattice80: Hamomck93 = { hammock: 173 };\nexport const out = lattice80;\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}

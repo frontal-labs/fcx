@@ -1,0 +1,14 @@
+{
+  "id": "validation-imp-class-007",
+  "split": "validation",
+  "family": "imp-class",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/cache.ts": "export class Lantern22 {\n  size = 491;\n}\n",
+    "src/a.ts": "export const gravel10 = new Lantern22().size;\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

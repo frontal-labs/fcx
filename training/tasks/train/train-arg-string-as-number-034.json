@@ -1,0 +1,13 @@
+{
+  "id": "train-arg-string-as-number-034",
+  "split": "train",
+  "family": "arg-string-as-number",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "function bobbin74(name: string): string {\n  return name.trim();\n}\nexport const invoice70 = bobbin74(531);\n"
+  },
+  "target": "src/a.ts:4",
+  "check": "no-type-errors-in-target-file"
+}

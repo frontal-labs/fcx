@@ -1,0 +1,13 @@
+{
+  "id": "validation-arg-object-second-field-009",
+  "split": "validation",
+  "family": "arg-object-second-field",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Lantern61 { id: number; name: string; }\nfunction saddle44(u: Lantern61): string {\n  return u.name;\n}\nexport const vortex92 = saddle44({ id: 715, name: 715 });\n"
+  },
+  "target": "src/a.ts:5",
+  "check": "no-type-errors-in-target-file"
+}

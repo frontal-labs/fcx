@@ -1,0 +1,13 @@
+{
+  "id": "train-ann-literal-number-059",
+  "split": "train",
+  "family": "ann-literal-number",
+  "category": "annotation-mismatch",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "export const ledger12: number = \"cobalt95\";\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

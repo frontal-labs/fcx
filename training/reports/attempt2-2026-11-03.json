@@ -1,0 +1,61 @@
+{
+  "title": "Attempt 2: fix-diagnostic LoRA (v2 data, validation-selected checkpoint), held-out TEST split, MLX inference",
+  "date": "2026-11-03",
+  "protocol": "training/reports/attempt2-protocol.md",
+  "data": {
+    "train": {
+      "tasks": 1620,
+      "examples": 1078
+    },
+    "validation": {
+      "tasks": 96,
+      "examples": 62
+    }
+  },
+  "training": {
+    "config": "training/configs/fix-diagnostic-v2.yaml",
+    "validationLoss": {
+      "1": 1.247,
+      "100": 0.192,
+      "200": 0.195,
+      "300": 0.222,
+      "400": 0.22,
+      "500": 0.215,
+      "600": 0.223
+    },
+    "selected": 100,
+    "selectionRule": "lowest validation loss among 100..600; no test result used"
+  },
+  "test": {
+    "modelSet": 90,
+    "compilerExcluded": 60,
+    "parse": "fence-stripped (headline)",
+    "base": {
+      "passed": 34,
+      "total": 90,
+      "wilson95": [
+        28.5,
+        48.1
+      ]
+    },
+    "finetunedCheckpoint100": {
+      "passed": 33,
+      "total": 90,
+      "wilson95": [
+        27.4,
+        47.0
+      ]
+    },
+    "pairedDiscordance": {
+      "baseOnly": 8,
+      "finetunedOnly": 7
+    },
+    "exactSignTestP": 1.0
+  },
+  "verdict": "NOT SHIPPED: not higher than base and p >= 0.05 (protocol section 5)",
+  "caveats": [
+    "MLX inference, not the product runtime (ggml-node, grammar-constrained)",
+    "Test split was used by attempt 1, so it is a re-measurement, not a fresh held-out set",
+    "Base completions regenerated for this attempt, matching attempt 1 exactly (34/90)"
+  ]
+}

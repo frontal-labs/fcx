@@ -1,0 +1,202 @@
+{
+  "model": "ggml/auto (qwen2.5-1.5b-instruct-q4_k_m)",
+  "generatedAt": "2026-11-02T01:43:53.099Z",
+  "candidateBudget": 6,
+  "synthetic": true,
+  "recipes": {
+    "commit-message": {
+      "tasks": 8,
+      "passed": 7,
+      "passRate": 0.875,
+      "medianMs": 1325,
+      "medianCandidates": 1,
+      "firstCandidatePassed": 7,
+      "failureReasons": {
+        "recipe:abstained": 1
+      },
+      "ruleRates": {
+        "type": 0.875,
+        "header": 0.875,
+        "subject-length": 0.875,
+        "no-period": 0.875,
+        "single-line-subject": 0.875,
+        "blank-line-before-body": 0.875
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "commit-message-01",
+      "recipe": "commit-message",
+      "shape": "add-function",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 2748,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-02",
+      "recipe": "commit-message",
+      "shape": "fix-boundary",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 616,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-03",
+      "recipe": "commit-message",
+      "shape": "docs-readme",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "The subject ends with a period. Remove it.",
+      "totalMs": 3877,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "commit-message-04",
+      "recipe": "commit-message",
+      "shape": "add-test",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1325,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-05",
+      "recipe": "commit-message",
+      "shape": "rename-variable",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1059,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-06",
+      "recipe": "commit-message",
+      "shape": "delete-dead-file",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 673,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-07",
+      "recipe": "commit-message",
+      "shape": "bump-config",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1315,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-08",
+      "recipe": "commit-message",
+      "shape": "refactor-helper",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1341,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    }
+  ]
+}

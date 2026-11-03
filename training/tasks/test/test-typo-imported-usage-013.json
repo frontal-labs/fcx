@@ -1,0 +1,14 @@
+{
+  "id": "test-typo-imported-usage-013",
+  "split": "test",
+  "family": "typo-imported-usage",
+  "category": "misspelled-name",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/util.ts": "export function zephyr21(s: string): string {\n  return s.trim();\n}\n",
+    "src/a.ts": "import { zephyr21 } from \"./util\";\nexport const kettle20 = zephry21(\" x \");\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "train-arg-number-as-string-001",
+  "split": "train",
+  "family": "arg-number-as-string",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "function pulley75(n: number): number {\n  return n * 2;\n}\nexport const cistern94 = pulley75(\"407\");\n"
+  },
+  "target": "src/a.ts:4",
+  "check": "no-type-errors-in-target-file"
+}

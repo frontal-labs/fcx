@@ -1,0 +1,292 @@
+{
+  "seed": 7,
+  "splits": {
+    "test": {
+      "tasks": 150,
+      "families": [
+        "ann-array-of-numbers",
+        "ann-union-mismatch",
+        "typo-imported-usage",
+        "typo-type-name",
+        "imp-nested-dir",
+        "imp-default-export",
+        "ret-boolean",
+        "ret-array",
+        "arg-boolean-from-string",
+        "arg-array-from-string"
+      ]
+    },
+    "train": {
+      "tasks": 1620,
+      "families": [
+        "ann-literal-number",
+        "ann-object-field",
+        "ann-string-from-number",
+        "typo-local-const",
+        "typo-function-call",
+        "typo-property",
+        "imp-function-helper",
+        "imp-type-interface",
+        "imp-const-config",
+        "ret-string-from-number",
+        "ret-number-from-string",
+        "ret-object-shape",
+        "arg-number-as-string",
+        "arg-string-as-number",
+        "arg-second-param",
+        "ann-tuple-length",
+        "ann-record-value",
+        "ann-nested-array",
+        "ann-optional-union",
+        "typo-enum-member",
+        "typo-array-method",
+        "imp-type-alias",
+        "imp-enum-member",
+        "ret-void-value",
+        "ret-union-literal",
+        "ret-optional-undefined",
+        "arg-callback-return"
+      ]
+    },
+    "validation": {
+      "tasks": 96,
+      "families": [
+        "ann-boolean",
+        "typo-parameter",
+        "imp-class",
+        "ret-promise",
+        "arg-object-field",
+        "typo-object-method",
+        "imp-generic-type",
+        "arg-object-second-field"
+      ]
+    }
+  },
+  "families": {
+    "ann-array-of-numbers": {
+      "split": "test",
+      "category": "annotation-mismatch",
+      "tasks": 15
+    },
+    "ann-union-mismatch": {
+      "split": "test",
+      "category": "annotation-mismatch",
+      "tasks": 15
+    },
+    "typo-imported-usage": {
+      "split": "test",
+      "category": "misspelled-name",
+      "tasks": 15
+    },
+    "typo-type-name": {
+      "split": "test",
+      "category": "misspelled-name",
+      "tasks": 15
+    },
+    "imp-nested-dir": {
+      "split": "test",
+      "category": "missing-import",
+      "tasks": 15
+    },
+    "imp-default-export": {
+      "split": "test",
+      "category": "missing-import",
+      "tasks": 15
+    },
+    "ret-boolean": {
+      "split": "test",
+      "category": "return-type",
+      "tasks": 15
+    },
+    "ret-array": {
+      "split": "test",
+      "category": "return-type",
+      "tasks": 15
+    },
+    "arg-boolean-from-string": {
+      "split": "test",
+      "category": "argument-type",
+      "tasks": 15
+    },
+    "arg-array-from-string": {
+      "split": "test",
+      "category": "argument-type",
+      "tasks": 15
+    },
+    "ann-literal-number": {
+      "split": "train",
+      "category": "annotation-mismatch",
+      "tasks": 60
+    },
+    "ann-object-field": {
+      "split": "train",
+      "category": "annotation-mismatch",
+      "tasks": 60
+    },
+    "ann-string-from-number": {
+      "split": "train",
+      "category": "annotation-mismatch",
+      "tasks": 60
+    },
+    "typo-local-const": {
+      "split": "train",
+      "category": "misspelled-name",
+      "tasks": 60
+    },
+    "typo-function-call": {
+      "split": "train",
+      "category": "misspelled-name",
+      "tasks": 60
+    },
+    "typo-property": {
+      "split": "train",
+      "category": "misspelled-name",
+      "tasks": 60
+    },
+    "imp-function-helper": {
+      "split": "train",
+      "category": "missing-import",
+      "tasks": 60
+    },
+    "imp-type-interface": {
+      "split": "train",
+      "category": "missing-import",
+      "tasks": 60
+    },
+    "imp-const-config": {
+      "split": "train",
+      "category": "missing-import",
+      "tasks": 60
+    },
+    "ret-string-from-number": {
+      "split": "train",
+      "category": "return-type",
+      "tasks": 60
+    },
+    "ret-number-from-string": {
+      "split": "train",
+      "category": "return-type",
+      "tasks": 60
+    },
+    "ret-object-shape": {
+      "split": "train",
+      "category": "return-type",
+      "tasks": 60
+    },
+    "arg-number-as-string": {
+      "split": "train",
+      "category": "argument-type",
+      "tasks": 60
+    },
+    "arg-string-as-number": {
+      "split": "train",
+      "category": "argument-type",
+      "tasks": 60
+    },
+    "arg-second-param": {
+      "split": "train",
+      "category": "argument-type",
+      "tasks": 60
+    },
+    "ann-tuple-length": {
+      "split": "train",
+      "category": "annotation-mismatch",
+      "tasks": 60
+    },
+    "ann-record-value": {
+      "split": "train",
+      "category": "annotation-mismatch",
+      "tasks": 60
+    },
+    "ann-nested-array": {
+      "split": "train",
+      "category": "annotation-mismatch",
+      "tasks": 60
+    },
+    "ann-optional-union": {
+      "split": "train",
+      "category": "annotation-mismatch",
+      "tasks": 60
+    },
+    "typo-enum-member": {
+      "split": "train",
+      "category": "misspelled-name",
+      "tasks": 60
+    },
+    "typo-array-method": {
+      "split": "train",
+      "category": "misspelled-name",
+      "tasks": 60
+    },
+    "imp-type-alias": {
+      "split": "train",
+      "category": "missing-import",
+      "tasks": 60
+    },
+    "imp-enum-member": {
+      "split": "train",
+      "category": "missing-import",
+      "tasks": 60
+    },
+    "ret-void-value": {
+      "split": "train",
+      "category": "return-type",
+      "tasks": 60
+    },
+    "ret-union-literal": {
+      "split": "train",
+      "category": "return-type",
+      "tasks": 60
+    },
+    "ret-optional-undefined": {
+      "split": "train",
+      "category": "return-type",
+      "tasks": 60
+    },
+    "arg-callback-return": {
+      "split": "train",
+      "category": "argument-type",
+      "tasks": 60
+    },
+    "ann-boolean": {
+      "split": "validation",
+      "category": "annotation-mismatch",
+      "tasks": 12
+    },
+    "typo-parameter": {
+      "split": "validation",
+      "category": "misspelled-name",
+      "tasks": 12
+    },
+    "imp-class": {
+      "split": "validation",
+      "category": "missing-import",
+      "tasks": 12
+    },
+    "ret-promise": {
+      "split": "validation",
+      "category": "return-type",
+      "tasks": 12
+    },
+    "arg-object-field": {
+      "split": "validation",
+      "category": "argument-type",
+      "tasks": 12
+    },
+    "typo-object-method": {
+      "split": "validation",
+      "category": "misspelled-name",
+      "tasks": 12
+    },
+    "imp-generic-type": {
+      "split": "validation",
+      "category": "missing-import",
+      "tasks": 12
+    },
+    "arg-object-second-field": {
+      "split": "validation",
+      "category": "argument-type",
+      "tasks": 12
+    }
+  }
+}

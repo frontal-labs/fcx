@@ -1,0 +1,13 @@
+{
+  "id": "test-typo-type-name-012",
+  "split": "test",
+  "family": "typo-type-name",
+  "category": "misspelled-name",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Tundra91 { hammock: number; }\nconst yarrow58: Tudnra91 = { hammock: 893 };\nexport const out = yarrow58;\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}

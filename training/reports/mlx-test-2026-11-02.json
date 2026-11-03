@@ -1,0 +1,330 @@
+{
+  "title": "Held-out TEST split: base vs fix-diagnostic LoRA, MLX inference",
+  "date": "2026-11-02",
+  "generatedAt": "2026-11-02T02:09:05.218897+00:00",
+  "runtime": {
+    "inference": "MLX (mlx_lm 0.32.2), NOT the product runtime (ggml-node). The fine-tuned GGUF was not produced: llama.cpp was not approved, so ggml-node cannot load the adapter. MLX output is unconstrained (no grammar), while the product runtime constrains output to the JSON schema.",
+    "base": "Qwen/Qwen2.5-1.5B-Instruct, native weights (bfloat16 as stored; not cast to fp16)",
+    "finetuned": "same base + LoRA adapter training/runs/fix-diagnostic/adapters (rank 8, scale 20, 300 iters)",
+    "decoding": "temperature 0.2, seed 0, max_tokens 768, one candidate (maxCandidates 1)",
+    "chatTemplate": "one user message = the engine prompt, add_generation_prompt=True (same as mlx_lm lora training)"
+  },
+  "protocol": {
+    "testTasks": 150,
+    "kinds": {
+      "model": 90,
+      "compiler": 60
+    },
+    "compilerResolvedExcluded": 60,
+    "compilerNote": "Tasks fixed by the compiler quick fix never call the model. They are excluded from the model comparison and counted for both models equally.",
+    "modelComparisonSampleSize": 90,
+    "parseModes": {
+      "strict": "headline per protocol: the completion must be bare JSON",
+      "fence-stripped": "sensitivity: one surrounding ```json fence is removed before JSON.parse. Base wraps every output in a fence, so strict scoring measures the wrapper, not the edit."
+    }
+  },
+  "results": {
+    "strict": {
+      "models": {
+        "base": {
+          "modelComparison": {
+            "passed": 0,
+            "total": 90,
+            "rate": 0.0,
+            "wilson95": [
+              0.0,
+              0.0409
+            ]
+          },
+          "byCategory": {
+            "annotation-mismatch": {
+              "passed": 0,
+              "total": 30,
+              "rate": 0.0,
+              "wilson95": [
+                0.0,
+                0.1135
+              ]
+            },
+            "argument-type": {
+              "passed": 0,
+              "total": 30,
+              "rate": 0.0,
+              "wilson95": [
+                0.0,
+                0.1135
+              ]
+            },
+            "return-type": {
+              "passed": 0,
+              "total": 30,
+              "rate": 0.0,
+              "wilson95": [
+                0.0,
+                0.1135
+              ]
+            }
+          },
+          "compilerResolved": {
+            "passed": 60,
+            "total": 60,
+            "rate": 1.0,
+            "wilson95": [
+              0.9398,
+              1.0
+            ]
+          },
+          "overallIncludingCompiler": {
+            "passed": 60,
+            "total": 150,
+            "rate": 0.4,
+            "wilson95": [
+              0.325,
+              0.48
+            ]
+          },
+          "diagnostics": {
+            "missingCompletion": 0,
+            "promptMismatch": 0,
+            "parseError": 90,
+            "errors": 0
+          },
+          "acceptedFromModel": 0,
+          "scoresFile": "training/eval-mlx/base-scores-strict.json"
+        },
+        "finetuned": {
+          "modelComparison": {
+            "passed": 15,
+            "total": 90,
+            "rate": 0.1667,
+            "wilson95": [
+              0.1037,
+              0.2569
+            ]
+          },
+          "byCategory": {
+            "annotation-mismatch": {
+              "passed": 15,
+              "total": 30,
+              "rate": 0.5,
+              "wilson95": [
+                0.3315,
+                0.6685
+              ]
+            },
+            "argument-type": {
+              "passed": 0,
+              "total": 30,
+              "rate": 0.0,
+              "wilson95": [
+                0.0,
+                0.1135
+              ]
+            },
+            "return-type": {
+              "passed": 0,
+              "total": 30,
+              "rate": 0.0,
+              "wilson95": [
+                0.0,
+                0.1135
+              ]
+            }
+          },
+          "compilerResolved": {
+            "passed": 60,
+            "total": 60,
+            "rate": 1.0,
+            "wilson95": [
+              0.9398,
+              1.0
+            ]
+          },
+          "overallIncludingCompiler": {
+            "passed": 75,
+            "total": 150,
+            "rate": 0.5,
+            "wilson95": [
+              0.421,
+              0.579
+            ]
+          },
+          "diagnostics": {
+            "missingCompletion": 0,
+            "promptMismatch": 0,
+            "parseError": 0,
+            "errors": 0
+          },
+          "acceptedFromModel": 15,
+          "scoresFile": "training/eval-mlx/finetuned-scores-strict.json"
+        }
+      },
+      "pairedModelComparison": {
+        "n": 90,
+        "onlyBasePassed": 0,
+        "onlyFinetunedPassed": 15,
+        "exactSignTestP": 6.1e-05,
+        "differenceFinetunedMinusBasePoints": 16.67,
+        "baseWilsonWidthPoints": 4.09,
+        "finetunedWilsonWidthPoints": 15.32,
+        "differenceExceedsEitherIntervalWidth": true
+      }
+    },
+    "fence-stripped": {
+      "models": {
+        "base": {
+          "modelComparison": {
+            "passed": 34,
+            "total": 90,
+            "rate": 0.3778,
+            "wilson95": [
+              0.2846,
+              0.481
+            ]
+          },
+          "byCategory": {
+            "annotation-mismatch": {
+              "passed": 15,
+              "total": 30,
+              "rate": 0.5,
+              "wilson95": [
+                0.3315,
+                0.6685
+              ]
+            },
+            "argument-type": {
+              "passed": 1,
+              "total": 30,
+              "rate": 0.0333,
+              "wilson95": [
+                0.0059,
+                0.1667
+              ]
+            },
+            "return-type": {
+              "passed": 18,
+              "total": 30,
+              "rate": 0.6,
+              "wilson95": [
+                0.4232,
+                0.7541
+              ]
+            }
+          },
+          "compilerResolved": {
+            "passed": 60,
+            "total": 60,
+            "rate": 1.0,
+            "wilson95": [
+              0.9398,
+              1.0
+            ]
+          },
+          "overallIncludingCompiler": {
+            "passed": 94,
+            "total": 150,
+            "rate": 0.6267,
+            "wilson95": [
+              0.547,
+              0.7
+            ]
+          },
+          "diagnostics": {
+            "missingCompletion": 0,
+            "promptMismatch": 0,
+            "parseError": 15,
+            "errors": 0
+          },
+          "acceptedFromModel": 34,
+          "scoresFile": "training/eval-mlx/base-scores-fence-stripped.json"
+        },
+        "finetuned": {
+          "modelComparison": {
+            "passed": 15,
+            "total": 90,
+            "rate": 0.1667,
+            "wilson95": [
+              0.1037,
+              0.2569
+            ]
+          },
+          "byCategory": {
+            "annotation-mismatch": {
+              "passed": 15,
+              "total": 30,
+              "rate": 0.5,
+              "wilson95": [
+                0.3315,
+                0.6685
+              ]
+            },
+            "argument-type": {
+              "passed": 0,
+              "total": 30,
+              "rate": 0.0,
+              "wilson95": [
+                0.0,
+                0.1135
+              ]
+            },
+            "return-type": {
+              "passed": 0,
+              "total": 30,
+              "rate": 0.0,
+              "wilson95": [
+                0.0,
+                0.1135
+              ]
+            }
+          },
+          "compilerResolved": {
+            "passed": 60,
+            "total": 60,
+            "rate": 1.0,
+            "wilson95": [
+              0.9398,
+              1.0
+            ]
+          },
+          "overallIncludingCompiler": {
+            "passed": 75,
+            "total": 150,
+            "rate": 0.5,
+            "wilson95": [
+              0.421,
+              0.579
+            ]
+          },
+          "diagnostics": {
+            "missingCompletion": 0,
+            "promptMismatch": 0,
+            "parseError": 0,
+            "errors": 0
+          },
+          "acceptedFromModel": 15,
+          "scoresFile": "training/eval-mlx/finetuned-scores-fence-stripped.json"
+        }
+      },
+      "pairedModelComparison": {
+        "n": 90,
+        "onlyBasePassed": 19,
+        "onlyFinetunedPassed": 0,
+        "exactSignTestP": 4e-06,
+        "differenceFinetunedMinusBasePoints": -21.11,
+        "baseWilsonWidthPoints": 19.64,
+        "finetunedWilsonWidthPoints": 15.32,
+        "differenceExceedsEitherIntervalWidth": true
+      }
+    }
+  },
+  "commands": [
+    "bun training/src/capture-test-prompts.ts --out training/eval-mlx/test-prompts.jsonl",
+    "HF_HUB_OFFLINE=1 training/.venv/bin/python -I training/src/generate_mlx.py --label base",
+    "HF_HUB_OFFLINE=1 training/.venv/bin/python -I training/src/generate_mlx.py --label finetuned --adapter training/runs/fix-diagnostic/adapters",
+    "bun training/src/score-mlx.ts --completions training/eval-mlx/base-completions.jsonl --label base --parse strict",
+    "bun training/src/score-mlx.ts --completions training/eval-mlx/base-completions.jsonl --label base --parse fence-stripped",
+    "bun training/src/score-mlx.ts --completions training/eval-mlx/finetuned-completions.jsonl --label finetuned --parse strict",
+    "bun training/src/score-mlx.ts --completions training/eval-mlx/finetuned-completions.jsonl --label finetuned --parse fence-stripped",
+    "training/.venv/bin/python -I training/src/mlx_report.py --date 2026-11-02 --commands <commands list file>"
+  ]
+}

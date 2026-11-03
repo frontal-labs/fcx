@@ -1,0 +1,14 @@
+{
+  "id": "validation-imp-generic-type-010",
+  "split": "validation",
+  "family": "imp-generic-type",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/box.ts": "export interface Pillar28<T> { spindle: T; }\n",
+    "src/a.ts": "export const raven61: Pillar28<number> = { spindle: 768 };\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

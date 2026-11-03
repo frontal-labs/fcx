@@ -1,0 +1,13 @@
+{
+  "id": "validation-arg-object-second-field-004",
+  "split": "validation",
+  "family": "arg-object-second-field",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Canvas39 { id: number; name: string; }\nfunction mosaic23(u: Canvas39): string {\n  return u.name;\n}\nexport const timber81 = mosaic23({ id: 54, name: 54 });\n"
+  },
+  "target": "src/a.ts:5",
+  "check": "no-type-errors-in-target-file"
+}

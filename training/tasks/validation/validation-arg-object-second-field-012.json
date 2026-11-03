@@ -1,0 +1,13 @@
+{
+  "id": "validation-arg-object-second-field-012",
+  "split": "validation",
+  "family": "arg-object-second-field",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Falcon33 { id: number; name: string; }\nfunction basket97(u: Falcon33): string {\n  return u.name;\n}\nexport const lantern49 = basket97({ id: 835, name: 835 });\n"
+  },
+  "target": "src/a.ts:5",
+  "check": "no-type-errors-in-target-file"
+}

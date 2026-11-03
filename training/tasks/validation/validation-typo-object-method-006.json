@@ -1,0 +1,13 @@
+{
+  "id": "validation-typo-object-method-006",
+  "split": "validation",
+  "family": "typo-object-method",
+  "category": "misspelled-name",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "const spindle20 = { pillar(): number { return 562; } };\nexport const vortex99 = spindle20.plilar();\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}

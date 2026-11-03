@@ -1,0 +1,14 @@
+{
+  "id": "test-imp-nested-dir-012",
+  "split": "test",
+  "family": "imp-nested-dir",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/lib/math.ts": "export function glacier50(x: number): number { return x; }\n",
+    "src/app/main.ts": "export const lattice30 = glacier50(806);\n"
+  },
+  "target": "src/app/main.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

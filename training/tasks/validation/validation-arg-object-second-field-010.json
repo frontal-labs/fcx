@@ -1,0 +1,13 @@
+{
+  "id": "validation-arg-object-second-field-010",
+  "split": "validation",
+  "family": "arg-object-second-field",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Spindle38 { id: number; name: string; }\nfunction canvas67(u: Spindle38): string {\n  return u.name;\n}\nexport const orbit65 = canvas67({ id: 452, name: 452 });\n"
+  },
+  "target": "src/a.ts:5",
+  "check": "no-type-errors-in-target-file"
+}

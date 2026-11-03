@@ -1,0 +1,13 @@
+{
+  "id": "validation-arg-object-field-007",
+  "split": "validation",
+  "family": "arg-object-field",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Quartz47 { id: number; }\nfunction canvas2(u: Quartz47): number {\n  return u.id;\n}\nexport const lantern39 = canvas2({ id: \"gravel87\" });\n"
+  },
+  "target": "src/a.ts:5",
+  "check": "no-type-errors-in-target-file"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "validation-arg-object-field-005",
+  "split": "validation",
+  "family": "arg-object-field",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Orbit98 { id: number; }\nfunction gravel48(u: Orbit98): number {\n  return u.id;\n}\nexport const orbit46 = gravel48({ id: \"pillar66\" });\n"
+  },
+  "target": "src/a.ts:5",
+  "check": "no-type-errors-in-target-file"
+}

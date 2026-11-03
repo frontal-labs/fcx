@@ -1,0 +1,13 @@
+{
+  "id": "test-typo-type-name-002",
+  "split": "test",
+  "family": "typo-type-name",
+  "category": "misspelled-name",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Hammock11 { beacon: number; }\nconst yarrow12: Hammokc11 = { beacon: 710 };\nexport const out = yarrow12;\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}

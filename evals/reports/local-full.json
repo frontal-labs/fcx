@@ -1,0 +1,148 @@
+{
+  "model": "ggml/auto (qwen2.5-1.5b-instruct-q4_k_m)",
+  "generatedAt": "2026-11-01T22:14:06.519Z",
+  "total": 12,
+  "passed": 10,
+  "passRate": 0.8333333333333334,
+  "byCategory": {
+    "annotation-mismatch": {
+      "passed": 1,
+      "total": 3
+    },
+    "missing-import": {
+      "passed": 3,
+      "total": 3
+    },
+    "return-type": {
+      "passed": 3,
+      "total": 3
+    },
+    "misspelled-name": {
+      "passed": 3,
+      "total": 3
+    }
+  },
+  "medianMs": 836,
+  "results": [
+    {
+      "id": "annotation-1",
+      "category": "annotation-mismatch",
+      "status": "applied",
+      "pass": true,
+      "candidateSource": "model",
+      "candidates": 1,
+      "totalMs": 5441,
+      "remainingErrors": 0
+    },
+    {
+      "id": "annotation-2",
+      "category": "annotation-mismatch",
+      "status": "abstained",
+      "pass": false,
+      "candidateSource": "model",
+      "candidates": 6,
+      "totalMs": 6459,
+      "remainingErrors": 1
+    },
+    {
+      "id": "annotation-3",
+      "category": "annotation-mismatch",
+      "status": "abstained",
+      "pass": false,
+      "candidateSource": "model",
+      "candidates": 6,
+      "totalMs": 5660,
+      "remainingErrors": 1
+    },
+    {
+      "id": "missing-import-1",
+      "category": "missing-import",
+      "status": "applied",
+      "pass": true,
+      "candidateSource": "compiler",
+      "candidates": 1,
+      "totalMs": 387,
+      "remainingErrors": 0
+    },
+    {
+      "id": "missing-import-2",
+      "category": "missing-import",
+      "status": "applied",
+      "pass": true,
+      "candidateSource": "compiler",
+      "candidates": 1,
+      "totalMs": 325,
+      "remainingErrors": 0
+    },
+    {
+      "id": "missing-import-3",
+      "category": "missing-import",
+      "status": "applied",
+      "pass": true,
+      "candidateSource": "compiler",
+      "candidates": 1,
+      "totalMs": 289,
+      "remainingErrors": 0
+    },
+    {
+      "id": "return-type-1",
+      "category": "return-type",
+      "status": "applied",
+      "pass": true,
+      "candidateSource": "model",
+      "candidates": 1,
+      "totalMs": 914,
+      "remainingErrors": 0
+    },
+    {
+      "id": "return-type-2",
+      "category": "return-type",
+      "status": "applied",
+      "pass": true,
+      "candidateSource": "model",
+      "candidates": 1,
+      "totalMs": 836,
+      "remainingErrors": 0
+    },
+    {
+      "id": "return-type-3",
+      "category": "return-type",
+      "status": "applied",
+      "pass": true,
+      "candidateSource": "model",
+      "candidates": 1,
+      "totalMs": 1140,
+      "remainingErrors": 0
+    },
+    {
+      "id": "typo-1",
+      "category": "misspelled-name",
+      "status": "applied",
+      "pass": true,
+      "candidateSource": "compiler",
+      "candidates": 1,
+      "totalMs": 296,
+      "remainingErrors": 0
+    },
+    {
+      "id": "typo-2",
+      "category": "misspelled-name",
+      "status": "applied",
+      "pass": true,
+      "candidateSource": "compiler",
+      "candidates": 1,
+      "totalMs": 266,
+      "remainingErrors": 0
+    },
+    {
+      "id": "typo-3",
+      "category": "misspelled-name",
+      "status": "applied",
+      "pass": true,
+      "candidateSource": "compiler",
+      "candidates": 1,
+      "totalMs": 276,
+      "remainingErrors": 0
+    }
+  ]
+}

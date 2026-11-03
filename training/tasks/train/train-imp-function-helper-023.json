@@ -1,0 +1,14 @@
+{
+  "id": "train-imp-function-helper-023",
+  "split": "train",
+  "family": "imp-function-helper",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/helper.ts": "export function ledger62(): number {\n  return 322;\n}\n",
+    "src/a.ts": "export const tally92: number = ledger62();\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

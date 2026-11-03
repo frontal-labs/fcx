@@ -1,0 +1,46 @@
+{
+  "model": "ggml/auto (qwen2.5-1.5b-instruct-q4_k_m)",
+  "generatedAt": "2026-11-01T22:13:35.356Z",
+  "total": 3,
+  "passed": 3,
+  "passRate": 1,
+  "byCategory": {
+    "missing-import": {
+      "passed": 3,
+      "total": 3
+    }
+  },
+  "medianMs": 363,
+  "results": [
+    {
+      "id": "missing-import-1",
+      "category": "missing-import",
+      "status": "applied",
+      "pass": true,
+      "candidateSource": "compiler",
+      "candidates": 1,
+      "totalMs": 1011,
+      "remainingErrors": 0
+    },
+    {
+      "id": "missing-import-2",
+      "category": "missing-import",
+      "status": "applied",
+      "pass": true,
+      "candidateSource": "compiler",
+      "candidates": 1,
+      "totalMs": 363,
+      "remainingErrors": 0
+    },
+    {
+      "id": "missing-import-3",
+      "category": "missing-import",
+      "status": "applied",
+      "pass": true,
+      "candidateSource": "compiler",
+      "candidates": 1,
+      "totalMs": 316,
+      "remainingErrors": 0
+    }
+  ]
+}

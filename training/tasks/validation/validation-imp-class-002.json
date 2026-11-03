@@ -1,0 +1,14 @@
+{
+  "id": "validation-imp-class-002",
+  "split": "validation",
+  "family": "imp-class",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/cache.ts": "export class Basket70 {\n  size = 225;\n}\n",
+    "src/a.ts": "export const basket83 = new Basket70().size;\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

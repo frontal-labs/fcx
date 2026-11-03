@@ -1,0 +1,14 @@
+{
+  "id": "test-imp-default-export-010",
+  "split": "test",
+  "family": "imp-default-export",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/greet.ts": "export default function kettle81(): string { return \"yarrow69\"; }\n",
+    "src/a.ts": "export const pepper20 = kettle81();\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "validation-arg-object-field-002",
+  "split": "validation",
+  "family": "arg-object-field",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Mosaic33 { id: number; }\nfunction orbit87(u: Mosaic33): number {\n  return u.id;\n}\nexport const quartz98 = orbit87({ id: \"lantern60\" });\n"
+  },
+  "target": "src/a.ts:5",
+  "check": "no-type-errors-in-target-file"
+}

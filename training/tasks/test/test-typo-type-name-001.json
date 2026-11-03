@@ -1,0 +1,13 @@
+{
+  "id": "test-typo-type-name-001",
+  "split": "test",
+  "family": "typo-type-name",
+  "category": "misspelled-name",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Yarrow82 { walnut: number; }\nconst kettle18: Yarorw82 = { walnut: 834 };\nexport const out = kettle18;\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}

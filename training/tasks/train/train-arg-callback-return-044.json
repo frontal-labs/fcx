@@ -1,0 +1,13 @@
+{
+  "id": "train-arg-callback-return-044",
+  "split": "train",
+  "family": "arg-callback-return",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "function cistern78(cb: (x: number) => number): number {\n  return cb(255);\n}\nexport const meadow95 = cistern78((x: number) => \"bobbin73\");\n"
+  },
+  "target": "src/a.ts:4",
+  "check": "no-type-errors-in-target-file"
+}

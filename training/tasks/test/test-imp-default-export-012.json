@@ -1,0 +1,14 @@
+{
+  "id": "test-imp-default-export-012",
+  "split": "test",
+  "family": "imp-default-export",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/greet.ts": "export default function marble17(): string { return \"hammock19\"; }\n",
+    "src/a.ts": "export const tundra49 = marble17();\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

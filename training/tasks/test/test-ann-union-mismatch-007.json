@@ -1,0 +1,13 @@
+{
+  "id": "test-ann-union-mismatch-007",
+  "split": "test",
+  "family": "ann-union-mismatch",
+  "category": "annotation-mismatch",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "export const quiver32: \"on\" | \"off\" = \"island1\";\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

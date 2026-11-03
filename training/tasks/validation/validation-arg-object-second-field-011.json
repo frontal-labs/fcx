@@ -1,0 +1,13 @@
+{
+  "id": "validation-arg-object-second-field-011",
+  "split": "validation",
+  "family": "arg-object-second-field",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Falcon6 { id: number; name: string; }\nfunction spindle70(u: Falcon6): string {\n  return u.name;\n}\nexport const lantern27 = spindle70({ id: 643, name: 643 });\n"
+  },
+  "target": "src/a.ts:5",
+  "check": "no-type-errors-in-target-file"
+}

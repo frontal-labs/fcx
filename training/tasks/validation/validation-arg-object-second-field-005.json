@@ -1,0 +1,13 @@
+{
+  "id": "validation-arg-object-second-field-005",
+  "split": "validation",
+  "family": "arg-object-second-field",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "interface Pillar67 { id: number; name: string; }\nfunction orbit33(u: Pillar67): string {\n  return u.name;\n}\nexport const spindle58 = orbit33({ id: 508, name: 508 });\n"
+  },
+  "target": "src/a.ts:5",
+  "check": "no-type-errors-in-target-file"
+}

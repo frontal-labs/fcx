@@ -1,0 +1,106 @@
+{
+  "generatedAt": "2026-11-02T16:25:21.235Z",
+  "splits": {
+    "train": {
+      "file": "train.jsonl",
+      "tasks": 1620,
+      "examples": 1078,
+      "duplicatesRemoved": 0,
+      "perCategory": {
+        "annotation-mismatch": {
+          "tasks": 420,
+          "passed": 146,
+          "kept": 146,
+          "compiler": 0,
+          "model": 146
+        },
+        "argument-type": {
+          "tasks": 240,
+          "passed": 72,
+          "kept": 72,
+          "compiler": 0,
+          "model": 72
+        },
+        "missing-import": {
+          "tasks": 300,
+          "passed": 300,
+          "kept": 300,
+          "compiler": 300,
+          "model": 0
+        },
+        "return-type": {
+          "tasks": 360,
+          "passed": 262,
+          "kept": 262,
+          "compiler": 0,
+          "model": 262
+        },
+        "misspelled-name": {
+          "tasks": 300,
+          "passed": 298,
+          "kept": 298,
+          "compiler": 298,
+          "model": 0
+        }
+      },
+      "failures": {
+        "error: Failed to load generation model qwen2.5-1.5b: ENOENT: no such file or directory, rename '/Users/gabrielfonseca/Library/Caches/ggml-node/qwen2.5-1.5b-instruct-q4_k_m.gguf.partial' -> '/Users/gabrielfonseca/Library/Caches/ggml-node/qwen2.5-1.5b-instruct-q4_k_m.gguf'": 1,
+        "abstained": 541
+      },
+      "capture": {
+        "checked": 313,
+        "matchedRuntimePrompt": 312
+      }
+    },
+    "validation": {
+      "file": "valid.jsonl",
+      "tasks": 96,
+      "examples": 62,
+      "duplicatesRemoved": 0,
+      "perCategory": {
+        "annotation-mismatch": {
+          "tasks": 12,
+          "passed": 11,
+          "kept": 11,
+          "compiler": 0,
+          "model": 11
+        },
+        "argument-type": {
+          "tasks": 24,
+          "passed": 0,
+          "kept": 0,
+          "compiler": 0,
+          "model": 0
+        },
+        "missing-import": {
+          "tasks": 24,
+          "passed": 24,
+          "kept": 24,
+          "compiler": 24,
+          "model": 0
+        },
+        "return-type": {
+          "tasks": 12,
+          "passed": 3,
+          "kept": 3,
+          "compiler": 0,
+          "model": 3
+        },
+        "misspelled-name": {
+          "tasks": 24,
+          "passed": 24,
+          "kept": 24,
+          "compiler": 24,
+          "model": 0
+        }
+      },
+      "failures": {
+        "abstained": 34
+      },
+      "capture": {
+        "checked": 4,
+        "matchedRuntimePrompt": 4
+      }
+    }
+  }
+}

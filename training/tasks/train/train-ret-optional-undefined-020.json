@@ -1,0 +1,13 @@
+{
+  "id": "train-ret-optional-undefined-020",
+  "split": "train",
+  "family": "ret-optional-undefined",
+  "category": "return-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "export function ledger68(x: number): number {\n  if (x > 776) return x;\n  return undefined;\n}\n"
+  },
+  "target": "src/a.ts:3",
+  "check": "no-type-errors-in-target-file"
+}

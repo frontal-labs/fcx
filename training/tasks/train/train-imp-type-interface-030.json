@@ -1,0 +1,14 @@
+{
+  "id": "train-imp-type-interface-030",
+  "split": "train",
+  "family": "imp-type-interface",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/types.ts": "export interface Widget2 { invoice: number; }\n",
+    "src/a.ts": "export function pulley72(p: Widget2): number {\n  return p.invoice;\n}\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

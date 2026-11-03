@@ -1,0 +1,13 @@
+{
+  "id": "train-ann-string-from-number-051",
+  "split": "train",
+  "family": "ann-string-from-number",
+  "category": "annotation-mismatch",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "const harbor2: string = 313 * 2;\nexport const gadget55 = harbor2.length;\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

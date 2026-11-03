@@ -1,0 +1,14 @@
+{
+  "id": "train-imp-type-alias-031",
+  "split": "train",
+  "family": "imp-type-alias",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/types.ts": "export type Bobbin45 = { sprocket: number };\n",
+    "src/a.ts": "export function harbor88(p: Bobbin45): number {\n  return p.sprocket;\n}\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

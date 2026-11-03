@@ -1,0 +1,13 @@
+{
+  "id": "validation-typo-object-method-008",
+  "split": "validation",
+  "family": "typo-object-method",
+  "category": "misspelled-name",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "const hinge31 = { mosaic(): number { return 990; } };\nexport const raven26 = hinge31.mosiac();\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}

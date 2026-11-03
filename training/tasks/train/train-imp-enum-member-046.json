@@ -1,0 +1,14 @@
+{
+  "id": "train-imp-enum-member-046",
+  "split": "train",
+  "family": "imp-enum-member",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/codes.ts": "export enum Meadow38 { Fennel = 3 }\n",
+    "src/a.ts": "export const cobalt93 = Meadow38.Fennel;\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

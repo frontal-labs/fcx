@@ -1,0 +1,14 @@
+{
+  "id": "train-imp-function-helper-042",
+  "split": "train",
+  "family": "imp-function-helper",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/helper.ts": "export function invoice68(): number {\n  return 869;\n}\n",
+    "src/a.ts": "export const gadget49: number = invoice68();\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

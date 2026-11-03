@@ -1,0 +1,13 @@
+{
+  "id": "test-arg-boolean-from-string-015",
+  "split": "test",
+  "family": "arg-boolean-from-string",
+  "category": "argument-type",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "function nectar56(on: boolean): string {\n  return on ? \"y\" : \"n\";\n}\nexport const lattice43 = nectar56(\"lattice83\");\n"
+  },
+  "target": "src/a.ts:4",
+  "check": "no-type-errors-in-target-file"
+}

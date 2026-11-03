@@ -1,0 +1,105 @@
+{
+  "generatedAt": "2026-11-02T00:02:50.356Z",
+  "splits": {
+    "train": {
+      "file": "train.jsonl",
+      "tasks": 300,
+      "examples": 192,
+      "duplicatesRemoved": 0,
+      "perCategory": {
+        "annotation-mismatch": {
+          "tasks": 60,
+          "passed": 17,
+          "kept": 17,
+          "compiler": 0,
+          "model": 17
+        },
+        "argument-type": {
+          "tasks": 60,
+          "passed": 9,
+          "kept": 9,
+          "compiler": 0,
+          "model": 9
+        },
+        "missing-import": {
+          "tasks": 60,
+          "passed": 60,
+          "kept": 60,
+          "compiler": 60,
+          "model": 0
+        },
+        "return-type": {
+          "tasks": 60,
+          "passed": 46,
+          "kept": 46,
+          "compiler": 0,
+          "model": 46
+        },
+        "misspelled-name": {
+          "tasks": 60,
+          "passed": 60,
+          "kept": 60,
+          "compiler": 60,
+          "model": 0
+        }
+      },
+      "failures": {
+        "abstained": 108
+      },
+      "capture": {
+        "checked": 55,
+        "matchedRuntimePrompt": 55
+      }
+    },
+    "validation": {
+      "file": "valid.jsonl",
+      "tasks": 60,
+      "examples": 38,
+      "duplicatesRemoved": 0,
+      "perCategory": {
+        "annotation-mismatch": {
+          "tasks": 12,
+          "passed": 10,
+          "kept": 10,
+          "compiler": 0,
+          "model": 10
+        },
+        "argument-type": {
+          "tasks": 12,
+          "passed": 0,
+          "kept": 0,
+          "compiler": 0,
+          "model": 0
+        },
+        "missing-import": {
+          "tasks": 12,
+          "passed": 12,
+          "kept": 12,
+          "compiler": 12,
+          "model": 0
+        },
+        "return-type": {
+          "tasks": 12,
+          "passed": 4,
+          "kept": 4,
+          "compiler": 0,
+          "model": 4
+        },
+        "misspelled-name": {
+          "tasks": 12,
+          "passed": 12,
+          "kept": 12,
+          "compiler": 12,
+          "model": 0
+        }
+      },
+      "failures": {
+        "abstained": 22
+      },
+      "capture": {
+        "checked": 4,
+        "matchedRuntimePrompt": 4
+      }
+    }
+  }
+}

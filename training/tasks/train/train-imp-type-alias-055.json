@@ -1,0 +1,14 @@
+{
+  "id": "train-imp-type-alias-055",
+  "split": "train",
+  "family": "imp-type-alias",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/types.ts": "export type Cobalt22 = { bobbin: number };\n",
+    "src/a.ts": "export function sprocket44(p: Cobalt22): number {\n  return p.bobbin;\n}\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

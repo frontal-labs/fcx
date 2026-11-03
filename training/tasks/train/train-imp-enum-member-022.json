@@ -1,0 +1,14 @@
+{
+  "id": "train-imp-enum-member-022",
+  "split": "train",
+  "family": "imp-enum-member",
+  "category": "missing-import",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/codes.ts": "export enum Sprocket62 { Widget = 3 }\n",
+    "src/a.ts": "export const fennel25 = Sprocket62.Widget;\n"
+  },
+  "target": "src/a.ts:1",
+  "check": "no-type-errors-in-target-file"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "validation-typo-object-method-010",
+  "split": "validation",
+  "family": "typo-object-method",
+  "category": "misspelled-name",
+  "mutation": true,
+  "files": {
+    "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"bundler\",\n    \"noEmit\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}",
+    "src/a.ts": "const raven62 = { lantern(): number { return 954; } };\nexport const orbit50 = raven62.lnatern();\n"
+  },
+  "target": "src/a.ts:2",
+  "check": "no-type-errors-in-target-file"
+}
