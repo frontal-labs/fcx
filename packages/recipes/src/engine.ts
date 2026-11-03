@@ -1,5 +1,5 @@
 import { existsSync, readFileSync } from "node:fs";
-import { relative, sep } from "node:path";
+import { basename, relative, sep } from "node:path";
 import { type Edit, resolveInWorkspace } from "@fcx/apply";
 import { type Bundle, type LayerOutcome, anchor, constrain, verify } from "@fcx/defense";
 import type { ModelHost } from "@fcx/model";
@@ -15,28 +15,32 @@ import { prepareInstructions, withInstructions } from "./instructions.js";
 
 /** Temperatures for successive candidates (plan §10). Candidates run one at a time. */
 /**
- * A recipe that edits one file has one allowed path. A model sometimes names that file by a path it made up
- * ("/src/a.ts", "/path/to/a.ts"), and constrain then rejects a correct edit. With exactly one allowed file, an edit
- * whose path is outside the workspace or does not exist is pointed at it. A real file the recipe may not touch is
- * left alone, so constrain still rejects it. Constrain and every later layer still run on the result.
+ * A model sometimes names a file by a path it made up ("/src/a.ts", "/path/to/a.ts"), and constrain then rejects a
+ * correct edit. An edit whose path is outside the workspace, or does not exist, is pointed at the allowed file that
+ * has the same name. With one allowed file, that file is used whatever the name. A real file the recipe may not
+ * touch is left alone, so constrain still rejects it. Constrain and every later layer still run on the result.
  */
 export function pinEditsToTarget(
   edits: readonly Edit[],
   workspace: string,
   allowedFiles: readonly string[],
 ): Edit[] {
-  const [target, ...rest] = allowedFiles;
-  if (target === undefined || rest.length > 0) return [...edits];
-  const pinned = relative(workspace, target).split(sep).join("/");
+  if (allowedFiles.length === 0) return [...edits];
+  const relFor = (file: string) => relative(workspace, file).split(sep).join("/");
   return edits.map((edit) => {
-    let resolved: string;
+    let resolved: string | undefined;
     try {
       resolved = resolveInWorkspace(workspace, edit.file);
     } catch {
-      return { ...edit, file: pinned };
+      resolved = undefined;
     }
-    if (resolved === target || existsSync(resolved)) return edit;
-    return { ...edit, file: pinned };
+    if (resolved !== undefined && (allowedFiles.includes(resolved) || existsSync(resolved)))
+      return edit;
+    const name = basename(edit.file);
+    const sameName = allowedFiles.filter((file) => basename(file) === name);
+    const target =
+      sameName.length === 1 ? sameName[0] : allowedFiles.length === 1 ? allowedFiles[0] : undefined;
+    return target === undefined ? edit : { ...edit, file: relFor(target) };
   });
 }
 
