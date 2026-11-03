@@ -11,9 +11,9 @@
     "typecheck": "tsc -b",
     "test": "node ./node_modules/.bin/vitest run",
     "prepare": "husky",
-    "dev": "bunx tsx cli/src/index.ts",
-    "doctor": "bunx tsx cli/src/index.ts doctor",
-    "status": "bunx tsx cli/src/index.ts status",
+    "dev": "bunx tsx cli/src/main.ts",
+    "doctor": "bunx tsx cli/src/main.ts doctor",
+    "status": "bunx tsx cli/src/main.ts status",
     "ci:version": "changeset version && bun install --no-lockfile",
     "release:publish": "bun run --filter '*' build && changeset publish"
   },

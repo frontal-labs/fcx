@@ -3,4 +3,4 @@
 set -euo pipefail
 
 echo "Running fcx doctor..."
-bunx tsx cli/src/index.ts doctor
+bunx tsx cli/src/main.ts doctor

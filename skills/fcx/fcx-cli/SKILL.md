@@ -50,7 +50,7 @@ Named `fcx` (avoids `fc` shell built-in clash).
 
 ## Files
 
-- `cli/src/index.ts` — Command dispatch table
+- `cli/src/main.ts` — Command dispatch table
 - `cli/src/meta.ts` — Binary/package metadata
 - `cli/src/commands/*.ts` — 17 command handler files
 

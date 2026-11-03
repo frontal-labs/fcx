@@ -3,4 +3,4 @@
 set -euo pipefail
 
 echo "Running fcx status..."
-bunx tsx cli/src/index.ts status
+bunx tsx cli/src/main.ts status

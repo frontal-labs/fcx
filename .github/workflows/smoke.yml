@@ -25,10 +25,10 @@ jobs:
         run: bun run build
 
       - name: Version check
-        run: bunx tsx cli/src/index.ts --version
+        run: bunx tsx cli/src/main.ts --version
 
       - name: Status check
-        run: bunx tsx cli/src/index.ts status
+        run: bunx tsx cli/src/main.ts status
 
       - name: Doctor check
-        run: bunx tsx cli/src/index.ts doctor
+        run: bunx tsx cli/src/main.ts doctor

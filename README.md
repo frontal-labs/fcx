@@ -8,7 +8,7 @@ Local-first coding agent CLI. Uses a ~1.5B model locally with defense-in-depth c
 
 ## Status
 
-Early development (M0). See PLAN.md for the full specification.
+Early development (0.1.0). The design is in ARCHITECTURE.md, DECISIONS.md and docs/.
 
 ## Installation
 
@@ -38,7 +38,7 @@ cd fcx
 bun install
 bun run build
 # run directly
-bunx tsx cli/src/index.ts --version
+bunx tsx cli/src/main.ts --version
 ```
 
 ### Binary
@@ -55,13 +55,13 @@ bun install
 bun run build
 
 # Check version
-bunx tsx cli/src/index.ts --version
+bunx tsx cli/src/main.ts --version
 
 # Check status
-bunx tsx cli/src/index.ts status
+bunx tsx cli/src/main.ts status
 
 # Run doctor
-bunx tsx cli/src/index.ts doctor
+bunx tsx cli/src/main.ts doctor
 ```
 
 ## Binary
@@ -98,11 +98,13 @@ Commands:
   ask [question]        Ask a routing question
   undo                  Undo the last task
   index [--rebuild] [--status]  Rebuild or show index status
-  init                  Initialize fcx in a project
-  models list|pull|bench  Manage models
+  init                  Initialize fcx in a project (not implemented yet)
+  models list|pull|bench  Manage models (not implemented yet; use `ggml-node pull <id>`)
   status                Show status
   doctor                Run health checks
   acp                   Start ACP server
+  tui                   Interactive terminal UI (also: bare fcx in a terminal)
+  trust [path]          Trust a workspace so its project settings and language servers apply
 ```
 
 ## Development

@@ -15,7 +15,7 @@ shift || true
 case "$cmd" in
   dev)
     echo "Starting fcx in dev mode..."
-    bunx tsx cli/src/index.ts "${@}"
+    bunx tsx cli/src/main.ts "${@}"
     ;;
   build)
     echo "Building all packages..."
@@ -35,11 +35,11 @@ case "$cmd" in
     ;;
   doctor)
     echo "Running fcx doctor..."
-    bunx tsx cli/src/index.ts doctor
+    bunx tsx cli/src/main.ts doctor
     ;;
   status)
     echo "Running fcx status..."
-    bunx tsx cli/src/index.ts status
+    bunx tsx cli/src/main.ts status
     ;;
   fmt)
     echo "Formatting with biome..."
@@ -64,9 +64,9 @@ case "$cmd" in
     ;;
   smoke)
     echo "Running smoke tests..."
-    bunx tsx cli/src/index.ts --version
-    bunx tsx cli/src/index.ts status
-    bunx tsx cli/src/index.ts doctor
+    bunx tsx cli/src/main.ts --version
+    bunx tsx cli/src/main.ts status
+    bunx tsx cli/src/main.ts doctor
     ;;
   release)
     echo "Running release..."

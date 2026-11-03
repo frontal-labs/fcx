@@ -20,4 +20,4 @@ bun run test
 
 echo ""
 echo "Bootstrap complete. fcx is ready."
-echo "Try: bunx tsx cli/src/index.ts --version"
+echo "Try: bunx tsx cli/src/main.ts --version"
