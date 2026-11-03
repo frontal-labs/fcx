@@ -12,7 +12,7 @@ import { type Sandbox, makeSandbox, scriptedModel } from "./support.js";
 
 const MATH = "export function add(a: number, b: number): number {\n  return a + b;\n}\n";
 const GOOD = {
-  file: "tests/add.test.ts",
+  file: "tests/math.test.ts",
   imports: ["../src/math.js"],
   testCode: 'import { add } from "../src/math.js";\n\nexport const sum: number = add(1, 2);\n',
 };
@@ -43,12 +43,12 @@ describe("fcx test (write-test)", () => {
       command: "test",
       recipe: "write-test",
       status: "proposed",
-      file: "tests/add.test.ts",
+      file: "tests/math.test.ts",
       symbol: "add",
     });
     expect(report.testCode).toBe(GOOD.testCode);
     expect(report.warnings.join(" ")).toMatch(/not written/);
-    expect(existsSync(join(sb.workspace, "tests/add.test.ts"))).toBe(false);
+    expect(existsSync(join(sb.workspace, "tests/math.test.ts"))).toBe(false);
     expect(readFileSync(join(sb.workspace, "src/math.ts"), "utf8")).toBe(MATH);
     expect(exitCodeFor(report.status)).toBe(0);
   });
@@ -60,13 +60,13 @@ describe("fcx test (write-test)", () => {
     });
     const text = formatWriteTest(report);
     expect(text).toContain("fcx test src/math.ts:add: proposed");
-    expect(text).toContain("test file: tests/add.test.ts");
+    expect(text).toContain("test file: tests/math.test.ts");
     expect(text).toContain("export const sum: number = add(1, 2);");
   });
 
   it("abstains with exit 2 when every candidate fails verification", async () => {
     const bad = {
-      file: "tests/add.test.ts",
+      file: "tests/math.test.ts",
       imports: [],
       testCode: "export const x: number = missing;\n",
     };

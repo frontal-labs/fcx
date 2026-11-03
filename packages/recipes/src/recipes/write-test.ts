@@ -16,7 +16,7 @@
  * retrieval returned; no separate sibling test file is read.
  */
 import { existsSync } from "node:fs";
-import { dirname, isAbsolute, join, resolve } from "node:path";
+import { basename, dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { type Edit, isInside, resolveInWorkspace } from "@fcx/apply";
 import type { LayerOutcome } from "@fcx/defense";
 import type { ModelHost } from "@fcx/model";
@@ -115,11 +115,23 @@ export async function runWriteTest(options: WriteTestOptions): Promise<WriteTest
   const allow = bundle.allowLists;
   const context = bundle.blocks.filter((b) => b !== target);
 
+  // The recipe decides where the test goes and how it imports the symbol. Models have invented directories and
+  // workspace-root import paths, so the file is fixed here and the model's file value is replaced, not checked.
+  const testRel = chooseTestPath(workspace, sourcePath, options.symbol);
+  const testAbs = resolve(workspace, testRel);
+  const specifier = relativeSpecifier(dirname(testAbs), sourcePath);
+  const sourceRel = relativeTo(workspace, sourcePath);
+
   const checker = createTsChecker(workspace, sourcePath);
   try {
     const recipe: RecipeDefinition<WriteTestOutput> = {
       schema: WriteTestSchema,
       temperatures: CANDIDATE_TEMPERATURES,
+      normalize: (output) => ({
+        ...output,
+        file: testRel,
+        imports: output.imports.map((spec) => rewriteSourceImport(spec, sourceRel, specifier)),
+      }),
       prompt: (feedback) => ({
         system: WRITE_TEST_SYSTEM,
         user: [
@@ -133,7 +145,8 @@ export async function runWriteTest(options: WriteTestOptions): Promise<WriteTest
           "",
           `Importable packages: ${allow.importablePackages.join(", ") || "(none)"}`,
           `Symbols in scope: ${allow.symbolsInScope.join(", ") || "(none)"}`,
-          "The new file must be under a tests/ or __tests__/ directory and must not already exist.",
+          `The test file is ${testRel}. It must not already exist.`,
+          `Import the symbol from "${specifier}".`,
           ...(feedback ? ["", `Your previous attempt was rejected: ${feedback}`] : []),
         ].join("\n"),
       }),
@@ -264,4 +277,36 @@ function importResolves(
   return allow.symbolsInScope.some(
     (qualified) => qualified === spec || qualified.endsWith(`.${spec}`),
   );
+}
+
+/**
+ * The workspace-relative path for the new test: tests/<name>.test.ts, or tests/<name>.<symbol>.test.ts when that name
+ * is taken. Throws when both are taken, because a test file must be new.
+ */
+export function chooseTestPath(workspace: string, sourcePath: string, symbol: string): string {
+  const stem = basename(sourcePath).replace(/\.[^.]+$/, "");
+  const candidates = [`tests/${stem}.test.ts`, `tests/${stem}.${symbol}.test.ts`];
+  const free = candidates.find((rel) => !existsSync(join(workspace, rel)));
+  if (free === undefined) {
+    throw new RecipeInputError(`both ${candidates.join(" and ")} already exist; remove one first`);
+  }
+  return free;
+}
+
+/** The import specifier from a test directory to a source file: relative, with no extension. */
+export function relativeSpecifier(fromDir: string, sourcePath: string): string {
+  const bare = relative(fromDir, sourcePath.replace(/\.[^.]+$/, ""))
+    .split(sep)
+    .join("/");
+  return bare.startsWith(".") ? bare : `./${bare}`;
+}
+
+/**
+ * Maps a model import of the source file, written from the workspace root ("src/a", "src/a.js", "./src/a.ts"), to
+ * the specifier from the test file. Any other import is returned unchanged.
+ */
+export function rewriteSourceImport(spec: string, sourceRel: string, specifier: string): string {
+  const normalized = spec.replace(/^\.\//, "").replace(/\.(m|c)?(j|t)sx?$/, "");
+  const bareSource = sourceRel.replace(/\.[^.]+$/, "");
+  return normalized === bareSource ? specifier : spec;
 }
