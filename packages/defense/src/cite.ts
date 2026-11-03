@@ -198,6 +198,6 @@ function resolveCitation(
 
 /** Case-sensitive, whole-word match. `$` counts as part of a word, as it does in JavaScript identifiers. */
 export function containsWord(text: string, word: string): boolean {
-  const escaped = word.replace(/[$]/g, "\\$");
+  const escaped = word.replace(/\\/g, "\\\\").replace(/[$]/g, "\\$");
   return new RegExp(`(?<![A-Za-z0-9_$])${escaped}(?![A-Za-z0-9_$])`).test(text);
 }

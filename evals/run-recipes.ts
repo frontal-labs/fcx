@@ -227,7 +227,7 @@ function docAbove(text: string, name: string): string | undefined {
 }
 
 function wordPresent(text: string, word: string): boolean {
-  return new RegExp(`\\b${word.replace(/[$]/g, "\\$")}\\b`).test(text);
+  return new RegExp(`\\b${word.replace(/\\/g, "\\\\").replace(/[$]/g, "\\$")}\\b`).test(text);
 }
 
 function gitIn(cwd: string, gitArgs: string[]): void {
