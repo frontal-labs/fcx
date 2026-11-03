@@ -17,7 +17,7 @@
  * This recipe runs its own loop rather than the edit-based engine, because its output is an answer, not edits.
  */
 import { resolve } from "node:path";
-import { type CiteReasonCode, type Claim, cite } from "@fcx/defense";
+import { type CiteReasonCode, type Claim, cite, unshownNames } from "@fcx/defense";
 import type { ModelHost } from "@fcx/model";
 import { type ContextBlock, gatherFixContext } from "@fcx/retrieve";
 import { createTsChecker } from "@fcx/verify";
@@ -28,6 +28,12 @@ import { prepareInstructions, withInstructions } from "../instructions.js";
 
 /** Temperatures for the first attempt and the one regeneration. */
 export const EXPLAIN_TEMPERATURES = [0.2, 0.5] as const;
+
+/**
+ * Output budget for one answer. An answer of 12 cited claims runs past 1024 tokens, and a cut-off object is not
+ * valid JSON, so the budget has to cover the longest allowed answer.
+ */
+export const EXPLAIN_MAX_TOKENS = 2048;
 
 /** Claims per answer. The schema enforces the same bounds. */
 export const EXPLAIN_MAX_CLAIMS = 12;
@@ -54,18 +60,37 @@ export const ExplainSchema = z.object({
 export type ExplainOutput = z.infer<typeof ExplainSchema>;
 
 export const EXPLAIN_SCOPE: VerificationScope = {
-  ran: ["citation-ranges", "citation-identifiers"],
+  ran: ["citation-ranges", "citation-identifiers", "summary-names"],
   notRun: [
     "execution: no code is run or tested",
-    "summary text: not checked against the code",
+    "summary wording: prose is not checked; only the code names in it are",
     "claim truth beyond the cited identifiers",
   ],
 };
 
-/** A claim the cite layer dropped, and why. */
+/**
+ * Why a claim was dropped: a cite-layer reason, or OUTSIDE_SELECTION when every citation it kept lies outside the
+ * selected lines (it talks about definitions or enclosing code, not the selection the question is about).
+ */
+export type ExplainDropReason = CiteReasonCode | "OUTSIDE_SELECTION";
+
+/** A claim the explain check dropped, and why. */
 export interface DroppedClaim {
   claim: Claim;
-  reasonCode: CiteReasonCode;
+  reasonCode: ExplainDropReason;
+}
+
+/** True when one of the claim's citations overlaps the selected lines of `file` (an absolute path). */
+function citesSelection(
+  claim: Claim,
+  options: { workspace: string; file: string; startLine: number; endLine: number },
+): boolean {
+  return claim.cites.some(
+    (citation) =>
+      absoluteIn(options.workspace, citation.file) === options.file &&
+      citation.start <= options.endLine &&
+      citation.end >= options.startLine,
+  );
 }
 
 export interface ExplainAnswer {
@@ -99,6 +124,8 @@ export type ExplainResult =
       attempts: number;
       /** True when the instruction block was cut to its budget before it was sent. */
       instructionsTruncated: boolean;
+      /** Code names the summary used that were not shown to the model. When any, the summary is withheld. */
+      summaryOmitted: string[];
       verification: VerificationScope;
       ms: number;
     }
@@ -110,6 +137,7 @@ export type ExplainResult =
       attempts: number;
       /** True when the instruction block was cut to its budget before it was sent. */
       instructionsTruncated: boolean;
+      summaryOmitted: string[];
       verification: VerificationScope;
       ms: number;
     };
@@ -119,10 +147,12 @@ export const EXPLAIN_SYSTEM = `You are a coding agent explaining code. Given a s
 Constraints:
 - Output must be valid JSON matching the schema: { "summary": "...", "claims": [{ "text": "...", "cites": [{ "file": "...", "start": 1, "end": 2 }] }] }.
 - Each claim must cite at least one line range (file, start, end; 1-based, inclusive) that is shown to you. Cite the lines that contain the code the claim describes.
+- Every claim must cite at least one line of the selection itself, the lines under "Selection". Citing only definitions or the enclosing scope is not enough.
 - Put every code identifier in backticks in the claim text, for example \`parseDate\` or \`cache.get\`. Each backticked identifier must appear in the text of the lines cited for that claim.
 - Use at most 12 claims. Make each claim one short statement that the cited lines support.
 - Do not make claims about behavior that the cited lines do not show.
 - Do not invent file paths, line numbers, symbols, or package names.
+- The summary may name code only from the selection and the definitions shown to you. Write it in plain words otherwise.
 - If a question is given, answer it. Otherwise explain what the selected code does.`;
 
 /** Runs the explain recipe. Throws RecipeInputError when the file or the line range is invalid. */
@@ -179,7 +209,11 @@ export async function runExplain(options: ExplainOptions): Promise<ExplainResult
     const question = options.question?.trim() || "Explain what the selected code does.";
 
     let feedback: string | undefined;
-    let best: { kept: number; answer: ExplainAnswer; dropped: DroppedClaim[] } | undefined;
+    let best:
+      | { kept: number; answer: ExplainAnswer; dropped: DroppedClaim[]; summaryOmitted: string[] }
+      | undefined;
+    // Everything the model was shown: the selection and the definitions. A summary may only name code from here.
+    const shown = [selection.join("\n"), ...blocks.map((b) => b.text)].join("\n");
     let lastError = "no claim cites a range that supports it";
     let attempts = 0;
 
@@ -208,7 +242,7 @@ export async function runExplain(options: ExplainOptions): Promise<ExplainResult
           schema: ExplainSchema,
           prompt: `${EXPLAIN_SYSTEM}\n\n${user}`,
           temperature,
-          maxTokens: 1024,
+          maxTokens: EXPLAIN_MAX_TOKENS,
         });
         output = ExplainSchema.parse(result.object);
       } catch (error) {
@@ -232,28 +266,42 @@ export async function runExplain(options: ExplainOptions): Promise<ExplainResult
         output.claims.map((c) => ({ text: c.text, cites: c.cites })),
         { workspace },
       );
+      // A claim that survived the cite layer still has to be about the selection, not only about definitions.
+      const about = verdict.kept.filter((claim) =>
+        citesSelection(claim, { workspace, file: abs, startLine, endLine }),
+      );
+      const dropped: DroppedClaim[] = [
+        ...verdict.dropped,
+        ...verdict.kept
+          .filter((claim) => !about.includes(claim))
+          .map((claim) => ({ claim, reasonCode: "OUTSIDE_SELECTION" as const })),
+      ];
+      const regenerate = dropped.length * 2 > output.claims.length;
       options.onLayer?.({
         file: abs,
         candidate: index,
         layer: "cite",
-        pass: verdict.dropped.length === 0,
-        reasonCode: verdict.dropped[0]?.reasonCode,
+        pass: dropped.length === 0,
+        reasonCode: dropped[0]?.reasonCode,
         ms: Math.round(performance.now() - c0),
       });
 
       // Ties go to the later attempt, so an abstention reports the last attempt's drops.
-      const kept = verdict.kept.length;
+      const kept = about.length;
       if (best === undefined || kept >= best.kept) {
+        // The summary is prose and is not checked, but the code names in it must have been shown.
+        const summaryOmitted = unshownNames(output.summary, shown);
         best = {
           kept,
-          answer: { summary: output.summary, claims: verdict.kept },
-          dropped: verdict.dropped,
+          answer: { summary: summaryOmitted.length === 0 ? output.summary : "", claims: about },
+          dropped,
+          summaryOmitted,
         };
       }
-      if (!verdict.regenerate) break;
+      if (!regenerate) break;
 
-      const reasons = verdict.dropped.map((d) => d.reasonCode).join(", ");
-      feedback = `${verdict.dropped.length} of ${output.claims.length} claims were dropped (${reasons}). Cite only line ranges shown to you, and make sure every code identifier in a claim appears in the lines that claim cites.`;
+      const reasons = dropped.map((d) => d.reasonCode).join(", ");
+      feedback = `${dropped.length} of ${output.claims.length} claims were dropped (${reasons}). Cite the selected lines for each claim, only line ranges shown to you. Name the code each claim is about in backticks, and make sure each identifier appears in the lines that claim cites.`;
     }
 
     const elapsed = Math.round(performance.now() - t0);
@@ -265,6 +313,7 @@ export async function runExplain(options: ExplainOptions): Promise<ExplainResult
         lastError,
         attempts,
         instructionsTruncated: instructions.truncated,
+        summaryOmitted: [],
         verification: EXPLAIN_SCOPE,
         ms: elapsed,
       };
@@ -275,6 +324,7 @@ export async function runExplain(options: ExplainOptions): Promise<ExplainResult
       dropped: best.dropped,
       attempts,
       instructionsTruncated: instructions.truncated,
+      summaryOmitted: best.summaryOmitted,
       verification: EXPLAIN_SCOPE,
       ms: elapsed,
     };

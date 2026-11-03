@@ -95,6 +95,61 @@ describe("runExplain", () => {
     expect(out.attempts).toBe(1);
   });
 
+  it("drops a claim that is only about code outside the selection", async () => {
+    // The selection is lines 1-3 (sumPrices). The claim is true of the file, but it cites applyDiscount (5-6).
+    const outside = {
+      summary: "Applies a discount.",
+      claims: [
+        {
+          text: "`applyDiscount` multiplies the total by `rate`.",
+          cites: [{ file: "src/cart.ts", start: 5, end: 6 }],
+        },
+      ],
+    };
+    const { result } = run([outside, outside]);
+    const out = await result;
+    expect(out.status).toBe("abstained");
+    expect(out.dropped.map((d) => d.reasonCode)).toEqual(["OUTSIDE_SELECTION"]);
+  });
+
+  it("withholds a summary that names code the model was not shown", async () => {
+    const { result } = run([
+      {
+        summary: "Calls `reduceAll` on the list.",
+        claims: [
+          {
+            text: "`sumPrices` returns the total of `items`.",
+            cites: [{ file: "src/cart.ts", start: 1, end: 3 }],
+          },
+        ],
+      },
+    ]);
+    const out = await result;
+    expect(out.status).toBe("answered");
+    if (out.status !== "answered") return;
+    expect(out.answer.summary).toBe("");
+    expect(out.summaryOmitted).toEqual(["reduceAll"]);
+    expect(out.answer.claims).toHaveLength(1);
+  });
+
+  it("keeps a summary whose code names appear in the selection", async () => {
+    const { result } = run([
+      {
+        summary: "`sumPrices` adds the items with `reduce`.",
+        claims: [
+          {
+            text: "`sumPrices` returns the total of `items`.",
+            cites: [{ file: "src/cart.ts", start: 1, end: 3 }],
+          },
+        ],
+      },
+    ]);
+    const out = await result;
+    if (out.status !== "answered") throw new Error("expected an answer");
+    expect(out.answer.summary).toBe("`sumPrices` adds the items with `reduce`.");
+    expect(out.summaryOmitted).toEqual([]);
+  });
+
   it("abstains when every claim is dropped, after one regeneration", async () => {
     const bad = {
       summary: "Applies a discount.",
