@@ -23,7 +23,9 @@ export function buildChatBody<T>(request: EscalationRequest<T>): string {
 }
 
 export function chatEndpoint(baseUrl: string): string {
-  return `${baseUrl.replace(/\/+$/, "")}/chat/completions`;
+  let u = baseUrl;
+  while (u.endsWith("/")) u = u.slice(0, -1);
+  return `${u}/chat/completions`;
 }
 
 function timeoutError(timeoutMs: number): EscalationError {

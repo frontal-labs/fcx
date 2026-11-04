@@ -86,7 +86,12 @@ export function extractDocBlock(raw: string): string {
     const body = lines.map((line) => (line === "" ? " *" : ` * ${line}`));
     return ["/**", ...body, " */"].join("\n");
   }
-  if (!text.startsWith("/**") || !text.endsWith("*/") || text.indexOf("*/") !== text.length - 2) {
+  if (
+    text.length < 2 ||
+    !text.startsWith("/**") ||
+    !text.endsWith("*/") ||
+    text.indexOf("*/") !== text.length - 2
+  ) {
     return text;
   }
   // A one-line block is already valid as written.
@@ -414,6 +419,7 @@ function docFormat(doc: string): LayerOutcome {
   if (
     !trimmed.startsWith("/**") ||
     !trimmed.endsWith("*/") ||
+    trimmed.length < 2 ||
     trimmed.indexOf("*/") !== trimmed.length - 2
   ) {
     return fail(

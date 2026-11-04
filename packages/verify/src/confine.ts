@@ -21,7 +21,7 @@ export function confine(
   if (out.paths) {
     const kept: Record<string, string[]> = {};
     for (const [pattern, targets] of Object.entries(out.paths)) {
-      const inside = targets.filter((t) => isWithin(root, resolve(baseDir, t.replace("*", ""))));
+      const inside = targets.filter((t) => isWithin(root, resolve(baseDir, t.replaceAll("*", ""))));
       if (inside.length > 0) kept[pattern] = inside;
     }
     out.paths = kept;
