@@ -60,7 +60,8 @@ export class GgmlNodeModelHost implements ModelHost {
     try {
       const entry = getModelEntry(this.genModelId);
       const opts: GgmlNodeOptions = {
-        model: (entry.path ?? this.genModelId) as ModelId,
+        // A registry entry with a path loads that GGUF file; otherwise the id names a registry model.
+        model: (entry.path !== undefined ? { path: entry.path } : this.genModelId) as ModelId,
         isolation: "none",
         threads: "auto",
         gpu: "auto",
