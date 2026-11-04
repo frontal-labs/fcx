@@ -1,0 +1,1177 @@
+{
+  "model": "ggml/auto (qwen2.5-1.5b-instruct-q4_k_m)",
+  "generatedAt": "2026-11-03T16:02:39.602Z",
+  "candidateBudget": 6,
+  "synthetic": true,
+  "recipes": {
+    "add-types": {
+      "tasks": 10,
+      "passed": 0,
+      "passRate": 0,
+      "medianMs": 30643,
+      "medianCandidates": 6,
+      "firstCandidatePassed": 0,
+      "failureReasons": {
+        "recipe:abstained": 10
+      }
+    },
+    "docstring": {
+      "tasks": 9,
+      "passed": 0,
+      "passRate": 0,
+      "medianMs": 10267,
+      "medianCandidates": 6,
+      "firstCandidatePassed": 0,
+      "failureReasons": {
+        "recipe:abstained": 9
+      }
+    },
+    "implement": {
+      "tasks": 9,
+      "passed": 9,
+      "passRate": 1,
+      "medianMs": 5549,
+      "medianCandidates": 1,
+      "firstCandidatePassed": 6,
+      "failureReasons": {}
+    },
+    "refactor-small": {
+      "tasks": 8,
+      "passed": 3,
+      "passRate": 0.375,
+      "medianMs": 8155,
+      "medianCandidates": 3,
+      "firstCandidatePassed": 2,
+      "failureReasons": {
+        "criterion:effect-absent-still-present": 1,
+        "recipe:abstained": 3,
+        "criterion:effect-present-missing": 1
+      }
+    },
+    "rename-extract": {
+      "tasks": 9,
+      "passed": 9,
+      "passRate": 1,
+      "medianMs": 1633,
+      "medianCandidates": 1,
+      "firstCandidatePassed": 9,
+      "failureReasons": {}
+    },
+    "write-test": {
+      "tasks": 8,
+      "passed": 2,
+      "passRate": 0.25,
+      "medianMs": 19177,
+      "medianCandidates": 6,
+      "firstCandidatePassed": 0,
+      "failureReasons": {
+        "recipe:abstained": 6
+      }
+    },
+    "fix-test": {
+      "tasks": 8,
+      "passed": 0,
+      "passRate": 0,
+      "medianMs": 9795,
+      "medianCandidates": 6,
+      "firstCandidatePassed": 3,
+      "failureReasons": {
+        "recipe:abstained": 4,
+        "criterion:type-errors": 4
+      }
+    },
+    "explain": {
+      "tasks": 8,
+      "passed": 0,
+      "passRate": 0,
+      "medianMs": 49966,
+      "medianCandidates": 0,
+      "firstCandidatePassed": 0,
+      "failureReasons": {
+        "recipe:abstained": 6,
+        "criterion:claims-dropped": 2
+      },
+      "claimsKept": 5,
+      "claimsProposed": 58,
+      "citeRate": 0.08620689655172414,
+      "answered": 2
+    },
+    "commit-message": {
+      "tasks": 8,
+      "passed": 8,
+      "passRate": 1,
+      "medianMs": 2229,
+      "medianCandidates": 1,
+      "firstCandidatePassed": 8,
+      "failureReasons": {},
+      "ruleRates": {
+        "type": 1,
+        "header": 1,
+        "subject-length": 1,
+        "no-period": 1,
+        "single-line-subject": 1,
+        "blank-line-before-body": 1
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "add-types-01",
+      "recipe": "add-types",
+      "shape": "function-return",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "File \"/src/add_types_01.ts\" is outside the workspace.",
+      "totalMs": 50492,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "add-types-02",
+      "recipe": "add-types",
+      "shape": "const-number",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Edit for src/add_types_02.ts failed. Its search text does not match the file exactly. Copy it character for character from the file.",
+      "totalMs": 30643,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "add-types-03",
+      "recipe": "add-types",
+      "shape": "function-boolean",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "File \"/src/add_types_03.ts\" is outside the workspace.",
+      "totalMs": 27406,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "add-types-04",
+      "recipe": "add-types",
+      "shape": "const-object",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "File \"/path/to/src/add_types_04.ts\" is outside the workspace.",
+      "totalMs": 16506,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "add-types-05",
+      "recipe": "add-types",
+      "shape": "class-property",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "File \"/src/add_types_05.ts\" is outside the workspace.",
+      "totalMs": 16012,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "add-types-06",
+      "recipe": "add-types",
+      "shape": "function-reduce",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "total at line 1 still has no explicit type. Add a type annotation to its declaration.",
+      "totalMs": 31267,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "add-types-07",
+      "recipe": "add-types",
+      "shape": "const-array",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "File \"/path/to/src/add_types_07.ts\" is outside the workspace.",
+      "totalMs": 21638,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "add-types-08",
+      "recipe": "add-types",
+      "shape": "function-object",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "File \"/src/add_types_08.ts\" is outside the workspace.",
+      "totalMs": 43838,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "add-types-09",
+      "recipe": "add-types",
+      "shape": "function-predicate",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/add_types_09.ts at line 1: TS1203 Export assignment cannot be used when targeting ECMAScript modules. Consider using 'export default' or another module format instead.. Fix it without adding new errors.",
+      "totalMs": 32690,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "add-types-10",
+      "recipe": "add-types",
+      "shape": "function-template",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "File \"/path/to/src/add_types_10.ts\" is outside the workspace.",
+      "totalMs": 27680,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "docstring-01",
+      "recipe": "docstring",
+      "shape": "function-clamp",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Output one JSDoc block that starts with the opening delimiter and ends with the closing delimiter, and nothing else.",
+      "totalMs": 11387,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "docstring-02",
+      "recipe": "docstring",
+      "shape": "interface",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Output one JSDoc block that starts with the opening delimiter and ends with the closing delimiter, and nothing else.",
+      "totalMs": 10142,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "docstring-03",
+      "recipe": "docstring",
+      "shape": "class",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Output one JSDoc block that starts with the opening delimiter and ends with the closing delimiter, and nothing else.",
+      "totalMs": 31443,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "docstring-04",
+      "recipe": "docstring",
+      "shape": "arrow-const",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Output one JSDoc block that starts with the opening delimiter and ends with the closing delimiter, and nothing else.",
+      "totalMs": 9248,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "docstring-05",
+      "recipe": "docstring",
+      "shape": "function-date",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Output one JSDoc block that starts with the opening delimiter and ends with the closing delimiter, and nothing else.",
+      "totalMs": 8661,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "docstring-06",
+      "recipe": "docstring",
+      "shape": "type-alias",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Output one JSDoc block that starts with the opening delimiter and ends with the closing delimiter, and nothing else.",
+      "totalMs": 10230,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "docstring-07",
+      "recipe": "docstring",
+      "shape": "generic-chunk",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Output one JSDoc block that starts with the opening delimiter and ends with the closing delimiter, and nothing else.",
+      "totalMs": 14040,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "docstring-08",
+      "recipe": "docstring",
+      "shape": "function-median",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Output one JSDoc block that starts with the opening delimiter and ends with the closing delimiter, and nothing else.",
+      "totalMs": 14900,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "docstring-09",
+      "recipe": "docstring",
+      "shape": "function-format",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Output one JSDoc block that starts with the opening delimiter and ends with the closing delimiter, and nothing else.",
+      "totalMs": 10267,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "implement-01",
+      "recipe": "implement",
+      "shape": "parse-duration",
+      "candidates": 4,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 17811,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-02",
+      "recipe": "implement",
+      "shape": "slugify",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 6248,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-03",
+      "recipe": "implement",
+      "shape": "unique",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 5549,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-04",
+      "recipe": "implement",
+      "shape": "clamp-percent",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 4098,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-05",
+      "recipe": "implement",
+      "shape": "count-words",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 3109,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-06",
+      "recipe": "implement",
+      "shape": "invert-map",
+      "candidates": 3,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 6952,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-07",
+      "recipe": "implement",
+      "shape": "median",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 4786,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-08",
+      "recipe": "implement",
+      "shape": "palindrome",
+      "candidates": 4,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 17974,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-09",
+      "recipe": "implement",
+      "shape": "method",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 4660,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "refactor-small-01",
+      "recipe": "refactor-small",
+      "shape": "loop-to-reduce",
+      "candidates": 3,
+      "status": "verified",
+      "pass": false,
+      "reason": "criterion:effect-absent-still-present",
+      "detail": "for (const",
+      "totalMs": 10707,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "refactor-small-02",
+      "recipe": "refactor-small",
+      "shape": "let-to-const",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 5512,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "refactor-small-03",
+      "recipe": "refactor-small",
+      "shape": "optional-chaining",
+      "candidates": 2,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 7641,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "refactor-small-04",
+      "recipe": "refactor-small",
+      "shape": "includes",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Edit for src/refactor_04.ts failed. Its search text does not match the file exactly. Copy it character for character from the file.",
+      "totalMs": 10354,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "refactor-small-05",
+      "recipe": "refactor-small",
+      "shape": "template-literal",
+      "candidates": 2,
+      "status": "verified",
+      "pass": false,
+      "reason": "criterion:effect-present-missing",
+      "detail": "`Hello, ",
+      "totalMs": 8155,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "refactor-small-06",
+      "recipe": "refactor-small",
+      "shape": "remove-unused",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "File \"/path/to/src/refactor_06.ts\" is outside the workspace.",
+      "totalMs": 9746,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "refactor-small-07",
+      "recipe": "refactor-small",
+      "shape": "ternary-to-if",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 3320,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "refactor-small-08",
+      "recipe": "refactor-small",
+      "shape": "foreach-to-for-of",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Unknown member 'for' on type 'string[]'. Did you mean: pop, sort?",
+      "totalMs": 6684,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "rename-extract-01",
+      "recipe": "rename-extract",
+      "shape": "function",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 2249,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-02",
+      "recipe": "rename-extract",
+      "shape": "const-number",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1840,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-03",
+      "recipe": "rename-extract",
+      "shape": "class",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1633,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-04",
+      "recipe": "rename-extract",
+      "shape": "parameter",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1617,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-05",
+      "recipe": "rename-extract",
+      "shape": "const-array",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1809,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-06",
+      "recipe": "rename-extract",
+      "shape": "function-call",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1654,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-07",
+      "recipe": "rename-extract",
+      "shape": "interface",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1257,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-08",
+      "recipe": "rename-extract",
+      "shape": "let-counter",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1283,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-09",
+      "recipe": "rename-extract",
+      "shape": "parameter-in-template",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1598,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "write-test-01",
+      "recipe": "write-test",
+      "shape": "add",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "The test file must be under a tests/ or __tests__/ directory, not \"src/write_test_01_test.ts\".",
+      "totalMs": 16635,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "write-test-02",
+      "recipe": "write-test",
+      "shape": "reverse",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Import \"src/write_test_02.js\" does not resolve to a file in the project, a declared package, or a symbol in scope.",
+      "totalMs": 18937,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "write-test-03",
+      "recipe": "write-test",
+      "shape": "csv-line",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no candidate passed every check",
+      "totalMs": 56348,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "write-test-04",
+      "recipe": "write-test",
+      "shape": "clamp",
+      "candidates": 2,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 7338,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "write-test-05",
+      "recipe": "write-test",
+      "shape": "is-leap",
+      "candidates": 3,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 16572,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "write-test-06",
+      "recipe": "write-test",
+      "shape": "initials",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in tests/write_test_06_test.ts at line 1: TS2307 Cannot find module './write_test_06.ts' or its corresponding type declarations.. Fix it without adding new errors.",
+      "totalMs": 19177,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "write-test-07",
+      "recipe": "write-test",
+      "shape": "cents",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Import \"src/write_test_07.ts\" does not resolve to a file in the project, a declared package, or a symbol in scope.",
+      "totalMs": 44078,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "write-test-08",
+      "recipe": "write-test",
+      "shape": "chunk-list",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Import \"src/write_test_08.ts\" does not resolve to a file in the project, a declared package, or a symbol in scope.",
+      "totalMs": 56739,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-01",
+      "recipe": "fix-test",
+      "shape": "wrong-argument-type",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Edit for src/slug.ts failed. Its search text does not match the file exactly. Copy it character for character from the file.",
+      "totalMs": 10235,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-02",
+      "recipe": "fix-test",
+      "shape": "missing-argument",
+      "candidates": 1,
+      "status": "verified",
+      "pass": false,
+      "reason": "criterion:type-errors",
+      "detail": "1:10 TS2305 Module '\"../src/math\"' has no exported member 'add'.",
+      "totalMs": 6163,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "fix-test-03",
+      "recipe": "fix-test",
+      "shape": "wrong-property-name",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Edit for src/users.ts failed. Its search text does not match the file exactly. Copy it character for character from the file.",
+      "totalMs": 10404,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-04",
+      "recipe": "fix-test",
+      "shape": "boolean-as-string",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/parity.ts at line 2: TS2322 Type 'boolean' is not assignable to type 'string'.. Fix it without adding new errors.",
+      "totalMs": 14599,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-05",
+      "recipe": "fix-test",
+      "shape": "string-for-number",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Edit for src/text.ts failed. Its search text does not match the file exactly. Copy it character for character from the file.",
+      "totalMs": 9795,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-06",
+      "recipe": "fix-test",
+      "shape": "misspelled-identifier",
+      "candidates": 1,
+      "status": "verified",
+      "pass": false,
+      "reason": "criterion:type-errors",
+      "detail": "4:10 TS2552 Cannot find name 'medain'. Did you mean 'median'?",
+      "totalMs": 3695,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "fix-test-07",
+      "recipe": "fix-test",
+      "shape": "wrong-array-type",
+      "candidates": 4,
+      "status": "verified",
+      "pass": false,
+      "reason": "criterion:type-errors",
+      "detail": "4:16 TS2345 Argument of type 'string' is not assignable to parameter of type 'number[]'.",
+      "totalMs": 8993,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "fix-test-08",
+      "recipe": "fix-test",
+      "shape": "object-literal-shape",
+      "candidates": 1,
+      "status": "verified",
+      "pass": false,
+      "reason": "criterion:type-errors",
+      "detail": "1:10 TS2724 '\"../src/geometry\"' has no exported member named 'createPoint'. Did you mean 'createPoint2'?",
+      "totalMs": 3419,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "explain-01",
+      "recipe": "explain",
+      "shape": "retry-loop",
+      "candidates": 0,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no claim cites a range that supports it",
+      "totalMs": 34080,
+      "metrics": {
+        "kept": 0,
+        "dropped": 12,
+        "proposed": 12,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "explain-02",
+      "recipe": "explain",
+      "shape": "cache-get",
+      "candidates": 0,
+      "status": "answered",
+      "pass": false,
+      "reason": "criterion:claims-dropped",
+      "detail": "IDENTIFIER_NOT_IN_CITATION",
+      "totalMs": 14082,
+      "metrics": {
+        "kept": 1,
+        "dropped": 1,
+        "proposed": 2,
+        "attempts": 1
+      }
+    },
+    {
+      "id": "explain-03",
+      "recipe": "explain",
+      "shape": "parse-pairs",
+      "candidates": 0,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no claim cites a range that supports it",
+      "totalMs": 60787,
+      "metrics": {
+        "kept": 0,
+        "dropped": 10,
+        "proposed": 10,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "explain-04",
+      "recipe": "explain",
+      "shape": "debounce",
+      "candidates": 0,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no claim cites a range that supports it",
+      "totalMs": 38738,
+      "metrics": {
+        "kept": 0,
+        "dropped": 1,
+        "proposed": 1,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "explain-05",
+      "recipe": "explain",
+      "shape": "money-format",
+      "candidates": 0,
+      "status": "answered",
+      "pass": false,
+      "reason": "criterion:claims-dropped",
+      "detail": "IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION",
+      "totalMs": 88988,
+      "metrics": {
+        "kept": 4,
+        "dropped": 8,
+        "proposed": 12,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "explain-06",
+      "recipe": "explain",
+      "shape": "queue-drain",
+      "candidates": 0,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no claim cites a range that supports it",
+      "totalMs": 75832,
+      "metrics": {
+        "kept": 0,
+        "dropped": 12,
+        "proposed": 12,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "explain-07",
+      "recipe": "explain",
+      "shape": "header-parse",
+      "candidates": 0,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no claim cites a range that supports it",
+      "totalMs": 49966,
+      "metrics": {
+        "kept": 0,
+        "dropped": 6,
+        "proposed": 6,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "explain-08",
+      "recipe": "explain",
+      "shape": "range-sum",
+      "candidates": 0,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no claim cites a range that supports it",
+      "totalMs": 38407,
+      "metrics": {
+        "kept": 0,
+        "dropped": 3,
+        "proposed": 3,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "commit-message-01",
+      "recipe": "commit-message",
+      "shape": "add-function",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 2229,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-02",
+      "recipe": "commit-message",
+      "shape": "fix-boundary",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 2577,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-03",
+      "recipe": "commit-message",
+      "shape": "docs-readme",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1868,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-04",
+      "recipe": "commit-message",
+      "shape": "add-test",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 2279,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-05",
+      "recipe": "commit-message",
+      "shape": "rename-variable",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1328,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-06",
+      "recipe": "commit-message",
+      "shape": "delete-dead-file",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 905,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-07",
+      "recipe": "commit-message",
+      "shape": "bump-config",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 2654,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-08",
+      "recipe": "commit-message",
+      "shape": "refactor-helper",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 2149,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "model": "ggml/auto (qwen2.5-1.5b-instruct-q4_k_m)",
+  "generatedAt": "2026-11-04T16:23:45.140Z",
+  "candidateBudget": 6,
+  "synthetic": true,
+  "recipes": {
+    "fix-test": {
+      "tasks": 8,
+      "passed": 2,
+      "passRate": 0.25,
+      "medianMs": 16579,
+      "medianCandidates": 6,
+      "firstCandidatePassed": 0,
+      "failureReasons": {
+        "recipe:abstained": 6
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "fix-test-01",
+      "recipe": "fix-test",
+      "shape": "wrong-argument-type",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no candidate passed every check",
+      "totalMs": 20618,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-02",
+      "recipe": "fix-test",
+      "shape": "missing-argument",
+      "candidates": 6,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 16092,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "fix-test-03",
+      "recipe": "fix-test",
+      "shape": "wrong-property-name",
+      "candidates": 3,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 9150,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "fix-test-04",
+      "recipe": "fix-test",
+      "shape": "boolean-as-string",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no candidate passed every check",
+      "totalMs": 16920,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-05",
+      "recipe": "fix-test",
+      "shape": "string-for-number",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/text.ts at line 2: TS2345 Argument of type 'number' is not assignable to parameter of type 'string'.. Fix it without adding new errors.",
+      "totalMs": 14334,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-06",
+      "recipe": "fix-test",
+      "shape": "misspelled-identifier",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no candidate passed every check",
+      "totalMs": 19261,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-07",
+      "recipe": "fix-test",
+      "shape": "wrong-array-type",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "The test file still has a type error at line 1: TS2306 File '/var/folders/kz/jgdz_yyx49qbmqh3l1txy9dw0000gn/T/fcx-recipe-fix-test-07-pjfSW4/src/cart.ts' is not a module.. Fix every error in the file.",
+      "totalMs": 15231,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-08",
+      "recipe": "fix-test",
+      "shape": "object-literal-shape",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/geometry.ts at line 2: TS2355 A function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.. Fix it without adding new errors.",
+      "totalMs": 16579,
+      "firstCandidatePass": false
+    }
+  ]
+}

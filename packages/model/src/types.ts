@@ -1,6 +1,16 @@
+/** One file a local model needs. `bytes` is the exact size on the server; a download is complete when it matches. */
+export interface ModelFile {
+  name: string;
+  url: string;
+  bytes: number;
+}
+
 export interface ModelRegistryEntry {
   id: string;
+  /** Local GGUF path for a model that is not in ggml-node's registry. The first shard, for a split model. */
   path?: string;
+  /** Files that make up a local model, downloaded by `fcx models pull`. */
+  files?: ModelFile[];
   sha256?: string;
   ctx: number;
   kind: "generation" | "embedding";

@@ -129,6 +129,7 @@ describe.skipIf(!havePython)("verifyPython ignores repo files named like stdlib 
     });
     expect(result.available).toBe(true);
     expect(result.errors).toEqual([]);
-    expect(result.reason).toBeUndefined();
+    // The only acceptable note is the missing-pyflakes one; any other note would mean the planted module ran.
+    expect(result.reason === undefined || /pyflakes/.test(result.reason)).toBe(true);
   });
 });

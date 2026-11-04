@@ -1,0 +1,169 @@
+{
+  "model": "ggml/auto (qwen2.5-1.5b-instruct-q4_k_m)",
+  "generatedAt": "2026-11-04T14:50:18.926Z",
+  "candidateBudget": 6,
+  "synthetic": true,
+  "recipes": {
+    "explain": {
+      "tasks": 8,
+      "passed": 4,
+      "passRate": 0.5,
+      "medianMs": 25022,
+      "medianCandidates": 0,
+      "firstCandidatePassed": 0,
+      "failureReasons": {
+        "recipe:abstained": 4
+      },
+      "claimsKept": 4,
+      "claimsProposed": 45,
+      "citeRate": 0.08888888888888889,
+      "answered": 4
+    }
+  },
+  "results": [
+    {
+      "id": "explain-01",
+      "recipe": "explain",
+      "shape": "retry-loop",
+      "candidates": 0,
+      "status": "answered",
+      "pass": true,
+      "reason": "",
+      "detail": "NO_CITATION",
+      "totalMs": 7254,
+      "metrics": {
+        "kept": 1,
+        "dropped": 1,
+        "proposed": 2,
+        "attempts": 1,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-02",
+      "recipe": "explain",
+      "shape": "cache-get",
+      "candidates": 0,
+      "status": "answered",
+      "pass": true,
+      "reason": "",
+      "detail": "IDENTIFIER_NOT_IN_CITATION",
+      "totalMs": 5327,
+      "metrics": {
+        "kept": 1,
+        "dropped": 1,
+        "proposed": 2,
+        "attempts": 1,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-03",
+      "recipe": "explain",
+      "shape": "parse-pairs",
+      "candidates": 0,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no claim cites a range that supports it",
+      "totalMs": 33536,
+      "metrics": {
+        "kept": 0,
+        "dropped": 10,
+        "proposed": 10,
+        "attempts": 2,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-04",
+      "recipe": "explain",
+      "shape": "debounce",
+      "candidates": 0,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no claim cites a range that supports it",
+      "totalMs": 5694,
+      "metrics": {
+        "kept": 0,
+        "dropped": 1,
+        "proposed": 1,
+        "attempts": 2,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-05",
+      "recipe": "explain",
+      "shape": "money-format",
+      "candidates": 0,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no claim cites a range that supports it",
+      "totalMs": 21530,
+      "metrics": {
+        "kept": 0,
+        "dropped": 12,
+        "proposed": 12,
+        "attempts": 2,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-06",
+      "recipe": "explain",
+      "shape": "queue-drain",
+      "candidates": 0,
+      "status": "answered",
+      "pass": true,
+      "reason": "",
+      "detail": "IDENTIFIER_NOT_IN_CITATION,NO_CITATION",
+      "totalMs": 25022,
+      "metrics": {
+        "kept": 1,
+        "dropped": 2,
+        "proposed": 3,
+        "attempts": 2,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-07",
+      "recipe": "explain",
+      "shape": "header-parse",
+      "candidates": 0,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no claim cites a range that supports it",
+      "totalMs": 45824,
+      "metrics": {
+        "kept": 0,
+        "dropped": 12,
+        "proposed": 12,
+        "attempts": 2,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-08",
+      "recipe": "explain",
+      "shape": "range-sum",
+      "candidates": 0,
+      "status": "answered",
+      "pass": true,
+      "reason": "",
+      "detail": "NO_IDENTIFIER,NO_CITATION",
+      "totalMs": 26981,
+      "metrics": {
+        "kept": 1,
+        "dropped": 2,
+        "proposed": 3,
+        "attempts": 2,
+        "strictPass": false
+      }
+    }
+  ]
+}

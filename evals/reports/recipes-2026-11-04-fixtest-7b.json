@@ -1,0 +1,117 @@
+{
+  "model": "ggml/auto (qwen2.5-1.5b-instruct-q4_k_m)",
+  "generatedAt": "2026-11-04T17:24:47.019Z",
+  "candidateBudget": 6,
+  "synthetic": true,
+  "recipes": {
+    "fix-test": {
+      "tasks": 8,
+      "passed": 5,
+      "passRate": 0.625,
+      "medianMs": 27587,
+      "medianCandidates": 3,
+      "firstCandidatePassed": 2,
+      "failureReasons": {
+        "recipe:abstained": 3
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "fix-test-01",
+      "recipe": "fix-test",
+      "shape": "wrong-argument-type",
+      "candidates": 3,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 27587,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "fix-test-02",
+      "recipe": "fix-test",
+      "shape": "missing-argument",
+      "candidates": 2,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 13540,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "fix-test-03",
+      "recipe": "fix-test",
+      "shape": "wrong-property-name",
+      "candidates": 2,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 11988,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "fix-test-04",
+      "recipe": "fix-test",
+      "shape": "boolean-as-string",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 5762,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "fix-test-05",
+      "recipe": "fix-test",
+      "shape": "string-for-number",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/text.ts at line 4: TS1108 A 'return' statement can only be used within a function body.. Fix it without adding new errors.",
+      "totalMs": 31715,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-06",
+      "recipe": "fix-test",
+      "shape": "misspelled-identifier",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 7876,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "fix-test-07",
+      "recipe": "fix-test",
+      "shape": "wrong-array-type",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/cart.ts at line 4: TS1108 A 'return' statement can only be used within a function body.. Fix it without adding new errors.",
+      "totalMs": 34621,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-08",
+      "recipe": "fix-test",
+      "shape": "object-literal-shape",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "The test file still has a type error at line 4: TS2554 Expected 2 arguments, but got 1.. Fix every error in the file.",
+      "totalMs": 38890,
+      "firstCandidatePass": false
+    }
+  ]
+}

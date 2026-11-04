@@ -40,14 +40,14 @@ Commands:
   trust [path]              Trust a workspace (default: current directory) so its project settings and language servers apply
   memory list|forget|clear  Show, delete or clear local memory   [--kind K] [<id>]
   index [--rebuild|--status] Build, rebuild or show the code index
-  init                      Initialize fcx in a project            (not implemented yet)
-  models list|pull|bench    Manage models                          (not implemented yet)
+  init [path]               Create .frontal-code/ with settings in a project (never overwrites)
+  models list|pull|bench    List, download or benchmark local models (see docs/MODELS.md)
   acp                       Start the ACP server on stdin/stdout (for editors). Logs go to stderr.
 
 Exit codes: 0 applied/proposed/answered/routed, 1 error (also no staged changes, or unsupported),
 2 abstained, 3 declined, 4 escalation declined.`;
 
-export const NOT_IMPLEMENTED = new Set(["init", "models"]);
+export const NOT_IMPLEMENTED = new Set<string>();
 
 type CommandHandler = (args: GlobalArgs, cwd: string) => Promise<number>;
 
@@ -157,6 +157,16 @@ export async function run(args: GlobalArgs): Promise<number> {
 
   if (args.command === "index") {
     return runIndexCommand(args, cwd);
+  }
+
+  if (args.command === "init") {
+    const { runInitCommand } = await import("./commands/init.js");
+    return runInitCommand(args, cwd);
+  }
+
+  if (args.command === "models") {
+    const { runModelsCommand } = await import("./commands/models.js");
+    return runModelsCommand(args);
   }
 
   if (NOT_IMPLEMENTED.has(args.command)) {

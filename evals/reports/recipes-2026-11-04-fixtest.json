@@ -1,0 +1,117 @@
+{
+  "model": "ggml/auto (qwen2.5-1.5b-instruct-q4_k_m)",
+  "generatedAt": "2026-11-04T14:41:32.863Z",
+  "candidateBudget": 6,
+  "synthetic": true,
+  "recipes": {
+    "fix-test": {
+      "tasks": 8,
+      "passed": 0,
+      "passRate": 0,
+      "medianMs": 15955,
+      "medianCandidates": 6,
+      "firstCandidatePassed": 0,
+      "failureReasons": {
+        "recipe:abstained": 8
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "fix-test-01",
+      "recipe": "fix-test",
+      "shape": "wrong-argument-type",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/slug.ts at line 3: TS1109 Expression expected.. Fix it without adding new errors.",
+      "totalMs": 47354,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-02",
+      "recipe": "fix-test",
+      "shape": "missing-argument",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no candidate passed every check",
+      "totalMs": 7735,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-03",
+      "recipe": "fix-test",
+      "shape": "wrong-property-name",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Unknown identifier 'age'. Did you mean: Date, Image, Range?",
+      "totalMs": 12054,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-04",
+      "recipe": "fix-test",
+      "shape": "boolean-as-string",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "The test file still has a type error at line 4: TS2322 Type 'boolean' is not assignable to type 'string'.. Fix every error in the file.",
+      "totalMs": 8427,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-05",
+      "recipe": "fix-test",
+      "shape": "string-for-number",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no candidate passed every check",
+      "totalMs": 15955,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-06",
+      "recipe": "fix-test",
+      "shape": "misspelled-identifier",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no candidate passed every check",
+      "totalMs": 25711,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-07",
+      "recipe": "fix-test",
+      "shape": "wrong-array-type",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/cart.ts at line 1: TS2307 Cannot find module 'lodash' or its corresponding type declarations.. Fix it without adding new errors.",
+      "totalMs": 11127,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-08",
+      "recipe": "fix-test",
+      "shape": "object-literal-shape",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no candidate passed every check",
+      "totalMs": 34824,
+      "firstCandidatePass": false
+    }
+  ]
+}

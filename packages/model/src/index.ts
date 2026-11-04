@@ -21,3 +21,7 @@ export {
 } from "./registry.js";
 export { GgmlNodeModelHost } from "./host.js";
 export { createMockModelHost } from "./mock.js";
+
+export { modelsDir } from "./models-dir.js";
+export { downloadEntry, entryState, fileState } from "./download.js";
+export type { DownloadProgress, FileState } from "./download.js";

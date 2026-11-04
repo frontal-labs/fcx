@@ -98,8 +98,8 @@ Commands:
   ask [question]        Ask a routing question
   undo                  Undo the last task
   index [--rebuild] [--status]  Rebuild or show index status
-  init                  Initialize fcx in a project (not implemented yet)
-  models list|pull|bench  Manage models (not implemented yet; use `ggml-node pull <id>`)
+  init [path]          Create .frontal-code/ with settings (never overwrites existing files)
+  models list|pull|bench  List, download (pull) or benchmark local models; see docs/MODELS.md
   status                Show status
   doctor                Run health checks
   acp                   Start ACP server

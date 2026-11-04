@@ -9,10 +9,10 @@
     "skipLibCheck": true,
     "noEmit": true,
     "rootDir": "./",
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
-    }
+      "@/*": ["./src/*"]
+    },
+    "types": ["node"]
   },
   "include": ["src/**/*", "tsup.config.ts", "tests/**/*"]
 }

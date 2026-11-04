@@ -1,0 +1,1170 @@
+{
+  "model": "ggml/auto (qwen2.5-1.5b-instruct-q4_k_m)",
+  "generatedAt": "2026-11-04T13:04:47.604Z",
+  "candidateBudget": 6,
+  "synthetic": true,
+  "recipes": {
+    "add-types": {
+      "tasks": 10,
+      "passed": 5,
+      "passRate": 0.5,
+      "medianMs": 2231,
+      "medianCandidates": 6,
+      "firstCandidatePassed": 3,
+      "failureReasons": {
+        "recipe:abstained": 5
+      }
+    },
+    "docstring": {
+      "tasks": 9,
+      "passed": 9,
+      "passRate": 1,
+      "medianMs": 572,
+      "medianCandidates": 1,
+      "firstCandidatePassed": 9,
+      "failureReasons": {}
+    },
+    "implement": {
+      "tasks": 9,
+      "passed": 9,
+      "passRate": 1,
+      "medianMs": 1098,
+      "medianCandidates": 2,
+      "firstCandidatePassed": 3,
+      "failureReasons": {}
+    },
+    "refactor-small": {
+      "tasks": 8,
+      "passed": 4,
+      "passRate": 0.5,
+      "medianMs": 2811,
+      "medianCandidates": 4,
+      "firstCandidatePassed": 2,
+      "failureReasons": {
+        "criterion:effect-absent-still-present": 1,
+        "recipe:abstained": 2,
+        "criterion:effect-present-missing": 1
+      }
+    },
+    "rename-extract": {
+      "tasks": 9,
+      "passed": 9,
+      "passRate": 1,
+      "medianMs": 230,
+      "medianCandidates": 1,
+      "firstCandidatePassed": 9,
+      "failureReasons": {}
+    },
+    "write-test": {
+      "tasks": 8,
+      "passed": 4,
+      "passRate": 0.5,
+      "medianMs": 7660,
+      "medianCandidates": 6,
+      "firstCandidatePassed": 0,
+      "failureReasons": {
+        "recipe:abstained": 4
+      }
+    },
+    "fix-test": {
+      "tasks": 8,
+      "passed": 0,
+      "passRate": 0,
+      "medianMs": 8568,
+      "medianCandidates": 6,
+      "firstCandidatePassed": 0,
+      "failureReasons": {
+        "recipe:abstained": 8
+      }
+    },
+    "explain": {
+      "tasks": 8,
+      "passed": 0,
+      "passRate": 0,
+      "medianMs": 28818,
+      "medianCandidates": 0,
+      "firstCandidatePassed": 0,
+      "failureReasons": {
+        "criterion:claims-dropped": 7,
+        "recipe:abstained": 1
+      },
+      "claimsKept": 8,
+      "claimsProposed": 39,
+      "citeRate": 0.20512820512820512,
+      "answered": 7
+    },
+    "commit-message": {
+      "tasks": 8,
+      "passed": 8,
+      "passRate": 1,
+      "medianMs": 1602,
+      "medianCandidates": 1,
+      "firstCandidatePassed": 7,
+      "failureReasons": {},
+      "ruleRates": {
+        "type": 1,
+        "header": 1,
+        "subject-length": 1,
+        "no-period": 1,
+        "single-line-subject": 1,
+        "blank-line-before-body": 1
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "add-types-01",
+      "recipe": "add-types",
+      "shape": "function-return",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "greet at line 1 still has no explicit type. Add a type annotation to its declaration.",
+      "totalMs": 6193,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "add-types-02",
+      "recipe": "add-types",
+      "shape": "const-number",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 683,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "add-types-03",
+      "recipe": "add-types",
+      "shape": "function-boolean",
+      "candidates": 5,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 2155,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "add-types-04",
+      "recipe": "add-types",
+      "shape": "const-object",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 639,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "add-types-05",
+      "recipe": "add-types",
+      "shape": "class-property",
+      "candidates": 2,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1168,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "add-types-06",
+      "recipe": "add-types",
+      "shape": "function-reduce",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Unknown identifier 'function'. Did you mean: Function?",
+      "totalMs": 2355,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "add-types-07",
+      "recipe": "add-types",
+      "shape": "const-array",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 589,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "add-types-08",
+      "recipe": "add-types",
+      "shape": "function-object",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "pair at line 1 still has no explicit type. Add a type annotation to its declaration.",
+      "totalMs": 2380,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "add-types-09",
+      "recipe": "add-types",
+      "shape": "function-predicate",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/add_types_09.ts at line 2: TS2322 Type 'boolean' is not assignable to type 'Function'.. Fix it without adding new errors.",
+      "totalMs": 2231,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "add-types-10",
+      "recipe": "add-types",
+      "shape": "function-template",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "makeId at line 1 still has no explicit type. Add a type annotation to its declaration.",
+      "totalMs": 2395,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "docstring-01",
+      "recipe": "docstring",
+      "shape": "function-clamp",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 478,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "docstring-02",
+      "recipe": "docstring",
+      "shape": "interface",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 490,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "docstring-03",
+      "recipe": "docstring",
+      "shape": "class",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 630,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "docstring-04",
+      "recipe": "docstring",
+      "shape": "arrow-const",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 600,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "docstring-05",
+      "recipe": "docstring",
+      "shape": "function-date",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 572,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "docstring-06",
+      "recipe": "docstring",
+      "shape": "type-alias",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 534,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "docstring-07",
+      "recipe": "docstring",
+      "shape": "generic-chunk",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 678,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "docstring-08",
+      "recipe": "docstring",
+      "shape": "function-median",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 819,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "docstring-09",
+      "recipe": "docstring",
+      "shape": "function-format",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 557,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-01",
+      "recipe": "implement",
+      "shape": "parse-duration",
+      "candidates": 4,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 3806,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-02",
+      "recipe": "implement",
+      "shape": "slugify",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 652,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-03",
+      "recipe": "implement",
+      "shape": "unique",
+      "candidates": 5,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 2359,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-04",
+      "recipe": "implement",
+      "shape": "clamp-percent",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 615,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-05",
+      "recipe": "implement",
+      "shape": "count-words",
+      "candidates": 2,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1129,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-06",
+      "recipe": "implement",
+      "shape": "invert-map",
+      "candidates": 4,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 2911,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-07",
+      "recipe": "implement",
+      "shape": "median",
+      "candidates": 2,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1098,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-08",
+      "recipe": "implement",
+      "shape": "palindrome",
+      "candidates": 2,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 985,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "implement-09",
+      "recipe": "implement",
+      "shape": "method",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 615,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "refactor-small-01",
+      "recipe": "refactor-small",
+      "shape": "loop-to-reduce",
+      "candidates": 6,
+      "status": "verified",
+      "pass": false,
+      "reason": "criterion:effect-absent-still-present",
+      "detail": "for (const",
+      "totalMs": 4521,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "refactor-small-02",
+      "recipe": "refactor-small",
+      "shape": "let-to-const",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 729,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "refactor-small-03",
+      "recipe": "refactor-small",
+      "shape": "optional-chaining",
+      "candidates": 4,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 2051,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "refactor-small-04",
+      "recipe": "refactor-small",
+      "shape": "includes",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/refactor_04.ts at line 2: TS2367 This comparison appears to be unintentional because the types 'boolean' and 'number' have no overlap.. Fix it without adding new errors.",
+      "totalMs": 2811,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "refactor-small-05",
+      "recipe": "refactor-small",
+      "shape": "template-literal",
+      "candidates": 2,
+      "status": "verified",
+      "pass": false,
+      "reason": "criterion:effect-present-missing",
+      "detail": "`Hello, ",
+      "totalMs": 1598,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "refactor-small-06",
+      "recipe": "refactor-small",
+      "shape": "remove-unused",
+      "candidates": 3,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 3001,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "refactor-small-07",
+      "recipe": "refactor-small",
+      "shape": "ternary-to-if",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 862,
+      "firstCandidatePass": true,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "refactor-small-08",
+      "recipe": "refactor-small",
+      "shape": "foreach-to-for-of",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Unknown member 'for' on type 'string[]'. Did you mean: pop, sort?",
+      "totalMs": 3004,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "rename-extract-01",
+      "recipe": "rename-extract",
+      "shape": "function",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 260,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-02",
+      "recipe": "rename-extract",
+      "shape": "const-number",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 235,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-03",
+      "recipe": "rename-extract",
+      "shape": "class",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 230,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-04",
+      "recipe": "rename-extract",
+      "shape": "parameter",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 232,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-05",
+      "recipe": "rename-extract",
+      "shape": "const-array",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 212,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-06",
+      "recipe": "rename-extract",
+      "shape": "function-call",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 211,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-07",
+      "recipe": "rename-extract",
+      "shape": "interface",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 229,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-08",
+      "recipe": "rename-extract",
+      "shape": "let-counter",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 233,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "rename-extract-09",
+      "recipe": "rename-extract",
+      "shape": "parameter-in-template",
+      "candidates": 1,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 215,
+      "firstCandidatePass": true,
+      "acceptedSource": "compiler"
+    },
+    {
+      "id": "write-test-01",
+      "recipe": "write-test",
+      "shape": "add",
+      "candidates": 5,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 4040,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "write-test-02",
+      "recipe": "write-test",
+      "shape": "reverse",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in tests/write_test_02.test.ts at line 1: TS1128 Declaration or statement expected.. Fix it without adding new errors.",
+      "totalMs": 7319,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "write-test-03",
+      "recipe": "write-test",
+      "shape": "csv-line",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Unknown identifier 'encoding'. Define it or import it before use.",
+      "totalMs": 12818,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "write-test-04",
+      "recipe": "write-test",
+      "shape": "clamp",
+      "candidates": 4,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 6081,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "write-test-05",
+      "recipe": "write-test",
+      "shape": "is-leap",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Unknown identifier 'describe'. Define it or import it before use.",
+      "totalMs": 9645,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "write-test-06",
+      "recipe": "write-test",
+      "shape": "initials",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in tests/write_test_06.test.ts at line 3: TS1005 ')' expected.. Fix it without adding new errors.",
+      "totalMs": 7099,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "write-test-07",
+      "recipe": "write-test",
+      "shape": "cents",
+      "candidates": 4,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 8666,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "write-test-08",
+      "recipe": "write-test",
+      "shape": "chunk-list",
+      "candidates": 5,
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 7660,
+      "firstCandidatePass": false,
+      "acceptedSource": "model"
+    },
+    {
+      "id": "fix-test-01",
+      "recipe": "fix-test",
+      "shape": "wrong-argument-type",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/slug.ts at line 1: TS1109 Expression expected.. Fix it without adding new errors.",
+      "totalMs": 6366,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-02",
+      "recipe": "fix-test",
+      "shape": "missing-argument",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/math.ts at line 2: TS1128 Declaration or statement expected.. Fix it without adding new errors.",
+      "totalMs": 7933,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-03",
+      "recipe": "fix-test",
+      "shape": "wrong-property-name",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/users.ts at line 2: TS1109 Expression expected.. Fix it without adding new errors.",
+      "totalMs": 6929,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-04",
+      "recipe": "fix-test",
+      "shape": "boolean-as-string",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/parity.ts at line 1: TS2355 A function whose declared type is neither 'undefined', 'void', nor 'any' must return a value.. Fix it without adding new errors.",
+      "totalMs": 8568,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-05",
+      "recipe": "fix-test",
+      "shape": "string-for-number",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "The test file still has a type error at line 1: TS2306 File '/var/folders/kz/jgdz_yyx49qbmqh3l1txy9dw0000gn/T/fcx-recipe-fix-test-05-xXilGx/src/text.ts' is not a module.. Fix every error in the file.",
+      "totalMs": 7429,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-06",
+      "recipe": "fix-test",
+      "shape": "misspelled-identifier",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "The test file still has a type error at line 1: TS2306 File '/var/folders/kz/jgdz_yyx49qbmqh3l1txy9dw0000gn/T/fcx-recipe-fix-test-06-s39Atj/src/stats.ts' is not a module.. Fix every error in the file.",
+      "totalMs": 20297,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-07",
+      "recipe": "fix-test",
+      "shape": "wrong-array-type",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "The test file still has a type error at line 4: TS2345 Argument of type 'string' is not assignable to parameter of type 'number[]'.. Fix every error in the file.",
+      "totalMs": 8836,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "fix-test-08",
+      "recipe": "fix-test",
+      "shape": "object-literal-shape",
+      "candidates": 6,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "Your edit introduced a new error in src/geometry.ts at line 1: TS2391 Function implementation is missing or not immediately following the declaration.. Fix it without adding new errors.",
+      "totalMs": 10532,
+      "firstCandidatePass": false
+    },
+    {
+      "id": "explain-01",
+      "recipe": "explain",
+      "shape": "retry-loop",
+      "candidates": 0,
+      "status": "answered",
+      "pass": false,
+      "reason": "criterion:claims-dropped",
+      "detail": "IDENTIFIER_NOT_IN_CITATION,NO_CITATION",
+      "totalMs": 23957,
+      "metrics": {
+        "kept": 1,
+        "dropped": 2,
+        "proposed": 3,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "explain-02",
+      "recipe": "explain",
+      "shape": "cache-get",
+      "candidates": 0,
+      "status": "answered",
+      "pass": false,
+      "reason": "criterion:claims-dropped",
+      "detail": "IDENTIFIER_NOT_IN_CITATION",
+      "totalMs": 11793,
+      "metrics": {
+        "kept": 1,
+        "dropped": 1,
+        "proposed": 2,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "explain-03",
+      "recipe": "explain",
+      "shape": "parse-pairs",
+      "candidates": 0,
+      "status": "answered",
+      "pass": false,
+      "reason": "criterion:claims-dropped",
+      "detail": "NO_CITATION,NO_CITATION,NO_CITATION,NO_CITATION,NO_CITATION,NO_CITATION,NO_CITATION,NO_CITATION,NO_CITATION,NO_CITATION",
+      "totalMs": 38926,
+      "metrics": {
+        "kept": 2,
+        "dropped": 10,
+        "proposed": 12,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "explain-04",
+      "recipe": "explain",
+      "shape": "debounce",
+      "candidates": 0,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no claim cites a range that supports it",
+      "totalMs": 7422,
+      "metrics": {
+        "kept": 0,
+        "dropped": 1,
+        "proposed": 1,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "explain-05",
+      "recipe": "explain",
+      "shape": "money-format",
+      "candidates": 0,
+      "status": "answered",
+      "pass": false,
+      "reason": "criterion:claims-dropped",
+      "detail": "NO_IDENTIFIER,NO_IDENTIFIER,NO_IDENTIFIER,NO_IDENTIFIER,NO_IDENTIFIER,NO_IDENTIFIER",
+      "totalMs": 33767,
+      "metrics": {
+        "kept": 1,
+        "dropped": 6,
+        "proposed": 7,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "explain-06",
+      "recipe": "explain",
+      "shape": "queue-drain",
+      "candidates": 0,
+      "status": "answered",
+      "pass": false,
+      "reason": "criterion:claims-dropped",
+      "detail": "IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,NO_CITATION",
+      "totalMs": 28818,
+      "metrics": {
+        "kept": 1,
+        "dropped": 5,
+        "proposed": 6,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "explain-07",
+      "recipe": "explain",
+      "shape": "header-parse",
+      "candidates": 0,
+      "status": "answered",
+      "pass": false,
+      "reason": "criterion:claims-dropped",
+      "detail": "NO_CITATION",
+      "totalMs": 19622,
+      "metrics": {
+        "kept": 1,
+        "dropped": 1,
+        "proposed": 2,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "explain-08",
+      "recipe": "explain",
+      "shape": "range-sum",
+      "candidates": 0,
+      "status": "answered",
+      "pass": false,
+      "reason": "criterion:claims-dropped",
+      "detail": "IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION",
+      "totalMs": 33069,
+      "metrics": {
+        "kept": 1,
+        "dropped": 5,
+        "proposed": 6,
+        "attempts": 2
+      }
+    },
+    {
+      "id": "commit-message-01",
+      "recipe": "commit-message",
+      "shape": "add-function",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1739,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-02",
+      "recipe": "commit-message",
+      "shape": "fix-boundary",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1254,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-03",
+      "recipe": "commit-message",
+      "shape": "docs-readme",
+      "candidates": 6,
+      "firstCandidatePass": false,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 6215,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-04",
+      "recipe": "commit-message",
+      "shape": "add-test",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1258,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-05",
+      "recipe": "commit-message",
+      "shape": "rename-variable",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 930,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-06",
+      "recipe": "commit-message",
+      "shape": "delete-dead-file",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 677,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-07",
+      "recipe": "commit-message",
+      "shape": "bump-config",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1602,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    },
+    {
+      "id": "commit-message-08",
+      "recipe": "commit-message",
+      "shape": "refactor-helper",
+      "candidates": 1,
+      "firstCandidatePass": true,
+      "acceptedSource": "model",
+      "status": "verified",
+      "pass": true,
+      "reason": "",
+      "totalMs": 1693,
+      "metrics": {
+        "rules": {
+          "type": true,
+          "header": true,
+          "subject-length": true,
+          "no-period": true,
+          "single-line-subject": true,
+          "blank-line-before-body": true
+        },
+        "failedRules": []
+      }
+    }
+  ]
+}

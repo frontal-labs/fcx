@@ -43,3 +43,10 @@ The registry entry in `packages/model/src/registry.ts` holds the path to the fir
 ## Fine-tuning
 
 LoRA on the base model, merged into GGUF for shipping. See `training/`.
+
+## Managing models
+
+- `fcx models list`: shows each model and whether it is installed. `*` marks the default.
+- `fcx models pull <id>`: downloads a model with downloadable files (the Qwen2.5-7B files) into the models folder, checking each file's exact size. Files already installed are skipped. Other ids are passed to ggml-node's own `pull`.
+- `fcx models bench [id]`: runs ggml-node's benchmark for a model.
+- The models folder is the repository's `models/` by default. Set `FCX_MODELS_DIR` to use another folder, for example in an installed package.
