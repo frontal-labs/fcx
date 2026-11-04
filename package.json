@@ -8,7 +8,8 @@
   "scripts": {
     "build": "bun run --filter '*' build",
     "lint": "biome check .",
-    "typecheck": "tsc -b",
+    "typecheck": "tsc-rs -b",
+    "typecheck:tsc": "tsc -b",
     "test": "node ./node_modules/.bin/vitest run",
     "prepare": "husky",
     "dev": "bunx tsx cli/src/main.ts",
@@ -49,6 +50,7 @@
     "@types/node": "^26.6.6",
     "husky": "^9.1.7",
     "turbo": "^2.11.10",
+    "tsc-rs": "^0.8.0",
     "typescript": "^5.6.0",
     "typescript-language-server": "^6.0.2",
     "vitest": "^4.1.11"

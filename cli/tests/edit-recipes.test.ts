@@ -70,7 +70,9 @@ describe("fix-test command", () => {
 
   it("applies a verified edit and reports the undo id", async () => {
     const model = scriptedModel([
-      { edits: [{ file: "src/math.ts", search: "return a - b;", replace: "return a + b;" }] },
+      {
+        fixes: [{ file: "src/math.ts", startLine: 2, endLine: 2, replacement: "  return a + b;" }],
+      },
     ]);
     const report = await runFixTestCommand(recipeEnv(sb, model), input);
     expect(report).toMatchObject({ command: "fix-test", recipe: "fix-test", status: "applied" });
@@ -83,7 +85,9 @@ describe("fix-test command", () => {
 
   it("proposes without writing in read-only mode", async () => {
     const model = scriptedModel([
-      { edits: [{ file: "src/math.ts", search: "return a - b;", replace: "return a + b;" }] },
+      {
+        fixes: [{ file: "src/math.ts", startLine: 2, endLine: 2, replacement: "  return a + b;" }],
+      },
     ]);
     const report = await runFixTestCommand(
       recipeEnv(sb, model, { permissionMode: "read-only" }),
@@ -95,7 +99,9 @@ describe("fix-test command", () => {
 
   it("declines in prompt mode when the user says no", async () => {
     const model = scriptedModel([
-      { edits: [{ file: "src/math.ts", search: "return a - b;", replace: "return a + b;" }] },
+      {
+        fixes: [{ file: "src/math.ts", startLine: 2, endLine: 2, replacement: "  return a + b;" }],
+      },
     ]);
     const report = await runFixTestCommand(
       recipeEnv(sb, model, { permissionMode: "prompt", approve: async () => false }),
@@ -181,17 +187,7 @@ describe("types command", () => {
   afterEach(() => sb.cleanup());
 
   it("annotates the named symbol's return type", async () => {
-    const model = scriptedModel([
-      {
-        edits: [
-          {
-            file: "src/math.ts",
-            search: "export function add(a: number, b: number) {",
-            replace: "export function add(a: number, b: number): number {",
-          },
-        ],
-      },
-    ]);
+    const model = scriptedModel([{ types: [{ name: "add", line: 1, type: "number" }] }]);
     const report = await runTypesCommand(recipeEnv(sb, model), {
       file: "src/math.ts",
       symbol: "add",

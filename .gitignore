@@ -57,3 +57,6 @@ coverage/
 # Training (training/): local venv and run outputs (adapters, fused weights, GGUF)
 training/.venv/
 training/runs/
+
+# Local model files (large, downloaded; see docs/MODELS.md)
+/models/

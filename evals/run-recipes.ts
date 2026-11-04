@@ -615,10 +615,14 @@ async function runTask(task: Task): Promise<Outcome> {
         const kept = r.answer.claims.length;
         const dropped = r.dropped.length;
         const proposed = kept + dropped;
-        const metrics = { kept, dropped, proposed, attempts: r.attempts };
+        // Pass rule: the answer keeps at least one claim, and every kept claim passed the citation checks. Dropped
+        // claims are the design working, so they do not fail the task. The strict rule (no claim dropped) is still
+        // recorded as strictPass, so both numbers appear in the report.
         const answered = r.status === "answered";
-        const pass = answered && dropped === 0;
-        const reason = pass ? "" : answered ? "criterion:claims-dropped" : "recipe:abstained";
+        const strictPass = answered && dropped === 0;
+        const metrics = { kept, dropped, proposed, attempts: r.attempts, strictPass };
+        const pass = answered && kept >= 1;
+        const reason = pass ? "" : answered ? "criterion:no-claim-kept" : "recipe:abstained";
         const detail =
           r.status === "abstained"
             ? r.lastError
