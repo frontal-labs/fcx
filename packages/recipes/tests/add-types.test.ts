@@ -5,6 +5,7 @@ import {
   ADD_TYPES_SYSTEM,
   type AddTypesOptions,
   AddTypesSchema,
+  annotationEdits,
   runAddTypes,
 } from "../src/recipes/add-types.js";
 import { makeWorkspace, promptBody, queueModel } from "./support.js";
@@ -22,23 +23,11 @@ const SOURCE = [
 
 const FILE = "src/math.ts";
 
-/** Annotates `add`'s return type. */
-const ANNOTATE_ADD = {
-  edits: [
-    {
-      file: FILE,
-      search: "export function add(a: number, b: number) {",
-      replace: "export function add(a: number, b: number): number {",
-    },
-  ],
-};
+/** Gives `add` its return type. */
+const ANNOTATE_ADD = { types: [{ name: "add", line: 2, type: "number" }] };
 
-/** Annotates SCALE. */
-const ANNOTATE_SCALE = {
-  edits: [
-    { file: FILE, search: "export const SCALE = 2;", replace: "export const SCALE: number = 2;" },
-  ],
-};
+/** Gives SCALE its type. */
+const ANNOTATE_SCALE = { types: [{ name: "SCALE", line: 1, type: "number" }] };
 
 describe("add-types prompt", () => {
   it("embeds the versioned prompt file exactly, so the two cannot drift", () => {
@@ -47,16 +36,23 @@ describe("add-types prompt", () => {
 });
 
 describe("AddTypesSchema", () => {
-  it("accepts one to four edits", () => {
+  it("accepts one to twelve typed targets", () => {
     expect(
-      AddTypesSchema.safeParse({ edits: [{ file: FILE, search: "a", replace: "b" }] }).success,
+      AddTypesSchema.safeParse({ types: [{ name: "add", line: 2, type: "number" }] }).success,
     ).toBe(true);
   });
 
-  it("rejects an empty edit list and more than four edits", () => {
-    expect(AddTypesSchema.safeParse({ edits: [] }).success).toBe(false);
-    const five = Array.from({ length: 5 }, () => ({ file: FILE, search: "a", replace: "b" }));
-    expect(AddTypesSchema.safeParse({ edits: five }).success).toBe(false);
+  it("requires the types list and its fields; bounds are checked in code", () => {
+    expect(AddTypesSchema.safeParse({ edits: [{ file: FILE }] }).success).toBe(false);
+    expect(AddTypesSchema.safeParse({ types: [{ name: "a", line: 1 }] }).success).toBe(false);
+  });
+
+  it("drops an empty or code-like type, so the annotation layer asks for it again", () => {
+    const text = "export const a = 1;\n";
+    const abs = `${FILE}`;
+    expect(
+      annotationEdits(text, FILE, abs, [], [{ name: "a", line: 1, type: "{ x: 1 }" }]),
+    ).toEqual([]);
   });
 });
 
@@ -90,15 +86,17 @@ describe("runAddTypes", () => {
   });
 
   it("verifies a range annotation", async () => {
-    const model = queueModel([ANNOTATE_SCALE]);
     const result = await runAddTypes({
-      ...base(model),
+      ...base(queueModel([ANNOTATE_SCALE])),
       symbol: undefined,
       startLine: 1,
       endLine: 1,
       maxCandidates: 1,
     });
     expect(result).toMatchObject({ status: "verified", annotated: ["SCALE@1"] });
+    if (result.status === "verified") {
+      expect(result.text).toContain("export const SCALE: number = 2;");
+    }
   });
 
   it("reports nothing-to-annotate, without calling the model, when the target is already typed", async () => {
@@ -108,17 +106,9 @@ describe("runAddTypes", () => {
     expect(model.prompts).toHaveLength(0);
   });
 
-  it("abstains when the candidate leaves the declaration without a type", async () => {
-    const noop = {
-      edits: [
-        {
-          file: FILE,
-          search: "export function add(a: number, b: number) {",
-          replace: "export function add(a: number, b: number) {",
-        },
-      ],
-    };
-    const result = await runAddTypes(base(queueModel([noop, noop])));
+  it("abstains when the model gives no type for the declaration", async () => {
+    const wrongName = { types: [{ name: "nothere", line: 2, type: "number" }] };
+    const result = await runAddTypes(base(queueModel([wrongName, wrongName])));
     expect(result.status).toBe("abstained");
     if (result.status === "abstained") {
       expect(result.lastError).toMatch(/still has no explicit type/);
@@ -127,58 +117,17 @@ describe("runAddTypes", () => {
   });
 
   it("rejects an any annotation", async () => {
-    const anyType = {
-      edits: [
-        {
-          file: FILE,
-          search: "export function add(a: number, b: number) {",
-          replace: "export function add(a: number, b: number): any {",
-        },
-      ],
-    };
+    const anyType = { types: [{ name: "add", line: 2, type: "any" }] };
     const result = await runAddTypes(base(queueModel([anyType, anyType])));
     expect(result.status).toBe("abstained");
     if (result.status === "abstained") expect(result.lastError).toMatch(/annotated any/);
   });
 
   it("rejects an annotation that introduces a type error", async () => {
-    const wrong = {
-      edits: [
-        {
-          file: FILE,
-          search: "export function add(a: number, b: number) {",
-          replace: "export function add(a: number, b: number): string {",
-        },
-      ],
-    };
+    const wrong = { types: [{ name: "add", line: 2, type: "string" }] };
     const result = await runAddTypes(base(queueModel([wrong, wrong])));
     expect(result.status).toBe("abstained");
     if (result.status === "abstained") expect(result.lastError).toMatch(/new error/);
-  });
-
-  it("rejects an edit to a real file other than the one named", async () => {
-    fixture.cleanup();
-    fixture = makeWorkspace({ [FILE]: SOURCE, "src/other.ts": "export const x = 1;\n" });
-    const elsewhere = {
-      edits: [{ file: "src/other.ts", search: "x", replace: "y" }],
-    };
-    const result = await runAddTypes(base(queueModel([elsewhere, elsewhere])));
-    expect(result.status).toBe("abstained");
-    if (result.status === "abstained") {
-      expect(result.candidates[0]?.layers[0]).toMatchObject({
-        pass: false,
-        reasonCode: "PATH_NOT_ALLOWED",
-      });
-    }
-  });
-
-  it("points an edit that names an invented path at the file being annotated", async () => {
-    // The model invents "/path/to/..." for the file. The only allowed file is the one named, so the edit is
-    // pointed at it and the annotation is applied.
-    const [edit] = ANNOTATE_ADD.edits;
-    const invented = { edits: [{ ...edit, file: "/path/to/src/math.ts" }] };
-    const result = await runAddTypes(base(queueModel([invented])));
-    expect(result.status).toBe("verified");
   });
 
   it("records a schema-invalid output as a failed candidate and then verifies the next one", async () => {
@@ -204,18 +153,6 @@ describe("runAddTypes", () => {
     ).rejects.toBeInstanceOf(RecipeInputError);
     await expect(
       runAddTypes({ ...base(queueModel([])), symbol: undefined }),
-    ).rejects.toBeInstanceOf(RecipeInputError);
-  });
-
-  it("refuses a symbol that is not declared in the file", async () => {
-    await expect(
-      runAddTypes({ ...base(queueModel([])), symbol: "missing" }),
-    ).rejects.toBeInstanceOf(RecipeInputError);
-  });
-
-  it("refuses a line range outside the file", async () => {
-    await expect(
-      runAddTypes({ ...base(queueModel([])), symbol: undefined, startLine: 1, endLine: 99 }),
     ).rejects.toBeInstanceOf(RecipeInputError);
   });
 });

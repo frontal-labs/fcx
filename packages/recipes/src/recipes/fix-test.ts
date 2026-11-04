@@ -1,3 +1,4 @@
+import { basename } from "node:path";
 /**
  * fix-test: repairs a failing unit test by editing the code under test (or the test itself).
  *
@@ -14,11 +15,12 @@
  * It also does not run linked tests, and it does not run the test runner to produce `failureOutput`; the caller
  * must supply that text, or the prompt says it is missing.
  */
-import type { Edit } from "@fcx/apply";
+import { type Edit, resolveInWorkspace } from "@fcx/apply";
 import type { LayerOutcome } from "@fcx/defense";
 import type { ModelHost } from "@fcx/model";
 import { retrieve } from "@fcx/retrieve";
 import { type Checker, createTsChecker, errorsOnly } from "@fcx/verify";
+import * as z from "zod";
 import { groundLayer, typeCheckLayer } from "../checks.js";
 import {
   RecipeInputError,
@@ -47,8 +49,22 @@ import {
 } from "../engine.js";
 import { FIX_TEST_SYSTEM } from "../prompts.js";
 
-export const FixTestSchema = editsSchema(4);
-export type FixTestOutput = { edits: Edit[] };
+/**
+ * The model names line ranges and the replacement text, instead of search strings. Bounds are checked in code, since
+ * the grammar builder rejects min/max keywords. A search string has to match the
+ * file character for character, and models get that wrong; a line range is checked against the numbered file.
+ */
+export const FixTestSchema = z.object({
+  fixes: z.array(
+    z.object({
+      file: z.string(),
+      startLine: z.number().int(),
+      endLine: z.number().int(),
+      replacement: z.string(),
+    }),
+  ),
+});
+export type FixTestOutput = z.infer<typeof FixTestSchema>;
 
 export const FIX_TEST_SCOPE: VerificationScope = {
   ran: ["edit-apply", "ts-ground", "ts-type-check"],
@@ -146,6 +162,7 @@ export async function runFixTest(options: FixTestOptions): Promise<FixTestResult
         system: FIX_TEST_SYSTEM,
         user: [
           `Allowed files: ${allowed.map((f) => relativeTo(workspace, f)).join(", ")}`,
+          `The failing test is ${testRel}. Code under test is in the other allowed files; fix the code the test calls, not the test file, unless the test itself is wrong.`,
           `Failing test: "${options.testName}" at ${testRel}:${line}`,
           failure ? `First failure output:\n${failure}` : "First failure output: (not available)",
           "",
@@ -157,7 +174,7 @@ export async function runFixTest(options: FixTestOptions): Promise<FixTestResult
           ...(feedback ? ["", `Your previous attempt was rejected: ${feedback}`] : []),
         ].join("\n"),
       }),
-      toEdits: (output) => output.edits,
+      toEdits: (output) => fixesToEdits(output, workspace, allowed),
       layers: [
         { name: "constrain" },
         { name: "anchor" },
@@ -233,4 +250,81 @@ export function fixTestVerify(options: {
     reasonCode: "TARGET_NOT_FIXED",
     feedback: `The test file still has a type error at line ${first.line}: TS${first.code} ${first.message}. Fix every error in the file.`,
   };
+}
+
+/**
+ * Writes the model's line-range fixes into each file. The file is the allowed file the fix names, or the one with the
+ * same name, or the only allowed file. Each file becomes one edit that replaces its whole text, so the anchor layer
+ * sees the complete new text. A fix outside the file's lines throws, which reports it as an invalid candidate.
+ */
+export function fixesToEdits(
+  output: FixTestOutput,
+  workspace: string,
+  allowed: readonly string[],
+): Edit[] {
+  if (output.fixes.length === 0 || output.fixes.length > 4) {
+    throw new Error("a candidate must give between one and four fixes");
+  }
+  const byFile = new Map<string, { startLine: number; endLine: number; replacement: string }[]>();
+  for (const fix of output.fixes) {
+    const target = resolveFixFile(fix.file, workspace, allowed);
+    byFile.set(target, [...(byFile.get(target) ?? []), fix]);
+  }
+  const edits: Edit[] = [];
+  for (const [abs, fixes] of byFile) {
+    const original = readText(abs);
+    const lines = original.split("\n");
+    const rel = relativeTo(workspace, abs);
+    const ordered = [...fixes].sort((a, b) => b.startLine - a.startLine);
+    let previousStart = Number.POSITIVE_INFINITY;
+    for (const fix of ordered) {
+      if (fix.endLine < fix.startLine || fix.endLine > lines.length) {
+        throw new Error(
+          `lines ${fix.startLine}-${fix.endLine} are outside ${rel}, which has ${lines.length} lines`,
+        );
+      }
+      if (fix.endLine >= previousStart) {
+        throw new Error(`two fixes in ${rel} overlap at line ${fix.startLine}`);
+      }
+      previousStart = fix.startLine;
+      const replaced = fix.replacement === "" ? [] : fix.replacement.split("\n");
+      lines.splice(fix.startLine - 1, fix.endLine - fix.startLine + 1, ...replaced);
+    }
+    const before = braceBalance(original);
+    const after = braceBalance(lines.join("\n"));
+    if (before !== after) {
+      throw new Error(
+        `the fix to ${rel} changes the number of { and } (${before - after} unbalanced); keep every brace the replaced lines had`,
+      );
+    }
+    edits.push({ file: rel, search: original, replace: lines.join("\n") });
+  }
+  return edits;
+}
+
+/** The allowed file a fix names: the same path, else the allowed file with the same name, else the only one. */
+function resolveFixFile(file: string, workspace: string, allowed: readonly string[]): string {
+  const direct = (() => {
+    try {
+      return resolveInWorkspace(workspace, file);
+    } catch {
+      return undefined;
+    }
+  })();
+  if (direct !== undefined && allowed.includes(direct)) return direct;
+  const name = basename(file);
+  const sameName = allowed.filter((path) => basename(path) === name);
+  if (sameName.length === 1 && sameName[0] !== undefined) return sameName[0];
+  if (allowed.length === 1 && allowed[0] !== undefined) return allowed[0];
+  throw new Error(`"${file}" is not one of the allowed files`);
+}
+
+/** Opening braces minus closing braces in `text`. Equal values before and after a fix mean no block was cut or opened. */
+export function braceBalance(text: string): number {
+  let balance = 0;
+  for (const ch of text) {
+    if (ch === "{") balance++;
+    else if (ch === "}") balance--;
+  }
+  return balance;
 }

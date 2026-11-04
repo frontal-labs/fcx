@@ -21,6 +21,7 @@ import type { LayerOutcome } from "@fcx/defense";
 import type { ModelHost } from "@fcx/model";
 import { createTsChecker } from "@fcx/verify";
 import ts from "typescript";
+import * as z from "zod";
 import { type LineSpan, groundLayer, typeCheckLayer } from "../checks.js";
 import { RecipeInputError, absoluteIn, numberedRange, readText, relativeTo } from "../context.js";
 import {
@@ -29,26 +30,32 @@ import {
   type LayerEvent,
   type RecipeDefinition,
   type VerificationScope,
-  editsSchema,
   elapsed,
   requireWork,
   runRecipeEngine,
 } from "../engine.js";
 
 /** Versioned in prompts/add-types.md (promptVersion 1). A test keeps this constant identical to that file. */
-export const ADD_TYPES_SYSTEM = `You are a coding agent adding explicit TypeScript type annotations. Given a file, the declarations to annotate (each with the type the TypeScript compiler reports for it), and the code around them, produce search/replace edits that add the annotations.
+export const ADD_TYPES_SYSTEM = `You are a coding agent choosing TypeScript type annotations. Given a file and the declarations to annotate (each with the type the TypeScript compiler reports for it), give the type each declaration should have. The recipe writes the annotations into the file itself.
 
 Constraints:
-- Edit only the file named in the allowed files list.
-- Annotate only the declarations listed as targets. Do not change names, logic, or behavior.
+- Give one entry for each declaration listed as a target, with its name and line exactly as listed.
+- "type" is only a TypeScript type, such as number, string[], or Record<string, number>. Do not include the colon, a default value, or any code.
 - Use a precise type. Do not use any, unknown, or a type assertion. The compiler's reported type is a good answer when it is correct.
 - Only reference types in scope: built-in types, types declared or imported in the file, or types shown in the context. Do not invent type names or import paths.
-- Each search string must match exactly once in the current file (after line-ending normalization).
-- Output must be valid JSON matching the schema: { "edits": [{ "file": "...", "search": "...", "replace": "..." }] }.
-- Use minimal, targeted search/replace blocks. Do not rewrite whole files.`;
+- Output must be valid JSON matching the schema: { "types": [{ "name": "...", "line": 1, "type": "..." }] }.`;
 
-export const AddTypesSchema = editsSchema(4);
-export type AddTypesOutput = { edits: Edit[] };
+// Bounds (1 to 12 entries, a short type) are enforced in code: the grammar builder rejects min/max keywords.
+export const AddTypesSchema = z.object({
+  types: z.array(
+    z.object({
+      name: z.string(),
+      line: z.number().int(),
+      type: z.string(),
+    }),
+  ),
+});
+export type AddTypesOutput = z.infer<typeof AddTypesSchema>;
 
 export const ADD_TYPES_SCOPE: VerificationScope = {
   ran: ["edit-apply", "ts-ground", "ts-type-check", "ts-annotation-check"],
@@ -196,7 +203,7 @@ export async function runAddTypes(options: AddTypesOptions): Promise<AddTypesRes
           ...(feedback ? ["", `Your previous attempt was rejected: ${feedback}`] : []),
         ].join("\n"),
       }),
-      toEdits: (output) => output.edits,
+      toEdits: (output) => annotationEdits(text, rel, abs, targets, output.types),
       layers: [
         { name: "constrain" },
         { name: "anchor" },
@@ -333,4 +340,91 @@ function annotationLayer(candidate: string, targets: readonly NamedDeclaration[]
     }
   }
   return { layer: "verify", pass: true, ms: elapsed(t0) };
+}
+
+/** One annotation the model chose for a target. */
+interface ChosenType {
+  name: string;
+  line: number;
+  type: string;
+}
+
+/**
+ * Writes the chosen types into the file. Each target gets `: <type>` where its declaration takes an annotation: after
+ * the closing parenthesis of a function or method, and after the name of a variable, parameter, or property. The
+ * result is one edit that replaces the whole file, so the anchor layer sees the complete new text.
+ * A target the model gave no type for is left alone, and the annotation layer then asks for it again.
+ */
+export function annotationEdits(
+  text: string,
+  rel: string,
+  abs: string,
+  targets: readonly NamedDeclaration[],
+  chosen: readonly ChosenType[],
+): Edit[] {
+  // A type that is empty, too long, or has a colon or a brace is not a type; drop it, and the annotation layer asks again.
+  const usable = chosen.filter(
+    (c) => c.type.trim() !== "" && c.type.length <= 200 && !/[:;{}=]/.test(c.type),
+  );
+  const sourceFile = ts.createSourceFile(abs, text, ts.ScriptTarget.Latest, true);
+  const inserts: { at: number; type: string }[] = [];
+  for (const target of targets) {
+    const pick =
+      usable.find((c) => c.name === target.name && c.line === target.line) ??
+      usable.find((c) => c.name === target.name);
+    if (pick === undefined) continue;
+    const at = annotationOffset(sourceFile, text, target.pos);
+    if (at !== undefined) inserts.push({ at, type: pick.type });
+  }
+  if (inserts.length === 0) return [];
+  let next = text;
+  for (const insert of [...inserts].sort((a, b) => b.at - a.at)) {
+    next = `${next.slice(0, insert.at)}: ${insert.type}${next.slice(insert.at)}`;
+  }
+  return [{ file: rel, search: text, replace: next }];
+}
+
+/** Offset where the annotation of the declaration whose name starts at `pos` goes, or undefined. */
+function annotationOffset(
+  sourceFile: ts.SourceFile,
+  text: string,
+  pos: number,
+): number | undefined {
+  let found: number | undefined;
+  const visit = (node: ts.Node): void => {
+    if (found !== undefined) return;
+    if (
+      (ts.isFunctionDeclaration(node) || ts.isMethodDeclaration(node)) &&
+      node.name &&
+      node.name.getStart(sourceFile) === pos
+    ) {
+      found = closingParen(text, node.parameters.pos) + 1;
+      return;
+    }
+    if (
+      (ts.isVariableDeclaration(node) || ts.isParameter(node) || ts.isPropertyDeclaration(node)) &&
+      ts.isIdentifier(node.name) &&
+      node.name.getStart(sourceFile) === pos
+    ) {
+      found = node.name.end;
+      return;
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(sourceFile);
+  return found;
+}
+
+/** The index of the parenthesis that closes the one open before `from`, scanning parameter text. */
+function closingParen(text: string, from: number): number {
+  let depth = 1;
+  for (let i = from; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === "(") depth++;
+    else if (ch === ")") {
+      depth--;
+      if (depth === 0) return i;
+    }
+  }
+  return text.length - 1;
 }

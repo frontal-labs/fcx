@@ -325,6 +325,7 @@ export async function runRecipeEngine<O>(options: RecipeRunOptions<O>): Promise<
 
     let output: O;
     let edits: Edit[];
+    let parsed = false;
     try {
       const result = await options.model.generateObject<O>({
         schema: recipe.schema,
@@ -333,13 +334,16 @@ export async function runRecipeEngine<O>(options: RecipeRunOptions<O>): Promise<
         maxTokens: recipe.maxTokens ?? 768,
       });
       output = recipe.schema.parse(result.object);
+      parsed = true;
       if (recipe.normalize) output = recipe.normalize(output);
       edits = pinEditsToTarget(recipe.toEdits(output), options.workspace, options.allowedFiles);
     } catch (error) {
       // A model that cannot load is an environment problem, not a bad candidate. Let it reach the caller.
       if (isModelLoadFailure(error)) throw error;
       const message = error instanceof Error ? error.message : String(error);
-      feedback = `The previous output did not match the required JSON schema (${message}). Output only the JSON object.`;
+      feedback = parsed
+        ? `Your output was valid, but its edits could not be built: ${message}. Correct those lines and output only the JSON object.`
+        : `The previous output did not match the required JSON schema (${message}). Output only the JSON object.`;
       reports.push({
         source: "model",
         temperature,

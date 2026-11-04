@@ -40,45 +40,45 @@ describe("fix-test", () => {
     maxCandidates,
   });
 
-  it("verifies an edit to the function under test and says the test was not run", async () => {
-    const model = queueModel([
-      { edits: [{ file: "src/math.ts", search: "return a - b;", replace: "return a + b;" }] },
-    ]);
+  const RETURN_FIX = {
+    fixes: [{ file: "src/math.ts", startLine: 2, endLine: 2, replacement: "  return a + b;" }],
+  };
+
+  it("verifies a line-range fix to the function under test and says the test was not run", async () => {
+    const model = queueModel([RETURN_FIX]);
     const result = await runFixTest(base(model, 1));
     expect(result.status).toBe("verified");
     if (result.status === "verified") {
-      expect(result.edits[0]).toMatchObject({ file: "src/math.ts", replace: "return a + b;" });
+      expect(result.edits[0]).toMatchObject({ file: "src/math.ts" });
+      expect(result.edits[0]?.replace).toContain("return a + b;");
       expect(result.verification.notRun.join(" ")).toMatch(/test-run/);
     }
     expect(model.prompts[0]).toContain('Failing test: "adds two numbers"');
     expect(model.prompts[0]).toContain("First failure output: (not available)");
   });
 
-  it("abstains when every candidate is rejected by the anchor layer", async () => {
-    const bad = {
-      edits: [{ file: "src/math.ts", search: "return a * b;", replace: "return a + b;" }],
+  it("rejects a fix whose lines are outside the file", async () => {
+    const outside = {
+      fixes: [{ file: "src/math.ts", startLine: 9, endLine: 9, replacement: "x" }],
     };
-    const result = await runFixTest(base(queueModel([bad, bad])));
+    const result = await runFixTest(base(queueModel([outside, outside])));
     expect(result.status).toBe("abstained");
     if (result.status === "abstained") {
       expect(result.candidates).toHaveLength(2);
-      expect(result.lastError).toMatch(/does not match the file exactly/);
+      expect(result.candidates[0]?.error).toMatch(/outside src\/math\.ts/);
     }
   });
 
   it("records a schema-invalid output as a failed candidate and then verifies the next one", async () => {
-    const model = queueModel([
-      { edits: [] },
-      { edits: [{ file: "src/math.ts", search: "return a - b;", replace: "return a + b;" }] },
-    ]);
+    const model = queueModel([{ fixes: [] }, RETURN_FIX]);
     const result = await runFixTest(base(model));
     expect(result.status).toBe("verified");
     if (result.status === "verified")
       expect(result.candidates[0]).toMatchObject({ source: "model", pass: false });
-    expect(model.prompts[1]).toContain("did not match the required JSON schema");
+    expect(model.prompts[1]).toContain("between one and four fixes");
   });
 
-  it("rejects an edit that leaves the test file with the type error it was asked to fix", async () => {
+  it("rejects a fix that leaves the test file with the type error it was asked to fix", async () => {
     fixture.cleanup();
     fixture = makeWorkspace({
       "src/math.ts": MATH,
@@ -86,8 +86,13 @@ describe("fix-test", () => {
       "tests/globals.d.ts": "declare function it(name: string, fn: () => void): void;\n",
     });
     const unrelated = {
-      edits: [
-        { file: "tests/math.test.ts", search: "adds two numbers", replace: "adds two numbers." },
+      fixes: [
+        {
+          file: "tests/math.test.ts",
+          startLine: 3,
+          endLine: 3,
+          replacement: 'it("adds two numbers.", () => {',
+        },
       ],
     };
     const result = await runFixTest(base(queueModel([unrelated, unrelated])));
@@ -97,21 +102,14 @@ describe("fix-test", () => {
     }
   });
 
-  it("rejects an edit to a file outside the allowed set", async () => {
-    const events: LayerEvent[] = [];
-    const model = queueModel([{ edits: [{ file: "src/other.ts", search: '"x"', replace: "1" }] }]);
+  it("never edits a file outside the allowed set", async () => {
+    const model = queueModel([
+      { fixes: [{ file: "src/other.ts", startLine: 1, endLine: 1, replacement: "1" }] },
+    ]);
     // A one-token budget keeps optional blocks out, so src/other.ts is not in the bundle's allow-list.
-    const result = await runFixTest({
-      ...base(model, 1),
-      contextBudgetTokens: 1,
-      onLayer: (e) => events.push(e),
-    });
-    expect(result.status).toBe("abstained");
-    expect(events[0]).toMatchObject({
-      layer: "constrain",
-      pass: false,
-      reasonCode: "PATH_NOT_ALLOWED",
-    });
+    const result = await runFixTest({ ...base(model, 1), contextBudgetTokens: 1 });
+    // With one allowed file, a fix that names another path is pointed at that file, never at the other one.
+    expect(JSON.stringify(result)).not.toContain("src/other.ts");
   });
 
   it("rejects a test name that is not in the file", async () => {
