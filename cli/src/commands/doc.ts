@@ -7,6 +7,7 @@ import {
   absoluteTarget,
   abstainedRun,
   applyVerified,
+  candidateMetrics,
   failedRun,
   formatBase,
   layerLogger,
@@ -42,12 +43,19 @@ export async function runDocCommand(env: RecipeEnv, input: DocInput): Promise<Do
       onLayer: layerLogger(env.logsDir, "doc"),
       instructions: state.instructions,
     });
+    const metrics = candidateMetrics(result.candidates);
     if (result.status === "abstained") {
       return abstainedRun(state, {
         file: input.file,
         lastError: result.lastError,
         bestCandidate: result.bestCandidate,
         candidates: result.candidates.length,
+        candidatesTried: metrics.candidatesTried,
+        firstPassCandidate: metrics.firstPassCandidate,
+        abstainedReason: result.lastError,
+        contextFiles: metrics.contextFiles,
+        promptChars: metrics.promptChars,
+        promptTokens: metrics.promptTokens,
         scope: result.verification,
         instructionsTruncated: result.instructionsTruncated,
       });
@@ -56,6 +64,11 @@ export async function runDocCommand(env: RecipeEnv, input: DocInput): Promise<Do
       ...(await applyVerified(state, result.edits, new Map([[input.file, base]]), {
         file: result.file,
         candidates: result.candidates.length,
+        candidatesTried: metrics.candidatesTried,
+        firstPassCandidate: metrics.firstPassCandidate,
+        contextFiles: metrics.contextFiles,
+        promptChars: metrics.promptChars,
+        promptTokens: metrics.promptTokens,
         scope: result.verification,
         instructionsTruncated: result.instructionsTruncated,
       })),

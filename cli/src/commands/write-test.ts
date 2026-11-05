@@ -4,6 +4,7 @@ import {
   type RecipeEnv,
   type RecipeReportBase,
   abstainedRun,
+  candidateMetrics,
   completeRun,
   failedRun,
   formatBase,
@@ -53,6 +54,7 @@ export async function runWriteTestCommand(
     return { ...failedRun(state, error), ...extra };
   }
 
+  const metrics = candidateMetrics(result.candidates);
   if (result.status === "abstained") {
     return {
       ...abstainedRun(state, {
@@ -60,19 +62,29 @@ export async function runWriteTestCommand(
         lastError: result.lastError,
         bestCandidate: result.bestCandidate,
         candidates: result.candidates.length,
+        candidatesTried: metrics.candidatesTried,
+        firstPassCandidate: metrics.firstPassCandidate,
+        abstainedReason: result.lastError,
+        contextFiles: metrics.contextFiles,
+        promptChars: metrics.promptChars,
+        promptTokens: metrics.promptTokens,
         scope: result.verification,
         instructionsTruncated: result.instructionsTruncated,
       }),
       ...extra,
     };
   }
-  // @fcx/apply edits existing files only, so the new test file is reported and never written.
   state.warnings.push("the test file is not written: fcx does not create new files yet");
   return {
     ...completeRun(state, {
       status: "proposed",
       file: result.file,
       candidates: result.candidates.length,
+      candidatesTried: metrics.candidatesTried,
+      firstPassCandidate: metrics.firstPassCandidate,
+      contextFiles: metrics.contextFiles,
+      promptChars: metrics.promptChars,
+      promptTokens: metrics.promptTokens,
       scope: result.verification,
       instructionsTruncated: result.instructionsTruncated,
     }),

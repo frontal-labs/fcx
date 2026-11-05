@@ -41,7 +41,7 @@ export const IMPLEMENT_SCOPE: VerificationScope = {
 };
 
 export interface ImplementOptions {
-  model: Pick<ModelHost, "generateObject">;
+  model: Pick<ModelHost, "generateObject" | "countTokens">;
   workspace: string;
   /** The file that declares the stub, workspace-relative or absolute. */
   file: string;
@@ -157,6 +157,7 @@ export async function runImplement(options: ImplementOptions): Promise<Implement
         allowedFiles: [abs],
         primaryFile: abs,
         maxCandidates: options.maxCandidates,
+        countTokens: options.model.countTokens,
         onLayer: options.onLayer,
         instructions: options.instructions,
       }),

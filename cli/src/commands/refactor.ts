@@ -7,6 +7,7 @@ import {
   absoluteTarget,
   abstainedRun,
   applyVerified,
+  candidateMetrics,
   failedRun,
   formatBase,
   layerLogger,
@@ -47,6 +48,7 @@ export async function runRefactorCommand(
       onLayer: layerLogger(env.logsDir, "refactor"),
       instructions: state.instructions,
     });
+    const metrics = candidateMetrics(result.candidates);
     if (result.status === "abstained") {
       return {
         ...abstainedRun(state, {
@@ -54,6 +56,12 @@ export async function runRefactorCommand(
           lastError: result.lastError,
           bestCandidate: result.bestCandidate,
           candidates: result.candidates.length,
+          candidatesTried: metrics.candidatesTried,
+          firstPassCandidate: metrics.firstPassCandidate,
+          abstainedReason: result.lastError,
+          contextFiles: metrics.contextFiles,
+          promptChars: metrics.promptChars,
+          promptTokens: metrics.promptTokens,
           scope: result.verification,
           instructionsTruncated: result.instructionsTruncated,
         }),
@@ -61,11 +69,15 @@ export async function runRefactorCommand(
         allowedFiles: result.allowedFiles,
       };
     }
-    // The selection's file is verified against the text read here. Caller files are read when the plan is made.
     return {
       ...(await applyVerified(state, result.edits, new Map([[input.file, base]]), {
         file: input.file,
         candidates: result.candidates.length,
+        candidatesTried: metrics.candidatesTried,
+        firstPassCandidate: metrics.firstPassCandidate,
+        contextFiles: metrics.contextFiles,
+        promptChars: metrics.promptChars,
+        promptTokens: metrics.promptTokens,
         scope: result.verification,
         instructionsTruncated: result.instructionsTruncated,
       })),

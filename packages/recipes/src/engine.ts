@@ -73,6 +73,12 @@ export interface CandidateReport {
   error?: string;
   layers: LayerOutcome[];
   edits?: Edit[];
+  /** Estimated tokens in the prompt sent to the model (model candidates only). */
+  promptTokens?: number;
+  /** Byte size of the context portion of the prompt (model candidates only). */
+  contextBytes?: number;
+  /** Number of distinct files whose content appears in the context (model candidates only). */
+  filesPacked?: number;
 }
 
 export interface LayerEvent {
@@ -193,6 +199,10 @@ export interface RecipeRunOptions<O> {
   readonly onLayer?: (event: LayerEvent) => void;
   /** False when the caller found nothing to fix. The engine then returns `no-diagnostics` without calling the model. */
   readonly hasWork?: boolean;
+  /** Counts tokens in a prompt. When absent, prompt token estimates are not reported. */
+  readonly countTokens?: (text: string) => number;
+  /** Number of distinct files whose content appears in the context, when known by the recipe. */
+  readonly filesPacked?: number;
   /**
    * The project instruction block (plan §12.2). The engine puts it in the user part of every candidate's prompt,
    * after the system text. Empty or undefined leaves the prompt unchanged. See src/instructions.ts for the budget.
@@ -323,13 +333,22 @@ export async function runRecipeEngine<O>(options: RecipeRunOptions<O>): Promise<
     const prompt = recipe.prompt(feedback);
     publishCandidate({ phase: "start", ordinal: index + 1, of, source: "model", temperature });
 
+    const promptText = `${prompt.system}\n\n${withInstructions(prompt.user, instructions.text)}`;
+    let promptTokens: number | undefined;
+    let contextBytes: number | undefined;
+    let filesPacked: number | undefined;
+    if (options.countTokens) {
+      promptTokens = options.countTokens(promptText);
+      contextBytes = Buffer.byteLength(promptText, "utf8");
+    }
+    filesPacked = options.filesPacked;
     let output: O;
     let edits: Edit[];
     let parsed = false;
     try {
       const result = await options.model.generateObject<O>({
         schema: recipe.schema,
-        prompt: `${prompt.system}\n\n${withInstructions(prompt.user, instructions.text)}`,
+        prompt: promptText,
         temperature,
         maxTokens: recipe.maxTokens ?? 768,
       });
@@ -351,6 +370,9 @@ export async function runRecipeEngine<O>(options: RecipeRunOptions<O>): Promise<
         pass: false,
         error: message,
         layers: [],
+        promptTokens,
+        contextBytes,
+        filesPacked,
       });
       options.onLayer?.({
         file: options.primaryFile,
@@ -382,6 +404,9 @@ export async function runRecipeEngine<O>(options: RecipeRunOptions<O>): Promise<
       pass: passed,
       layers,
       edits,
+      promptTokens,
+      contextBytes,
+      filesPacked,
     });
     publishCandidate({
       phase: "end",

@@ -5,6 +5,7 @@ import {
   type RecipeReportBase,
   abstainedRun,
   applyVerified,
+  candidateMetrics,
   failedRun,
   formatBase,
   layerLogger,
@@ -43,12 +44,19 @@ export async function runRenameCommand(env: RecipeEnv, input: RenameInput): Prom
       onLayer: layerLogger(env.logsDir, "rename"),
       instructions: state.instructions,
     });
+    const metrics = candidateMetrics(result.candidates);
     if (result.status === "abstained") {
       return {
         ...abstainedRun(state, {
           file: input.file,
           lastError: result.lastError,
           candidates: result.candidates.length,
+          candidatesTried: metrics.candidatesTried,
+          firstPassCandidate: metrics.firstPassCandidate,
+          abstainedReason: result.lastError,
+          contextFiles: metrics.contextFiles,
+          promptChars: metrics.promptChars,
+          promptTokens: metrics.promptTokens,
           scope: result.verification,
           instructionsTruncated: result.instructionsTruncated,
         }),
@@ -56,13 +64,17 @@ export async function runRenameCommand(env: RecipeEnv, input: RenameInput): Prom
         newName: input.newName,
       };
     }
-    // Each file's edit replaces its whole verified text, so the apply step checks the exact text the rename used.
     const edits = result.files.map((f) => ({ file: f.file, search: f.baseText, replace: f.text }));
     const bases = new Map(result.files.map((f) => [f.file, f.baseText] as const));
     return {
       ...(await applyVerified(state, edits, bases, {
         file: input.file,
         candidates: result.candidates.length,
+        candidatesTried: metrics.candidatesTried,
+        firstPassCandidate: metrics.firstPassCandidate,
+        contextFiles: metrics.contextFiles,
+        promptChars: metrics.promptChars,
+        promptTokens: metrics.promptTokens,
         scope: result.verification,
         instructionsTruncated: result.instructionsTruncated,
       })),

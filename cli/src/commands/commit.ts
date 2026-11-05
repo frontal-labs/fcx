@@ -10,6 +10,7 @@ import {
   type RecipeEnv,
   type RecipeReportBase,
   abstainedRun,
+  candidateMetrics,
   completeRun,
   failedRun,
   formatBase,
@@ -55,12 +56,19 @@ export async function runCommitCommand(env: RecipeEnv, input: CommitInput): Prom
         ...extra,
       };
     }
+    const metrics = candidateMetrics(result.candidates);
     if (result.status === "abstained") {
       if (result.diffTruncated) state.warnings.push("the staged diff was cut to its size limit");
       return {
         ...abstainedRun(state, {
           lastError: result.lastError,
           candidates: result.candidates.length,
+          candidatesTried: metrics.candidatesTried,
+          firstPassCandidate: metrics.firstPassCandidate,
+          abstainedReason: result.lastError,
+          contextFiles: metrics.contextFiles,
+          promptChars: metrics.promptChars,
+          promptTokens: metrics.promptTokens,
           scope: result.verification,
           instructionsTruncated: result.instructionsTruncated,
         }),
@@ -70,6 +78,11 @@ export async function runCommitCommand(env: RecipeEnv, input: CommitInput): Prom
     if (result.diffTruncated) state.warnings.push("the staged diff was cut to its size limit");
     const body = {
       candidates: result.candidates.length,
+      candidatesTried: metrics.candidatesTried,
+      firstPassCandidate: metrics.firstPassCandidate,
+      contextFiles: metrics.contextFiles,
+      promptChars: metrics.promptChars,
+      promptTokens: metrics.promptTokens,
       scope: result.verification,
       instructionsTruncated: result.instructionsTruncated,
     };

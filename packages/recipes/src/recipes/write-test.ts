@@ -57,7 +57,7 @@ export const WRITE_TEST_SCOPE: VerificationScope = {
 };
 
 export interface WriteTestOptions {
-  model: Pick<ModelHost, "generateObject">;
+  model: Pick<ModelHost, "generateObject" | "countTokens">;
   workspace: string;
   /** The file that declares the symbol, workspace-relative or absolute. */
   file: string;
@@ -176,6 +176,7 @@ export async function runWriteTest(options: WriteTestOptions): Promise<WriteTest
         allowedFiles: [],
         primaryFile: sourcePath,
         maxCandidates: options.maxCandidates,
+        countTokens: options.model.countTokens,
         onLayer: options.onLayer,
         instructions: options.instructions,
       }),

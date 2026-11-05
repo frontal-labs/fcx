@@ -8,6 +8,7 @@ import {
   absoluteTarget,
   abstainedRun,
   applyVerified,
+  candidateMetrics,
   failedRun,
   formatBase,
   layerLogger,
@@ -51,6 +52,7 @@ export async function runFixTestCommand(
       onLayer: layerLogger(env.logsDir, "fix-test"),
       instructions: state.instructions,
     });
+    const metrics = candidateMetrics(result.candidates);
     if (result.status === "abstained") {
       return {
         ...abstainedRun(state, {
@@ -58,6 +60,12 @@ export async function runFixTestCommand(
           lastError: result.lastError,
           bestCandidate: result.bestCandidate,
           candidates: result.candidates.length,
+          candidatesTried: metrics.candidatesTried,
+          firstPassCandidate: metrics.firstPassCandidate,
+          abstainedReason: result.lastError,
+          contextFiles: metrics.contextFiles,
+          promptChars: metrics.promptChars,
+          promptTokens: metrics.promptTokens,
           scope: result.verification,
           instructionsTruncated: result.instructionsTruncated,
         }),
@@ -68,6 +76,11 @@ export async function runFixTestCommand(
       ...(await applyVerified(state, result.edits, new Map([[input.file, base]]), {
         file: input.file,
         candidates: result.candidates.length,
+        candidatesTried: metrics.candidatesTried,
+        firstPassCandidate: metrics.firstPassCandidate,
+        contextFiles: metrics.contextFiles,
+        promptChars: metrics.promptChars,
+        promptTokens: metrics.promptTokens,
         scope: result.verification,
         instructionsTruncated: result.instructionsTruncated,
       })),

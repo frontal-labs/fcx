@@ -57,7 +57,7 @@ export type FixResult =
     };
 
 export interface FixOptions {
-  model: Pick<ModelHost, "generateObject">;
+  model: Pick<ModelHost, "generateObject"> & { countTokens?: (text: string) => number };
   checker: Checker;
   workspace: string;
   /** Absolute path of the file to fix. */
@@ -156,6 +156,7 @@ export async function runFixDiagnostic(options: FixOptions): Promise<FixResult> 
     primaryFile: options.file,
     maxCandidates: options.maxCandidates,
     readFile,
+    countTokens: options.model.countTokens,
     onLayer: options.onLayer,
     instructions: options.instructions,
   });

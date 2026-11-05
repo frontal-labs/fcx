@@ -58,7 +58,7 @@ const SNIPPET_RADIUS = 3;
 const MAX_IDENTIFIERS = 60;
 
 export interface RefactorSmallOptions {
-  model: Pick<ModelHost, "generateObject">;
+  model: Pick<ModelHost, "generateObject" | "countTokens">;
   workspace: string;
   /** The file that holds the selection, workspace-relative or absolute. */
   file: string;
@@ -178,6 +178,7 @@ export async function runRefactorSmall(
         allowedFiles,
         primaryFile: abs,
         maxCandidates: options.maxCandidates,
+        countTokens: options.model.countTokens,
         onLayer: options.onLayer,
         instructions: options.instructions,
       }),

@@ -89,7 +89,7 @@ const SUBJECT_MAX = 72;
 const HEADER = new RegExp(`^(${COMMIT_TYPES.join("|")})(?:\\(([^()\\r\\n]+)\\))?!?: (.+)$`);
 
 export interface CommitMessageOptions {
-  model: Pick<ModelHost, "generateObject">;
+  model: Pick<ModelHost, "generateObject" | "countTokens">;
   /** The repository directory. */
   repo: string;
   /** Number of model candidates to try (plan §10: 4 on tier S, 6 on tier M). */
@@ -197,6 +197,7 @@ export async function runCommitMessage(
       allowedFiles: [],
       primaryFile: repo,
       maxCandidates: options.maxCandidates,
+      countTokens: options.model.countTokens,
       onLayer: options.onLayer,
       instructions: options.instructions,
     }),

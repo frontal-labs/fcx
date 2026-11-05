@@ -11,7 +11,12 @@ import {
 import type { PermissionMode } from "@fcx/config";
 
 import type { ModelHost } from "@fcx/model";
-import { type LayerEvent, RecipeInputError, type VerificationScope } from "@fcx/recipes";
+import {
+  type CandidateReport,
+  type LayerEvent,
+  RecipeInputError,
+  type VerificationScope,
+} from "@fcx/recipes";
 import type { GlobalArgs, OutputFormat } from "../args.js";
 import { emit } from "../output.js";
 import { askToApply, writesPermitted } from "./approval.js";
@@ -45,6 +50,18 @@ export interface RecipeReportBase {
   edits?: Edit[];
   undoId?: string;
   candidates: number;
+  /** How many candidates were attempted (covers compiler + model candidates). */
+  candidatesTried?: number;
+  /** The 1-based ordinal of the first candidate that passed, or undefined when none passed. */
+  firstPassCandidate?: number;
+  /** The reason the run abstained, when it did. */
+  abstainedReason?: string;
+  /** How many distinct files were packed into the context. */
+  contextFiles?: number;
+  /** Character count of the prompt sent to the model. */
+  promptChars?: number;
+  /** Estimated token count of the prompt sent to the model. */
+  promptTokens?: number;
   lastError?: string;
   error?: { code: string; message: string };
   /** Checks the recipe did not run, from its verification scope. */
@@ -58,7 +75,7 @@ export interface RecipeReportBase {
 /** Everything a recipe command needs from the environment. Tests build this directly with a scripted model. */
 export interface RecipeEnv {
   workspace: string;
-  model: Pick<ModelHost, "generateObject">;
+  model: Pick<ModelHost, "generateObject" | "countTokens">;
   maxCandidates: number;
   indexPath: string;
   undoRoot: string;
@@ -121,6 +138,12 @@ export function completeRun(
     edits?: Edit[];
     undoId?: string;
     candidates?: number;
+    candidatesTried?: number;
+    firstPassCandidate?: number;
+    abstainedReason?: string;
+    contextFiles?: number;
+    promptChars?: number;
+    promptTokens?: number;
     lastError?: string;
     scope?: VerificationScope;
     instructionsTruncated?: boolean;
@@ -137,11 +160,42 @@ export function completeRun(
     edits: outcome.edits,
     undoId: outcome.undoId,
     candidates: outcome.candidates ?? 0,
+    candidatesTried: outcome.candidatesTried,
+    firstPassCandidate: outcome.firstPassCandidate,
+    abstainedReason: outcome.abstainedReason,
+    contextFiles: outcome.contextFiles,
+    promptChars: outcome.promptChars,
+    promptTokens: outcome.promptTokens,
     lastError: outcome.lastError,
     notChecked: outcome.scope ? [...outcome.scope.notRun] : [],
     instructions: state.instructions,
     warnings,
     ms: Math.round(performance.now() - state.t0),
+  };
+}
+
+/** Computes run-level metrics from a recipe's candidate reports. */
+export function candidateMetrics(candidates: CandidateReport[]): {
+  candidatesTried: number;
+  firstPassCandidate: number | undefined;
+  contextFiles: number | undefined;
+  promptChars: number | undefined;
+  promptTokens: number | undefined;
+} {
+  const candidatesTried = candidates.length;
+  const firstPass = candidates.findIndex((c) => c.pass);
+  const contextFiles =
+    candidates.length > 0 ? Math.max(...candidates.map((c) => c.filesPacked ?? 0)) : undefined;
+  const promptChars =
+    candidates.length > 0 ? Math.max(...candidates.map((c) => c.contextBytes ?? 0)) : undefined;
+  const promptTokens =
+    candidates.length > 0 ? Math.max(...candidates.map((c) => c.promptTokens ?? 0)) : undefined;
+  return {
+    candidatesTried,
+    firstPassCandidate: firstPass === -1 ? undefined : firstPass + 1,
+    contextFiles: contextFiles === 0 ? undefined : contextFiles,
+    promptChars: promptChars === 0 ? undefined : promptChars,
+    promptTokens: promptTokens === 0 ? undefined : promptTokens,
   };
 }
 
@@ -237,6 +291,18 @@ export async function applyRecipeEdits(
 export interface RecipeResultBody {
   file?: string;
   candidates: number;
+  /** How many candidates were attempted. */
+  candidatesTried?: number;
+  /** The 1-based ordinal of the first candidate that passed. */
+  firstPassCandidate?: number;
+  /** The reason the run abstained, when it did. */
+  abstainedReason?: string;
+  /** How many distinct files were packed into the context. */
+  contextFiles?: number;
+  /** Character count of the prompt sent to the model. */
+  promptChars?: number;
+  /** Estimated token count of the prompt sent to the model. */
+  promptTokens?: number;
   scope: VerificationScope;
   instructionsTruncated: boolean;
 }

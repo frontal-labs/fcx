@@ -72,7 +72,7 @@ export const FIX_TEST_SCOPE: VerificationScope = {
 };
 
 export interface FixTestOptions {
-  model: Pick<ModelHost, "generateObject">;
+  model: Pick<ModelHost, "generateObject" | "countTokens">;
   workspace: string;
   /** The test file, workspace-relative or absolute. */
   testFile: string;
@@ -195,6 +195,7 @@ export async function runFixTest(options: FixTestOptions): Promise<FixTestResult
         allowedFiles: allowed,
         primaryFile: testPath,
         maxCandidates: options.maxCandidates,
+        countTokens: options.model.countTokens,
         onLayer: options.onLayer,
         instructions: options.instructions,
       }),

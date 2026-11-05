@@ -79,7 +79,7 @@ export interface FixCommandOptions {
   permissionMode: PermissionMode;
   dryRun: boolean;
   maxCandidates: number;
-  model: Pick<ModelHost, "generateObject">;
+  model: Pick<ModelHost, "generateObject"> & { countTokens?: (text: string) => number };
   /** Called only in `prompt` mode. Returns true to apply. */
   approve: (proposal: Proposal) => Promise<boolean>;
   undoRoot: string;

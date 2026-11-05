@@ -129,7 +129,7 @@ export function isValidIdentifier(name: string): boolean {
 }
 
 export interface RenameExtractOptions {
-  model: Pick<ModelHost, "generateObject">;
+  model: Pick<ModelHost, "generateObject" | "countTokens">;
   workspace: string;
   /** The TypeScript file, workspace-relative or absolute. */
   file: string;
@@ -391,6 +391,7 @@ export async function runRenameExtract(options: RenameExtractOptions): Promise<R
         allowedFiles: [abs],
         primaryFile: abs,
         maxCandidates: options.maxCandidates,
+        countTokens: options.model.countTokens,
         onLayer: options.onLayer,
         instructions: options.instructions,
       }),

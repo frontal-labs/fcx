@@ -79,7 +79,7 @@ interface NamedDeclaration {
 }
 
 export interface AddTypesOptions {
-  model: Pick<ModelHost, "generateObject">;
+  model: Pick<ModelHost, "generateObject" | "countTokens">;
   workspace: string;
   /** The TypeScript file, workspace-relative or absolute. */
   file: string;
@@ -228,6 +228,7 @@ export async function runAddTypes(options: AddTypesOptions): Promise<AddTypesRes
         allowedFiles: [abs],
         primaryFile: abs,
         maxCandidates: options.maxCandidates,
+        countTokens: options.model.countTokens,
         onLayer: options.onLayer,
         instructions: options.instructions,
       }),

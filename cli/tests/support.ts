@@ -105,6 +105,7 @@ export function scriptedModel(outputs: unknown[]) {
       if (object === undefined) throw new Error("scripted model ran out of outputs");
       return { object: object as T, ms: 1, raw: JSON.stringify(object) };
     },
+    countTokens: (text: string) => Math.ceil(text.length / 3.5),
   };
 }
 

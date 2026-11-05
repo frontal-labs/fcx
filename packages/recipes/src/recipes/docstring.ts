@@ -132,7 +132,7 @@ const DOCUMENTABLE = (node: ts.Node): boolean =>
   ts.isVariableStatement(node);
 
 export interface DocstringOptions {
-  model: Pick<ModelHost, "generateObject">;
+  model: Pick<ModelHost, "generateObject" | "countTokens">;
   workspace: string;
   /** The TypeScript file, workspace-relative or absolute. */
   file: string;
@@ -294,6 +294,7 @@ export async function runDocstring(options: DocstringOptions): Promise<Docstring
       allowedFiles: [abs],
       primaryFile: abs,
       maxCandidates: options.maxCandidates,
+      countTokens: options.model.countTokens,
       onLayer: options.onLayer,
       instructions: options.instructions,
     }),

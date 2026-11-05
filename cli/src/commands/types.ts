@@ -7,6 +7,7 @@ import {
   absoluteTarget,
   abstainedRun,
   applyVerified,
+  candidateMetrics,
   completeRun,
   failedRun,
   formatBase,
@@ -57,6 +58,7 @@ export async function runTypesCommand(env: RecipeEnv, input: TypesInput): Promis
         annotated: [],
       };
     }
+    const metrics = candidateMetrics(result.candidates);
     if (result.status === "abstained") {
       return {
         ...abstainedRun(state, {
@@ -64,6 +66,12 @@ export async function runTypesCommand(env: RecipeEnv, input: TypesInput): Promis
           lastError: result.lastError,
           bestCandidate: result.bestCandidate,
           candidates: result.candidates.length,
+          candidatesTried: metrics.candidatesTried,
+          firstPassCandidate: metrics.firstPassCandidate,
+          abstainedReason: result.lastError,
+          contextFiles: metrics.contextFiles,
+          promptChars: metrics.promptChars,
+          promptTokens: metrics.promptTokens,
           scope: result.verification,
           instructionsTruncated: result.instructionsTruncated,
         }),
@@ -75,6 +83,11 @@ export async function runTypesCommand(env: RecipeEnv, input: TypesInput): Promis
       ...(await applyVerified(state, result.edits, new Map([[result.file, base]]), {
         file: result.file,
         candidates: result.candidates.length,
+        candidatesTried: metrics.candidatesTried,
+        firstPassCandidate: metrics.firstPassCandidate,
+        contextFiles: metrics.contextFiles,
+        promptChars: metrics.promptChars,
+        promptTokens: metrics.promptTokens,
         scope: result.verification,
         instructionsTruncated: result.instructionsTruncated,
       })),
