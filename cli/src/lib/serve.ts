@@ -17,6 +17,8 @@ import {
   socketPathFor,
 } from "./client.js";
 import { resolveFcxConfig } from "./config.js";
+import { ModelHostCache, idleUnloadMsFrom } from "./model-cache.js";
+import { createFreshModelHost, useSharedModelCache } from "./runtime.js";
 
 /** A request line larger than this is dropped, so a client cannot exhaust server memory. */
 const MAX_REQUEST_BYTES = 1024 * 1024;
@@ -370,6 +372,7 @@ export async function runServe(args: GlobalArgs, cwd: string): Promise<number> {
 
   const idleMinutes = readWarmSettings(resolved.settings).idleExitMinutes;
   let handle: ServeHandle;
+  let models: ModelHostCache | undefined;
   try {
     handle = await startServer({
       socketPath,
@@ -380,6 +383,14 @@ export async function runServe(args: GlobalArgs, cwd: string): Promise<number> {
     console.error(message(error));
     return 1;
   }
+
+  const fc = isRecord(resolved.settings.fc) ? resolved.settings.fc : {};
+  models = new ModelHostCache({
+    create: createFreshModelHost,
+    idleUnloadMs: idleUnloadMsFrom(fc),
+  });
+  useSharedModelCache(models);
+
   console.log(`fcx serve: listening on ${socketPath} (idle exit after ${idleMinutes} min)`);
 
   const onSignal = (): void => {
@@ -392,6 +403,8 @@ export async function runServe(args: GlobalArgs, cwd: string): Promise<number> {
   } finally {
     process.off("SIGINT", onSignal);
     process.off("SIGTERM", onSignal);
+    useSharedModelCache(undefined);
+    if (models) await models.closeAll();
   }
   return 0;
 }
