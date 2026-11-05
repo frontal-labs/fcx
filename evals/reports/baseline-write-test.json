@@ -1,0 +1,109 @@
+{
+  "model": "ggml/auto (qwen2.5-1.5b-instruct-q4_k_m)",
+  "generatedAt": "2026-11-05T09:03:10.964Z",
+  "candidateBudget": 6,
+  "synthetic": true,
+  "recipes": {
+    "write-test": {
+      "tasks": 8,
+      "passed": 0,
+      "passRate": 0,
+      "medianMs": 5,
+      "medianCandidates": 0,
+      "firstCandidatePassed": 0,
+      "failureReasons": {
+        "harness:exception": 8
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "write-test-01",
+      "recipe": "write-test",
+      "shape": "add",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 20
+    },
+    {
+      "id": "write-test-02",
+      "recipe": "write-test",
+      "shape": "reverse",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 2
+    },
+    {
+      "id": "write-test-03",
+      "recipe": "write-test",
+      "shape": "csv-line",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 4
+    },
+    {
+      "id": "write-test-04",
+      "recipe": "write-test",
+      "shape": "clamp",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 3
+    },
+    {
+      "id": "write-test-05",
+      "recipe": "write-test",
+      "shape": "is-leap",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 5
+    },
+    {
+      "id": "write-test-06",
+      "recipe": "write-test",
+      "shape": "initials",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 10
+    },
+    {
+      "id": "write-test-07",
+      "recipe": "write-test",
+      "shape": "cents",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 7
+    },
+    {
+      "id": "write-test-08",
+      "recipe": "write-test",
+      "shape": "chunk-list",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 3
+    }
+  ]
+}

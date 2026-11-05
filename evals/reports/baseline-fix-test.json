@@ -1,0 +1,109 @@
+{
+  "model": "ggml/auto (qwen2.5-1.5b-instruct-q4_k_m)",
+  "generatedAt": "2026-11-05T09:03:13.266Z",
+  "candidateBudget": 6,
+  "synthetic": true,
+  "recipes": {
+    "fix-test": {
+      "tasks": 8,
+      "passed": 0,
+      "passRate": 0,
+      "medianMs": 264,
+      "medianCandidates": 0,
+      "firstCandidatePassed": 0,
+      "failureReasons": {
+        "harness:exception": 8
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "fix-test-01",
+      "recipe": "fix-test",
+      "shape": "wrong-argument-type",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 867
+    },
+    {
+      "id": "fix-test-02",
+      "recipe": "fix-test",
+      "shape": "missing-argument",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 450
+    },
+    {
+      "id": "fix-test-03",
+      "recipe": "fix-test",
+      "shape": "wrong-property-name",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 224
+    },
+    {
+      "id": "fix-test-04",
+      "recipe": "fix-test",
+      "shape": "boolean-as-string",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 302
+    },
+    {
+      "id": "fix-test-05",
+      "recipe": "fix-test",
+      "shape": "string-for-number",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 253
+    },
+    {
+      "id": "fix-test-06",
+      "recipe": "fix-test",
+      "shape": "misspelled-identifier",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 264
+    },
+    {
+      "id": "fix-test-07",
+      "recipe": "fix-test",
+      "shape": "wrong-array-type",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 237
+    },
+    {
+      "id": "fix-test-08",
+      "recipe": "fix-test",
+      "shape": "object-literal-shape",
+      "candidates": 0,
+      "status": "error",
+      "pass": false,
+      "reason": "harness:exception",
+      "detail": "node:sqlite is not available. The index needs Node 22 or later.",
+      "totalMs": 230
+    }
+  ]
+}

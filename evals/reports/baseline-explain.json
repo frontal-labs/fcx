@@ -1,0 +1,169 @@
+{
+  "model": "ggml/auto (qwen2.5-1.5b-instruct-q4_k_m)",
+  "generatedAt": "2026-11-05T08:59:39.558Z",
+  "candidateBudget": 6,
+  "synthetic": true,
+  "recipes": {
+    "explain": {
+      "tasks": 8,
+      "passed": 7,
+      "passRate": 0.875,
+      "medianMs": 21669,
+      "medianCandidates": 0,
+      "firstCandidatePassed": 0,
+      "failureReasons": {
+        "recipe:abstained": 1
+      },
+      "claimsKept": 22,
+      "claimsProposed": 38,
+      "citeRate": 0.5789473684210527,
+      "answered": 7
+    }
+  },
+  "results": [
+    {
+      "id": "explain-01",
+      "recipe": "explain",
+      "shape": "retry-loop",
+      "candidates": 0,
+      "status": "answered",
+      "pass": true,
+      "reason": "",
+      "detail": "IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION",
+      "totalMs": 43609,
+      "metrics": {
+        "kept": 1,
+        "dropped": 4,
+        "proposed": 5,
+        "attempts": 2,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-02",
+      "recipe": "explain",
+      "shape": "cache-get",
+      "candidates": 0,
+      "status": "answered",
+      "pass": true,
+      "reason": "",
+      "detail": "IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION",
+      "totalMs": 25048,
+      "metrics": {
+        "kept": 1,
+        "dropped": 2,
+        "proposed": 3,
+        "attempts": 2,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-03",
+      "recipe": "explain",
+      "shape": "parse-pairs",
+      "candidates": 0,
+      "status": "answered",
+      "pass": true,
+      "reason": "",
+      "detail": "NO_IDENTIFIER,IDENTIFIER_NOT_IN_CITATION",
+      "totalMs": 17498,
+      "metrics": {
+        "kept": 5,
+        "dropped": 2,
+        "proposed": 7,
+        "attempts": 1,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-04",
+      "recipe": "explain",
+      "shape": "debounce",
+      "candidates": 0,
+      "status": "answered",
+      "pass": true,
+      "reason": "",
+      "detail": "NO_IDENTIFIER",
+      "totalMs": 18345,
+      "metrics": {
+        "kept": 2,
+        "dropped": 1,
+        "proposed": 3,
+        "attempts": 2,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-05",
+      "recipe": "explain",
+      "shape": "money-format",
+      "candidates": 0,
+      "status": "answered",
+      "pass": true,
+      "reason": "",
+      "detail": "NO_IDENTIFIER",
+      "totalMs": 21669,
+      "metrics": {
+        "kept": 7,
+        "dropped": 1,
+        "proposed": 8,
+        "attempts": 1,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-06",
+      "recipe": "explain",
+      "shape": "queue-drain",
+      "candidates": 0,
+      "status": "answered",
+      "pass": true,
+      "reason": "",
+      "detail": "IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION,IDENTIFIER_NOT_IN_CITATION",
+      "totalMs": 30178,
+      "metrics": {
+        "kept": 1,
+        "dropped": 4,
+        "proposed": 5,
+        "attempts": 2,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-07",
+      "recipe": "explain",
+      "shape": "header-parse",
+      "candidates": 0,
+      "status": "answered",
+      "pass": true,
+      "reason": "",
+      "detail": "NO_IDENTIFIER",
+      "totalMs": 19920,
+      "metrics": {
+        "kept": 5,
+        "dropped": 1,
+        "proposed": 6,
+        "attempts": 1,
+        "strictPass": false
+      }
+    },
+    {
+      "id": "explain-08",
+      "recipe": "explain",
+      "shape": "range-sum",
+      "candidates": 0,
+      "status": "abstained",
+      "pass": false,
+      "reason": "recipe:abstained",
+      "detail": "no claim cites a range that supports it",
+      "totalMs": 17755,
+      "metrics": {
+        "kept": 0,
+        "dropped": 1,
+        "proposed": 1,
+        "attempts": 2,
+        "strictPass": false
+      }
+    }
+  ]
+}
