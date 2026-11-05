@@ -7,6 +7,8 @@ import { resolveFcxConfig } from "./config.js";
 
 /** Env switch that turns the warm server on for one run (plan §15.2 item 3). */
 export const WARM_ENV = "FCX_WARM";
+/** Env switch that forces in-process runs, bypassing the warm server entirely. */
+export const NO_WARM_ENV = "FCX_NO_WARM";
 /** Argv a client sends to ask the warm server to exit. Never a valid command. */
 export const STOP_ARG = "__stop__";
 /** How long a client waits for the socket to accept a connection before running in-process. */
@@ -171,6 +173,7 @@ export async function routeToWarmServer(args: GlobalArgs): Promise<number | unde
 
   try {
     const cwd = args.cwd ?? process.cwd();
+    if (process.env[NO_WARM_ENV] === "1") return undefined;
     const envOn = process.env[WARM_ENV] === "1";
     const resolved = resolveFcxConfig(cwd, { permissionMode: args.permissionMode });
     if (!envOn && !readWarmSettings(resolved.settings).enabled) return undefined;
