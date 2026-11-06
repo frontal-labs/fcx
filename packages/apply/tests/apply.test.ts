@@ -1,11 +1,13 @@
 import {
   chmodSync,
+  existsSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
   rmSync,
   statSync,
   symlinkSync,
+  unlinkSync,
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
@@ -117,5 +119,36 @@ describe("apply", () => {
     writeFileSync(file, "beta\n");
     undoLatest(undoRoot, workspace);
     expect(readFileSync(file, "utf-8")).toBe("alpha\n");
+  });
+
+  it("creates a new file with empty search", () => {
+    const file = join(workspace, "new.ts");
+    const plan = planEdits(workspace, [
+      { file: "new.ts", search: "", replace: "export const x = 1;\n" },
+    ]);
+    applyPlan(plan, undoRoot);
+    expect(readFileSync(file, "utf-8")).toBe("export const x = 1;\n");
+  });
+
+  it("creates a new file with default mode 0o644", () => {
+    const file = join(workspace, "new.ts");
+    const plan = planEdits(workspace, [
+      { file: "new.ts", search: "", replace: "export const x = 1;\n" },
+    ]);
+    applyPlan(plan, undoRoot);
+    expect(statSync(file).mode & 0o777).toBe(0o644);
+  });
+
+  it("undo deletes a newly created file", () => {
+    const file = join(workspace, "new.ts");
+    const applied = applyPlan(
+      planEdits(workspace, [{ file: "new.ts", search: "", replace: "export const x = 1;\n" }]),
+      undoRoot,
+    );
+    expect(applied.files).toHaveLength(1);
+    expect(existsSync(file)).toBe(true);
+
+    undoLatest(undoRoot, workspace);
+    expect(existsSync(file)).toBe(false);
   });
 });

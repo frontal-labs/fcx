@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { sha256 } from "./hash.js";
 import { readUtf8 } from "./io.js";
 import { resolveInWorkspace } from "./path.js";
@@ -6,7 +7,8 @@ import type { Edit, PlannedFile } from "./types.js";
 
 /**
  * Computes the new content of each file. `baseTexts` supplies the text the edits were verified against,
- * keyed by absolute path. A file missing from it is read from disk. Nothing is written here.
+ * keyed by absolute path. A file missing from it is read from disk. A file that does not exist yet is treated
+ * as empty (file creation). Nothing is written here.
  */
 export function planEdits(
   workspace: string,
@@ -19,7 +21,7 @@ export function planEdits(
     byFile.set(path, [...(byFile.get(path) ?? []), edit]);
   }
   return [...byFile].map(([path, fileEdits]) => {
-    const original = baseTexts.get(path) ?? readUtf8(path);
+    const original = baseTexts.get(path) ?? (existsSync(path) ? readUtf8(path) : "");
     const updated = applyEditsToText(original, fileEdits);
     const after = original.includes("\r\n") ? updated.replace(/\n/g, "\r\n") : updated;
     return { path, before: sha256(original), after, original };

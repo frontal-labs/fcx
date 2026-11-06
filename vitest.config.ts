@@ -9,5 +9,6 @@ export default defineConfig({
   },
   test: {
     globals: true,
+    include: ["cli/tests/**/*.test.ts", "packages/*/tests/**/*.test.ts"],
   },
 });

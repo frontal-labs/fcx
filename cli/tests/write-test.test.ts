@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, unlinkSync } from "node:fs";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import {
@@ -34,7 +34,7 @@ describe("fcx test (write-test)", () => {
   });
   afterEach(() => sb.cleanup());
 
-  it("proposes the test for the symbol and does not write the file", async () => {
+  it("writes the test file for the symbol", async () => {
     const report = await runWriteTestCommand(recipeEnv(sb, scriptedModel([GOOD])), {
       file: "src/math.ts",
       symbol: "add",
@@ -42,15 +42,17 @@ describe("fcx test (write-test)", () => {
     expect(report).toMatchObject({
       command: "test",
       recipe: "write-test",
-      status: "proposed",
+      status: "applied",
       file: "tests/math.test.ts",
       symbol: "add",
     });
     expect(report.testCode).toBe(GOOD.testCode);
-    expect(report.warnings.join(" ")).toMatch(/not written/);
-    expect(existsSync(join(sb.workspace, "tests/math.test.ts"))).toBe(false);
+    expect(existsSync(join(sb.workspace, "tests/math.test.ts"))).toBe(true);
+    expect(readFileSync(join(sb.workspace, "tests/math.test.ts"), "utf8")).toBe(GOOD.testCode);
     expect(readFileSync(join(sb.workspace, "src/math.ts"), "utf8")).toBe(MATH);
     expect(exitCodeFor(report.status)).toBe(0);
+    // Clean up the created file
+    unlinkSync(join(sb.workspace, "tests/math.test.ts"));
   });
 
   it("text output shows the test file and the code", async () => {
@@ -59,7 +61,7 @@ describe("fcx test (write-test)", () => {
       symbol: "add",
     });
     const text = formatWriteTest(report);
-    expect(text).toContain("fcx test src/math.ts:add: proposed");
+    expect(text).toContain("fcx test src/math.ts:add: applied");
     expect(text).toContain("test file: tests/math.test.ts");
     expect(text).toContain("export const sum: number = add(1, 2);");
   });

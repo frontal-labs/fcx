@@ -13,6 +13,7 @@ export function applyEditsToText(
   for (const edit of edits) {
     const search = edit.search.replace(/\r\n/g, "\n");
     if (search.length === 0) {
+      if (current.length === 0) return edit.replace.replace(/\r\n/g, "\n");
       throw new EditError("EMPTY_SEARCH", "search text is empty");
     }
     const exact = current.indexOf(search);

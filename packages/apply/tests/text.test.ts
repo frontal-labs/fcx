@@ -24,6 +24,12 @@ describe("applyEditsToText", () => {
     expect(() => applyEditsToText("x", [{ search: "", replace: "y" }])).toThrow(EditError);
   });
 
+  it("treats empty search on empty text as file creation", () => {
+    expect(applyEditsToText("", [{ search: "", replace: "new file content\n" }])).toBe(
+      "new file content\n",
+    );
+  });
+
   it("reports a search that is not in the file", () => {
     expect(() => applyEditsToText("x", [{ search: "z", replace: "y" }])).toThrowError(
       expect.objectContaining({ code: "ANCHOR_NOT_FOUND" }),

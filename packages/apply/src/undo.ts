@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { sha256 } from "./hash.js";
 import { readUtf8, restoreText } from "./io.js";
@@ -36,7 +36,17 @@ export function undoLatest(undoRoot: string, workspace: string): UndoResult {
 
   const restored: string[] = [];
   manifest.files.forEach((file, index) => {
-    restoreText(file.path, readFileSync(join(dir, "files", `${index}.orig`), "utf-8"));
+    const original = readFileSync(join(dir, "files", `${index}.orig`), "utf-8");
+    if (original === "" && existsSync(file.path)) {
+      // Undoing a new-file creation: remove the file instead of writing empty content.
+      try {
+        unlinkSync(file.path);
+      } catch {
+        // Already gone.
+      }
+    } else {
+      restoreText(file.path, original);
+    }
     restored.push(file.path);
   });
   writeFileSync(latestPath, "", "utf-8");
