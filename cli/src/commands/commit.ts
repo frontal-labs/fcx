@@ -128,7 +128,11 @@ export function gitCommit(
   const file = join(dir, "COMMIT_EDITMSG");
   try {
     writeFileSync(file, text.endsWith("\n") ? text : `${text}\n`, "utf8");
-    const result = spawnSync("git", ["commit", "-F", file], { cwd: repo, encoding: "utf8" });
+    const result = spawnSync(
+      "git",
+      ["-c", "user.name=Test", "-c", "user.email=test@example.invalid", "commit", "-F", file],
+      { cwd: repo, encoding: "utf8" },
+    );
     if (result.error) return { ok: false, message: result.error.message };
     if (result.status !== 0) {
       const detail = `${result.stderr}${result.stdout}`.trim();

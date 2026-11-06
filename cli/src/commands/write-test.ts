@@ -1,9 +1,11 @@
+import type { Edit } from "@fcx/apply";
 import { type WriteTestResult, runWriteTest } from "@fcx/recipes";
 import type { GlobalArgs } from "../args.js";
 import {
   type RecipeEnv,
   type RecipeReportBase,
   abstainedRun,
+  applyVerified,
   candidateMetrics,
   completeRun,
   failedRun,
@@ -31,7 +33,7 @@ export interface WriteTestReport extends RecipeReportBase {
   imports?: string[];
 }
 
-/** `fcx test <file:symbol>`: writes a unit test for one symbol. The test file is proposed, never written. */
+/** `fcx test <file:symbol>`: writes a unit test for one symbol, creating the test file. */
 export async function runWriteTestCommand(
   env: RecipeEnv,
   input: WriteTestInput,
@@ -74,10 +76,12 @@ export async function runWriteTestCommand(
       ...extra,
     };
   }
-  state.warnings.push("the test file is not written: fcx does not create new files yet");
+
+  // A new test file has no prior content; its base is the empty string.
+  const edits: Edit[] = [{ file: result.file, search: "", replace: result.testCode }];
+  const bases = new Map<string, string>([[result.file, ""]]);
   return {
-    ...completeRun(state, {
-      status: "proposed",
+    ...(await applyVerified(state, edits, bases, {
       file: result.file,
       candidates: result.candidates.length,
       candidatesTried: metrics.candidatesTried,
@@ -87,11 +91,11 @@ export async function runWriteTestCommand(
       promptTokens: metrics.promptTokens,
       scope: result.verification,
       instructionsTruncated: result.instructionsTruncated,
-    }),
+    })),
     ...extra,
     testCode: result.testCode,
     imports: result.imports,
-  };
+  } as WriteTestReport;
 }
 
 export function formatWriteTest(report: WriteTestReport): string {

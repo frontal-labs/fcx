@@ -23,7 +23,8 @@ Commands:
   fix-test <file> --name <test> [--output <text>]
                             Fix a failing test. fcx runs no tests: the failure text comes from --output
   test | write-test <file:symbol>
-                            Write a unit test for one symbol. The test file is proposed, never written
+                            Write a unit test for one symbol. Creates the test file.
+  create <file> "<desc>"    Create a new file with AI-generated content from a description.
   implement <file:line>     Write the body of the stub function at a line
   types <file[:symbol]>     Add missing type annotations (TypeScript). Without a symbol, the whole file
   doc <file:line>           Write a doc comment for the declaration at a line
@@ -68,6 +69,7 @@ const RECIPE_COMMANDS: ReadonlyMap<string, CommandHandler> = new Map<string, Com
     "fix-test",
     async (args, cwd) => (await import("./commands/fix-test.js")).runFixTestCli(args, cwd),
   ],
+  ["create", async (args, cwd) => (await import("./commands/create.js")).runCreateCli(args, cwd)],
   [
     "implement",
     async (args, cwd) => (await import("./commands/implement.js")).runImplementCli(args, cwd),
