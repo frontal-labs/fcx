@@ -1,0 +1,7 @@
+[
+  {
+    "name": "fcx cli bundle (dist/main.js)",
+    "path": "cli/dist/main.js",
+    "limit": "200 kB"
+  }
+]

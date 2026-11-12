@@ -115,7 +115,12 @@ bun run build        # Build all packages
 bun run lint         # Run biome lint
 bun run typecheck    # TypeScript typecheck
 bun run test         # Run vitest tests
+bun run size         # Build the CLI bundle and check its size limit
 ```
+
+The CLI bundle size is budgeted by [size-limit](https://github.com/ai/size-limit)
+(see [CONTRIBUTING.md](./.github/CONTRIBUTING.md#bundle-size)); the limit lives
+in `.size-limit.jsonc`.
 
 ## Packages
 
