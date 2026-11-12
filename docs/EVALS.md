@@ -28,8 +28,15 @@
 ## Runner
 
 ```
-bun run eval --lang typescript --recipe fix-diagnostic --model ggml/qwen2.5-1.5b
+bun run eval                 # all recipe tasks (evals/run-recipes.ts)
+bun run eval --recipe commit-message
+bun run eval --filter typo   # only tasks whose id contains the substring
+bun run eval --out path.json # write the report somewhere else
+bun evals/run.ts --filter x  # fix-diagnostic task set (evals/tasks/ts/fix-diagnostic-local)
 ```
+
+Both runners load the local model (default `ggml/auto` → `qwen2.5-7b`), so the model must be
+installed first: `bunx tsx cli/src/main.ts models pull qwen2.5-7b`.
 
 ## CI Gates
 
@@ -40,4 +47,7 @@ bun run eval --lang typescript --recipe fix-diagnostic --model ggml/qwen2.5-1.5b
 
 ## Current Tasks
 
-20 TypeScript tasks in `evals/tasks/ts/` across 6 recipes.
+89 TypeScript tasks in `evals/tasks/ts/*-local/` across 10 recipes (add-types, commit-message,
+docstring, explain, fix-diagnostic, fix-test, implement, refactor-small, rename-extract,
+write-test). The non-suffixed directories (add-types, docstring, fix-diagnostic, fix-test,
+implement, write-test) hold repo-based task seeds for future public-repo runs.
