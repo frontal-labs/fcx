@@ -48,6 +48,22 @@ bun run typecheck
 bun run test
 ```
 
+## Bundle Size
+
+The published CLI is a single ESM bundle (`cli/dist/main.js`). Its Brotli
+compressed size is budgeted by [Size Limit](https://github.com/ai/size-limit)
+so that PRs don't silently bloat the download.
+
+```bash
+# build the bundle and check it against the limit
+bun run size
+```
+
+The limit lives in `.size-limit.jsonc` (currently `200 kB` brotlied). If a
+change pushes the bundle past the limit, either shrink the change or raise the
+limit in `.size-limit.jsonc` and explain why in the PR description. CI runs the
+same check in the `Size Limit` job.
+
 ## Making Changes
 
 ### Branching
@@ -75,7 +91,7 @@ Use conventional commits:
 
 ## Submitting Changes
 
-1. Ensure all checks pass: `bun run lint && bun run typecheck && bun run test`
+1. Ensure all checks pass: `bun run lint && bun run typecheck && bun run test && bun run size`
 2. Push your branch to your fork
 3. Open a pull request against `main`
 4. Fill out the pull request template
